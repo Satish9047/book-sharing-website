@@ -4,7 +4,7 @@ import cors from "cors";
 import morgan from "morgan";
 
 import config from "./config";
-import router from "./router";
+import router from "./routers";
 
 const app = express();
 app.use(cors());

@@ -1,9 +1,11 @@
-import * as authRepositories from "../repositories/book";
+import * as authRepositories from "../repositories/auth";
 
-const registerHandler = async ()=>{
-    const data = authRepositories.loginHandler;
+export const registerHandler = async ()=>{
+    const data = authRepositories.registerHandler();
+    return data;
 };
 
-const loginHandler = async ()=>{
-    const data = 
+export const loginHandler = async ()=>{
+    const data = authRepositories.loginHandler();
+    return data;
 };
