@@ -1,6 +1,6 @@
-import { PrismaClient } from "@prisma/client";
-import jwt from "jsonwebtoken";
-import bcrypt from "bcrypt";
+// import { PrismaClient } from "@prisma/client";
+// import jwt from "jsonwebtoken";
+// import bcrypt from "bcrypt";
 import { ILogin, IRegister } from "../interfaces/auth";
 
 export const registerHandler = async (userInfo: IRegister) => {

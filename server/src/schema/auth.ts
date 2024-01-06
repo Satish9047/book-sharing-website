@@ -14,10 +14,3 @@ export const registerSchema = Joi.object({
     password: Joi.string().trim().pattern(new RegExp("^[a-zA-Z0-9]{3,30}$")),
 });
 
-//addbook validation schema
-export const addBookSchema = Joi.object({
-    bookName: Joi.string().required().trim(),
-    author: Joi.string().required().trim(),
-    description: Joi.string().required().min(3).max(30),
-    imagePath: Joi.string.required().trim(),
-});
