@@ -16,7 +16,11 @@
   ],
   "author": "Satish Prajapati <satishprajapati930@gmail.com>",
   "license": "ISC",
+  "prisma": {
+    "schema": "src/prisma/schema.prisma"
+  },
   "dependencies": {
+    "@prisma/client": "^5.7.1",
     "bcrypt": "^5.1.1",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
@@ -39,6 +43,7 @@
     "cookie-parser": "^1.4.6",
     "eslint": "^8.56.0",
     "nodemon": "^3.0.2",
+    "prisma": "^5.7.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.3.3"
   }
