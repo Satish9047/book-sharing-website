@@ -7,7 +7,7 @@ import jwtRefreshRouter from "./jwt";
 
 const router = Router();
 
-router.use("/auth", jwtAuth, authRouter);
+router.use("/auth", authRouter);
 router.use("/books", jwtAuth, bookRouter);
 //router.use("/user", userRouter);
 router.use("/refresh", jwtRefreshRouter);

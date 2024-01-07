@@ -9,10 +9,21 @@ export const getBooks = async (req: Request, res: Response) => {
     res.json({ msg: "hello from the book controller", data });
 };
 
+
 export const addBookHandler = async (req: Request, res: Response) => {
     const bookInfo: IAddBook = req.body;
-    // const bookFile = req.files;
-    // console.log(bookFile.);
+
+    const bookFile = req.files;
+    // if (!Array.isArray(bookInfo)) {
+    //@ts-ignore
+    // console.log(bookFile?.pdfFile?.[0].path);
+    // }
+
+    //@ts-expect-error
+    bookInfo.pdfFile = bookFile?.pdfFile?.[0].path;
+    //@ts-ignore
+    bookInfo.imgFile = bookFile?.imgFile?.[0].path;
+    console.log(bookInfo);
     const data = await bookServices.addBookHandler(bookInfo);
     res.json({ msg: data });
 };

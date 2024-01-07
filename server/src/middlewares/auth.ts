@@ -29,21 +29,21 @@ export const jwtAuth = (req: Request, res: Response, next: NextFunction) => {
     console.log(accessToken);
 
     if (!accessToken) {
-        return res.status(401).json({ error: "Access Denied!" });
+        return res.status(401).json({ error: "Access Denied! 1" });
     }
 
     try {
         const verifyToken = jwt.verify(accessToken, config.ACCESS_TOKEN_SECRET);
         if (!verifyToken) {
             res.clearCookie("accessToken");
-            return res.status(401).json({ error: "Access Denied!" });
+            // console.log(verifyToken);
+            return res.status(401).json({ error: "Access Denied! 2" });
         }
         next();
     } catch (error) {
-        // Handle token verification errors
         console.error("Error verifying access token:", error);
         res.clearCookie("accessToken");
-        return res.status(401).json({ error: "Access Denied!" });
+        return res.status(401).json({ error: "Access Denied! 3" });
     }
 };
 
