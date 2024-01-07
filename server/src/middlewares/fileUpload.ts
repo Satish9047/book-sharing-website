@@ -1,36 +1,36 @@
-import multer from "multer";
-
+import multer, { FileFilterCallback, Multer } from "multer";
+import { Request } from "express";
 
 const pdfStorage = multer.diskStorage({
     destination: "public/uploads/pdf",
-    filename: (req, file, cb) => {
+    filename: (req: Request, file: Express.Multer.File, cb) => {
         cb(null, "pdf_" + Date.now() + "-" + Math.round(Math.random() * 1E9));
     }
 });
 
 const imgStorage = multer.diskStorage({
     destination: "public/uploads/img",
-    filename: (req, file, cb) => {
+    filename: (req: Request, file: Express.Multer.File, cb) => {
         cb(null, "img_" + Date.now() + "-" + Math.round(Math.random() * 1E9));
     }
 });
 
-const pdfFilter = (req, file, cb) => {
+const pdfFilter = (req: Request, file: Express.Multer.File, cb: FileFilterCallback) => {
     if (file.mimetype === "application/pdf") {
         cb(null, true);
     } else {
-        cb(new Error("Invalid file type. Only PDF files are allowed."), false);
+        cb(null, false);
     }
 };
 
 
-const imageFilter = (req, file, cb) => {
+const imgFilter = (req: Request, file: Express.Multer.File, cb: FileFilterCallback) => {
     if (file.mimetype.startsWith("image/")) {
         cb(null, true);
     } else {
-        cb(new Error("Invalid file type. Only image files are allowed."), false);
+        cb(null, false);
     }
 };
 
-export const uploadPdf = multer({ storage: pdfStorage, fileFilter: pdfFilter });
-export const uploadImg = multer({ storage: imgStorage, fileFilter: imageFilter });
+export const uploadPdf: Multer = multer({ storage: pdfStorage, fileFilter: pdfFilter });
+export const uploadImg: Multer = multer({ storage: imgStorage, fileFilter: imgFilter });
