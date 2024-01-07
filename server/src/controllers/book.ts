@@ -11,8 +11,10 @@ export const getBooks = async (req: Request, res: Response) => {
 
 export const addBookHandler = async (req: Request, res: Response) => {
     const bookInfo: IAddBook = req.body;
+    const bookFile = req.files;
+    // console.log(bookFile.);
     const data = await bookServices.addBookHandler(bookInfo);
-    res.json({ msg: "hello from the add book controller", data });
+    res.json({ msg: data });
 };
 
 export const updateBookHandler = async (req: Request, res: Response) => {

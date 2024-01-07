@@ -6,15 +6,15 @@ export const getBooks = async () => {
 
 export const addBookHandler = async (bookInfo: IAddBook) => {
     console.log(bookInfo);
-    return "hello from delete addBookHandler repositories";
+    return "hello from addBookHandler repositories";
 };
 
 export const updateBookHandler = async (bookInfo: string) => {
     console.log(bookInfo);
-    return "hello from delete updateBookHandler repositories";
+    return "hello from updateBookHandler repositories";
 };
 
 export const deleteBookHandler = async (bookInfo: string) => {
     console.log(bookInfo);
-    return "hello from delete bookhandler repositories";
+    return "hello from deletebookhandler repositories";
 };

@@ -8,7 +8,6 @@ export const getBooks = async () => {
 };
 
 export const addBookHandler = async (bookInfo: IAddBook) => {
-    console.log("hello from the book service add book handler");
     const data = bookRepositories.addBookHandler(bookInfo);
     return data;
 };
