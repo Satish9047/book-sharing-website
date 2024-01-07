@@ -11,10 +11,10 @@ app.use(cors());
 app.use(helmet());
 app.use(morgan("combined"));
 app.use(express.json());
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({ extended: true }));
 
 app.use("/", router);
 
-app.listen(config.serverPort, ()=>{
-    console.log(`Server is running in port: ${config.serverPort}`);
+app.listen(config.SERVER_PORT, () => {
+    console.log(`Server is running in port: ${config.SERVER_PORT}`);
 });
