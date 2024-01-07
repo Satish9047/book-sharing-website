@@ -10,9 +10,16 @@ export const registerHandler = async (req: Request, res: Response) => {
 };
 
 export const loginHandler = async (req: Request, res: Response) => {
-    //console.log(req.headers);
     const userInfo: ILogin = req.body;
     const data = await authService.loginHandler(userInfo);
-    res.json({ msg: "hello from login", data });
+    res.cookie("accessToken", data.accessToken, { httpOnly: true });
+    res.cookie("refreshToken", data.refreshToken, { httpOnly: true });
+    res.json({ meg: data.msg });
+};
+
+export const logoutHandler = async (req: Request, res: Response) => {
+    res.clearCookie("accessToken");
+    res.clearCookie("refreshToken");
+    res.json({ msg: "logged out" });
 };
 

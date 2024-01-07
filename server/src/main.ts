@@ -2,6 +2,7 @@ import express from "express";
 import helmet from "helmet";
 import cors from "cors";
 import morgan from "morgan";
+import cookieParser from "cookie-parser";
 
 import config from "./config";
 import router from "./routers";
@@ -12,6 +13,7 @@ app.use(helmet());
 app.use(morgan("combined"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 app.use("/", router);
 

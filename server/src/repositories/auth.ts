@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 import { PrismaClient } from "@prisma/client";
 
 import { ILogin, IRegister } from "../interfaces/auth";
-import { ACCESS_TOKEN_EXPIRY, REFRESH_TOKEN_EXPIRY } from "../constants  /expiry";
+import { ACCESS_TOKEN_EXPIRY, REFRESH_TOKEN_EXPIRY } from "../constants/expiry";
 import config from "../config";
 
 const saltRounds = 10;
