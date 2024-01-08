@@ -1,6 +1,6 @@
 import { PrismaClient } from "@prisma/client";
-import { IAddBook } from "../interfaces/book";
-import { IQueryBook } from "../interfaces/book";
+import { IAddBook, IQueryBookDb } from "../interfaces/book";
+// import { IQueryBook } from "../interfaces/book";
 
 const prisma = new PrismaClient();
 
@@ -8,8 +8,30 @@ export const getBooks = async () => {
     return "hello from repositories";
 };
 
-export const getSearchedBooks = async (query: IQueryBook) => {
-    const data = await prisma.book.findMany({ where: query });
+export const getSearchedBooks = async (query: IQueryBookDb) => {
+    const { book_name, author_name, keyword, category_name } = query;
+    const data = await prisma.book.findMany({
+        where: {
+            book_name: {
+                contains: book_name,
+                mode: "insensitive",
+            },
+            author_name: {
+                contains: author_name,
+                mode: "insensitive",
+            },
+
+            keyword: {
+                contains: keyword,
+                mode: "insensitive",
+            },
+            category_name: {
+                contains: category_name,
+                mode: "insensitive",
+            }
+
+        }
+    });
     return data;
 };
 

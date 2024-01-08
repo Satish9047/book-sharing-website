@@ -39,4 +39,4 @@ export interface IQueryBookDb {
     author_name?: string,
     keyword?: string,
     category_name?: string
-};
+}
