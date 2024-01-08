@@ -7,6 +7,13 @@ export const addBookSchema = Joi.object({
     description: Joi.string().required().min(3).max(30),
     pdfPath: Joi.string(),
     imgPath: Joi.string(),
-    keyWords: Joi.string().required(),
+    keyword: Joi.string().required(),
     category: Joi.string().required(),
+});
+
+export const queryBookSchema = Joi.object({
+    name: Joi.string().min(2),
+    author: Joi.string().min(2),
+    category: Joi.string().min(2),
+    keyword: Joi.string().min(2)
 });

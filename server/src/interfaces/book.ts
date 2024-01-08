@@ -33,3 +33,10 @@ export interface IQueryBook {
     author?: string;
     keyword?: string;
 }
+
+export interface IQueryBookDb {
+    book_name?: string,
+    author_name?: string,
+    keyword?: string,
+    category_name?: string
+};

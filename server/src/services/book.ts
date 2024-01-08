@@ -9,11 +9,11 @@ export const getBooks = async () => {
 };
 
 export const getSearchedBooks = async (query: IQueryBook) => {
-    // const { name, author, keyword, category } = query;
 
+    const data = bookRepositories.getSearchedBooks(query);
     console.log(query);
 
-    return { query };
+    return data;
 };
 
 export const addBookHandler = async (bookInfo: IAddBook) => {

@@ -1,3 +1,4 @@
+import { IQueryBookDb } from "./../interfaces/book";
 import { Request, Response } from "express";
 import * as bookServices from "../services/book";
 import { IAddBook } from "../interfaces/book";
@@ -12,7 +13,14 @@ export const getBooks = async (req: Request, res: Response) => {
 };
 
 export const getSearchedBook = async (req: Request, res: Response) => {
-    const data = await bookServices.getSearchedBooks(req.query);
+    const { name, author, keyword, category } = req.query;
+    const queryBook: IQueryBookDb = {
+        book_name: typeof name === "string" ? name : undefined,
+        author_name: typeof author === "string" ? author : undefined,
+        keyword: typeof keyword === "string" ? keyword : undefined,
+        category_name: typeof category === "string" ? category : undefined,
+    };
+    const data = await bookServices.getSearchedBooks(queryBook);
     res.json(data);
 };
 
@@ -39,8 +47,6 @@ export const addBookHandler = async (req: Request, res: Response) => {
         console.log(error);
         return res.status(401).json({ error: "unauthorized" });
     }
-
-
 };
 
 export const updateBookHandler = async (req: Request, res: Response) => {

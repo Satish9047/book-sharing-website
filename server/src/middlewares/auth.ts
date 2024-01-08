@@ -26,7 +26,7 @@ export const registerAuth = (req: Request, res: Response, next: NextFunction) =>
 //jwt token Validation
 export const jwtAuth = (req: Request, res: Response, next: NextFunction) => {
     const accessToken = req.cookies.accessToken;
-    console.log(accessToken);
+    //console.log(accessToken);
 
     if (!accessToken) {
         return res.status(401).json({ error: "Access Denied! 1" });
