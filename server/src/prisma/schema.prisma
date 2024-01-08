@@ -10,44 +10,25 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// schema.prisma
+
 model User {
-  user_id  Int     @id @default(autoincrement())
-  username String
-  email    String  @unique
-  password String
-  Books    Books[]
+  user_id   Int    @id @default(autoincrement())
+  user_name String
+  email     String @unique
+  password  String
+  Book      Book[]
 }
 
-model Books {
-  book_id       Int           @id @default(autoincrement())
+model Book {
+  book_id       Int    @id @default(autoincrement())
   book_name     String
-  description   String?
+  description   String
   pdf_file_path String
   img_file_path String
-  keyword       String?
+  keyword       String
   user_id       Int
-  category_id   Int
-  User          User          @relation(fields: [user_id], references: [user_id])
-  Categories    Categories    @relation(fields: [category_id], references: [category_id])
-  Author_Book   Author_Book[]
-}
-
-model Categories {
-  category_id   Int     @id @default(autoincrement())
   category_name String
-  Books         Books[]
-}
-
-model Author {
-  author_id   Int           @id @default(autoincrement())
-  author_name String
-  Author_Book Author_Book[]
-}
-
-model Author_Book {
-  author_book_id Int    @id @default(autoincrement())
-  author_id      Int
-  book_id        Int
-  Author         Author @relation(fields: [author_id], references: [author_id])
-  Books          Books  @relation(fields: [book_id], references: [book_id])
+  author_name   String
+  user          User   @relation(fields: [user_id], references: [user_id])
 }

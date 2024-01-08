@@ -24,7 +24,7 @@ export const registerHandler = async (userInfo: IRegister) => {
         const hashedPassword = await bcrypt.hash(userInfo.password, saltRounds);
         const newUser = await prisma.user.create({
             data: {
-                username: userInfo.userName,
+                user_name: userInfo.userName,
                 email: userInfo.email,
                 password: hashedPassword
             }
