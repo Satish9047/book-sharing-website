@@ -1,9 +1,12 @@
 export interface IAddBook {
     bookName: string,
-    author: string,
     description: string,
+    author: string,
+    user: number,
+    category: string,
+    keyword: string,
     pdfPath: string,
-    imgPath: string
+    imgPath: string,
 }
 
 export interface IFileDetails {

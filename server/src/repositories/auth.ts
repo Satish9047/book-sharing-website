@@ -52,8 +52,8 @@ export const loginHandler = async (userInfo: ILogin) => {
             return { err: "password does not match" };
         }
 
-        const accessToken = jwt.sign({ email: userExists.email }, ACCESS_TOKEN_SECRET, { expiresIn: ACCESS_TOKEN_EXPIRY });
-        const refreshToken = jwt.sign({ email: userExists.email }, REFRESH_TOKEN_SECRET, { expiresIn: REFRESH_TOKEN_EXPIRY });
+        const accessToken = jwt.sign({ email: userExists.email, id: userExists.user_id }, ACCESS_TOKEN_SECRET, { expiresIn: ACCESS_TOKEN_EXPIRY });
+        const refreshToken = jwt.sign({ email: userExists.email, id: userExists.user_id }, REFRESH_TOKEN_SECRET, { expiresIn: REFRESH_TOKEN_EXPIRY });
         return { msg: "login success", accessToken: accessToken, refreshToken: refreshToken };
 
     } catch (error) {

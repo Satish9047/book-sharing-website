@@ -22,14 +22,15 @@ jwtRefreshRouter.post("/", (req: Request, res: Response, next: NextFunction) => 
             return res.status(401).json({ error: "Access Denied! 2" });
         }
         const email = verifyToken.email;
+        const id = verifyToken.id;
 
-        if (!email) {
+        if (!email && !id) {
             res.clearCookie("accessToken");
             res.clearCookie("refreshToken");
             return res.status(401).json({ error: "Access Denied! 3" });
         }
 
-        const accessToken = jwt.sign({ email }, config.ACCESS_TOKEN_SECRET, { expiresIn: ACCESS_TOKEN_EXPIRY });
+        const accessToken = jwt.sign({ email: email, id: id }, config.ACCESS_TOKEN_SECRET, { expiresIn: ACCESS_TOKEN_EXPIRY });
         res.cookie("accessToken", accessToken);
         res.status(200).json({ msg: "Token Refreshed" });
         next();

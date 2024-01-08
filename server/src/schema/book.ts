@@ -5,5 +5,8 @@ export const addBookSchema = Joi.object({
     bookName: Joi.string().required().trim(),
     author: Joi.string().required().trim(),
     description: Joi.string().required().min(3).max(30),
-    imagePath: Joi.string().trim(),
+    pdfPath: Joi.string(),
+    imgPath: Joi.string(),
+    keyWords: Joi.string().required(),
+    category: Joi.string().required(),
 });
