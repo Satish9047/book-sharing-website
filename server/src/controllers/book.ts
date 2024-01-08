@@ -7,8 +7,13 @@ import config from "../config";
 
 export const getBooks = async (req: Request, res: Response) => {
     const data = await bookServices.getBooks();
-    console.log(data);
-    res.json({ msg: "hello from the book controller", data });
+    //console.log(data);
+    res.json({ data });
+};
+
+export const getSearchedBook = async (req: Request, res: Response) => {
+    const data = await bookServices.getSearchedBooks(req.query);
+    res.json(data);
 };
 
 
@@ -27,7 +32,7 @@ export const addBookHandler = async (req: Request, res: Response) => {
         bookInfo.imgPath = bookFile?.imgFile?.[0].path;
 
 
-        console.log(bookInfo);
+        //console.log(bookInfo);
         const data = await bookServices.addBookHandler(bookInfo);
         res.json({ data });
     } catch (error) {

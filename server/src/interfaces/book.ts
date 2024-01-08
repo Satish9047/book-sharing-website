@@ -25,3 +25,11 @@ export interface IBookFile {
     imgFile: IFileDetails[];
 }
 
+
+export interface IQueryBook {
+    name?: string;
+    search?: string;
+    category?: string;
+    author?: string;
+    keyword?: string;
+}

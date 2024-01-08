@@ -8,7 +8,7 @@ import config from "../config";
 export const loginAuth = (req: Request, res: Response, next: NextFunction) => {
     const { error } = loginSchema.validate(req.body);
     if (error) {
-        return res.status(400).json({ error: "Invalid Username or Password!" });
+        return res.status(400).json({ error: `${error}` });
     }
     next();
 };
@@ -17,7 +17,7 @@ export const loginAuth = (req: Request, res: Response, next: NextFunction) => {
 export const registerAuth = (req: Request, res: Response, next: NextFunction) => {
     const { error } = registerSchema.validate(req.body);
     if (error) {
-        return res.status(400).json({ error: "invalid credentials provided" });
+        return res.status(400).json({ error: `${error}` });
     }
     next();
 };
