@@ -1,10 +1,10 @@
 import * as bookRepositories from "../repositories/book";
-import { IAddBook } from "../interfaces/book";
+import { IAddBook, IPage } from "../interfaces/book";
 import { IQueryBook } from "../interfaces/book";
 
-export const getBooks = async () => {
+export const getBooks = async (page: IPage) => {
     //console.log("hello from the book service getbooks");
-    const data = bookRepositories.getBooks();
+    const data = bookRepositories.getBooks(page);
     return data;
 };
 

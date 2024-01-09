@@ -40,3 +40,8 @@ export interface IQueryBookDb {
     keyword?: string,
     category_name?: string
 }
+
+export interface IPage {
+    skip: number;
+    take: number;
+}

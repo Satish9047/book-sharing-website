@@ -1,15 +1,24 @@
 import { PrismaClient } from "@prisma/client";
-import { IAddBook, IQueryBookDb } from "../interfaces/book";
+import { IAddBook, IPage, IQueryBookDb } from "../interfaces/book";
 // import { IQueryBook } from "../interfaces/book";
 
 const prisma = new PrismaClient();
 
-export const getBooks = async () => {
-    return "hello from repositories";
+//get the book from the database
+export const getBooks = async (page: IPage) => {
+    const data = await prisma.book.findMany({
+        skip: page.skip,
+        take: page.take,
+    });
+    return data;
 };
 
+
+//handling the the search with query paramters
 export const getSearchedBooks = async (query: IQueryBookDb) => {
+
     const { book_name, author_name, keyword, category_name } = query;
+    //getting the book accoridng to the query parameter without having case sensitive
     const data = await prisma.book.findMany({
         where: {
             book_name: {
@@ -29,7 +38,6 @@ export const getSearchedBooks = async (query: IQueryBookDb) => {
                 contains: category_name,
                 mode: "insensitive",
             }
-
         }
     });
     return data;
@@ -39,7 +47,7 @@ export const addBookHandler = async (bookInfo: IAddBook) => {
     console.log(bookInfo);
 
     try {
-
+        //saving the new book in the database
         const book = await prisma.book.create({
             data: {
                 book_name: bookInfo.bookName,
@@ -58,13 +66,13 @@ export const addBookHandler = async (bookInfo: IAddBook) => {
         return { error: "error while adding book" };
     }
 };
-
 export const updateBookHandler = async (bookInfo: string) => {
     console.log(bookInfo);
-
     return "hello from updateBookHandler repositories";
 };
 
+
+//delete book handler
 export const deleteBookHandler = async (bookInfo: string) => {
     console.log(bookInfo);
     const id = Number(bookInfo);

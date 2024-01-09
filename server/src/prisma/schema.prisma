@@ -17,7 +17,6 @@ model User {
   user_name String
   email     String @unique
   password  String
-  Book      Book[]
 }
 
 model Book {

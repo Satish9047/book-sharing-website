@@ -17,3 +17,9 @@ export const queryBookSchema = Joi.object({
     category: Joi.string().min(2),
     keyword: Joi.string().min(2)
 });
+
+
+export const queryPageSchema = Joi.object({
+    skip: Joi.number().required(),
+    take: Joi.number().required()
+});

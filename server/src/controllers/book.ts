@@ -4,14 +4,20 @@ import * as bookServices from "../services/book";
 import { IAddBook } from "../interfaces/book";
 import jwt, { JwtPayload } from "jsonwebtoken";
 import config from "../config";
+import { IPage } from "./../interfaces/book";
 
-
+//get book
 export const getBooks = async (req: Request, res: Response) => {
-    const data = await bookServices.getBooks();
+    const page: IPage = {
+        skip: Number(req.query.skip) || 0,
+        take: Number(req.query.take) || 10,
+    };
+    const data = await bookServices.getBooks(page);
     //console.log(data);
     res.json({ data });
 };
 
+//search book handler
 export const getSearchedBook = async (req: Request, res: Response) => {
     const { name, author, keyword, category } = req.query;
     const queryBook: IQueryBookDb = {
@@ -62,5 +68,9 @@ export const deleteBookHandler = async (req: Request, res: Response) => {
     const data = await bookServices.deleteBookHandler(bookInfo);
     res.json({ data });
 };
+
+// export const getPageHandler = async (req: Request, res: Response) => {
+
+// };
 
 
