@@ -10,6 +10,11 @@ export const getBooks = async (page: IPage) => {
     const data = await prisma.book.findMany({
         skip: page.skip,
         take: page.take,
+        select: {
+            book_id: true,
+            book_name: true,
+            author_name: true,
+        }
     });
     return data;
 };
@@ -45,6 +50,11 @@ export const getSearchedBooks = async (query: IQueryBookDb) => {
                 contains: category_name,
                 mode: "insensitive",
             }
+        },
+        select: {
+            book_id: true,
+            book_name: true,
+            author_name: true,
         }
     });
     return data;
