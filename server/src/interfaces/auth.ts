@@ -1,3 +1,6 @@
+import { Request } from "express";
+import { JwtPayload } from "jsonwebtoken";
+
 export interface IRegister {
     userName: string,
     email: string,
@@ -7,4 +10,10 @@ export interface IRegister {
 export interface ILogin {
     email: string,
     password: string
+}
+
+export interface IAuthRequest extends Request {
+    user?: JwtPayload,
+
+
 }

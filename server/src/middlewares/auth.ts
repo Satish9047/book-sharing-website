@@ -1,4 +1,4 @@
-import jwt from "jsonwebtoken";
+import jwt, { JwtPayload } from "jsonwebtoken";
 import { Request, Response, NextFunction } from "express";
 import { loginSchema, registerSchema } from "../schema/auth";
 import config from "../config";
@@ -24,7 +24,7 @@ export const registerAuth = (req: Request, res: Response, next: NextFunction) =>
 
 
 //jwt token Validation
-export const jwtAuth = (req: Request, res: Response, next: NextFunction) => {
+export const jwtAuth = (req: Request & { user?: JwtPayload }, res: Response, next: NextFunction) => {
     const accessToken = req.cookies.accessToken;
     //console.log(accessToken);
 
@@ -33,12 +33,13 @@ export const jwtAuth = (req: Request, res: Response, next: NextFunction) => {
     }
 
     try {
-        const verifyToken = jwt.verify(accessToken, config.ACCESS_TOKEN_SECRET);
+        const verifyToken = jwt.verify(accessToken, config.ACCESS_TOKEN_SECRET) as JwtPayload;
         if (!verifyToken) {
             res.clearCookie("accessToken");
             // console.log(verifyToken);
             return res.status(401).json({ error: "Access Denied! 2" });
         }
+        req.user = verifyToken.id;
         next();
     } catch (error) {
         console.error("Error verifying access token:", error);

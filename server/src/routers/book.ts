@@ -10,7 +10,7 @@ bookRouter.get("/", queryPageMiddlware, bookController.getBooks);
 bookRouter.get("/getby", queryBookMiddlware, bookController.getSearchedBook);
 bookRouter.post("/addbook", filesUpload, bookController.addBookHandler);
 bookRouter.put("/updatebook/:id", bookController.updateBookHandler);
-bookRouter.delete("/book/:id", bookController.deleteBookHandler);
+bookRouter.delete("/:id", bookController.deleteBookHandler);
 // bookRouter.get("/page", bookController.getPageHandler);
 
 export default bookRouter;

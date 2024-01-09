@@ -1,10 +1,11 @@
-import { IQueryBookDb } from "./../interfaces/book";
+import { IBookInfo, IQueryBookDb } from "./../interfaces/book";
 import { Request, Response } from "express";
 import * as bookServices from "../services/book";
 import { IAddBook } from "../interfaces/book";
 import jwt, { JwtPayload } from "jsonwebtoken";
 import config from "../config";
 import { IPage } from "./../interfaces/book";
+import { IAuthRequest } from "../interfaces/auth";
 
 //get book
 export const getBooks = async (req: Request, res: Response) => {
@@ -62,9 +63,13 @@ export const updateBookHandler = async (req: Request, res: Response) => {
     res.json({ msg: "hello from the update book controller", data });
 };
 
-export const deleteBookHandler = async (req: Request, res: Response) => {
-    console.log(req.headers);
-    const bookInfo: string = req.params.id;
+export const deleteBookHandler = async (req: IAuthRequest, res: Response) => {
+    console.log(req.user, "user id from controller");
+    const userId = req.user;
+    const bookInfo: IBookInfo = {
+        userId: Number(userId),
+        bookId: Number(req.params.id),
+    };
     const data = await bookServices.deleteBookHandler(bookInfo);
     res.json({ data });
 };

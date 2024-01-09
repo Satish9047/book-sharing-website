@@ -1,5 +1,5 @@
 import { PrismaClient } from "@prisma/client";
-import { IAddBook, IPage, IQueryBookDb } from "../interfaces/book";
+import { IAddBook, IPage, IQueryBookDb, IBookInfo } from "../interfaces/book";
 // import { IQueryBook } from "../interfaces/book";
 
 const prisma = new PrismaClient();
@@ -45,7 +45,6 @@ export const getSearchedBooks = async (query: IQueryBookDb) => {
 
 export const addBookHandler = async (bookInfo: IAddBook) => {
     console.log(bookInfo);
-
     try {
         //saving the new book in the database
         const book = await prisma.book.create({
@@ -73,16 +72,26 @@ export const updateBookHandler = async (bookInfo: string) => {
 
 
 //delete book handler
-export const deleteBookHandler = async (bookInfo: string) => {
-    console.log(bookInfo);
-    const id = Number(bookInfo);
-    const book = await prisma.book.findFirst({ where: { book_id: id } });
-    if (!book) {
-        return { err: "book not found" };
-    }
+export const deleteBookHandler = async (bookInfo: IBookInfo) => {
+    const bookId = bookInfo.bookId;
+    const userId = bookInfo.userId;
+
     try {
-        const deleteBook = await prisma.book.delete({ where: { book_id: id } });
+        const book = await prisma.book.findFirst({ where: { book_id: bookId } });
+
+        if (!book) {
+            return { err: "book not found" };
+        }
+        console.log("user_id: ", book.user_id);
+        console.log("userId: ", userId);
+
+        if (book.user_id !== userId) {
+            return { err: "you are not the owner of this book" };
+        }
+
+        const deleteBook = await prisma.book.delete({ where: { book_id: bookId } });
         return { msg: "book deleted", deleteBook: deleteBook };
+
     } catch (error) {
         console.log(error);
         return { err: "error while deleting book" };

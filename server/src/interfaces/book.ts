@@ -45,3 +45,14 @@ export interface IPage {
     skip: number;
     take: number;
 }
+
+export interface IBookDelete {
+    userId: number;
+    bookId: number;
+}
+
+
+export interface IBookInfo {
+    userId: number;
+    bookId: number;
+}
