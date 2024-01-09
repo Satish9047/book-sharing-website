@@ -71,7 +71,19 @@ export const deleteBookHandler = async (req: IAuthRequest, res: Response) => {
         bookId: Number(req.params.id),
     };
     const data = await bookServices.deleteBookHandler(bookInfo);
-    res.json({ data });
+    return res.json(data);
+};
+
+export const downloadBookHandler = async (req: Request, res: Response) => {
+    const bookInfo = Number(req.params.id);
+    const data = await bookServices.downloadBookHandler(bookInfo);
+    // return res.json(data);
+    if ("error" in data) {
+        return res.status(404).json({ error: data.error });
+    }
+    res.setHeader("content-type", "application/pdf");
+    res.setHeader("Content-disposition", "attachment; filename=book.pdf");
+    data.pipe(res);
 };
 
 // export const getPageHandler = async (req: Request, res: Response) => {

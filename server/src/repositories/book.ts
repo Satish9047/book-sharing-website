@@ -1,3 +1,4 @@
+import fs from "fs";
 import { PrismaClient } from "@prisma/client";
 import { IAddBook, IPage, IQueryBookDb, IBookInfo } from "../interfaces/book";
 // import { IQueryBook } from "../interfaces/book";
@@ -96,4 +97,13 @@ export const deleteBookHandler = async (bookInfo: IBookInfo) => {
         console.log(error);
         return { err: "error while deleting book" };
     }
+};
+
+
+export const downloadBookHandler = async (bookInfo: number) => {
+    const book = await prisma.book.findFirst({ where: { book_id: bookInfo } });
+    if (!book) return { error: "Book not found" };
+    const bookPath = book.pdf_file_path;
+
+    return fs.createReadStream(bookPath);
 };

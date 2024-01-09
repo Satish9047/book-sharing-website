@@ -31,3 +31,8 @@ export const deleteBookHandler = async (bookInfo: IBookInfo) => {
     const data = bookRepositories.deleteBookHandler(bookInfo);
     return data;
 };
+
+export const downloadBookHandler = async (bookInfo: number) => {
+    const data = bookRepositories.downloadBookHandler(bookInfo);
+    return data;
+};
