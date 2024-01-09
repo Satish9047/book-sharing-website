@@ -8,6 +8,11 @@ export const getBooks = async (page: IPage) => {
     return data;
 };
 
+export const getBookById = async (bookId: number) => {
+    const data = bookRepositories.getBookById(bookId);
+    return data;
+};
+
 export const getSearchedBooks = async (query: IQueryBook) => {
 
     const data = bookRepositories.getSearchedBooks(query);
@@ -34,5 +39,10 @@ export const deleteBookHandler = async (bookInfo: IBookInfo) => {
 
 export const downloadBookHandler = async (bookInfo: number) => {
     const data = bookRepositories.downloadBookHandler(bookInfo);
+    return data;
+};
+
+export const getImageHandler = async (bookInfo: number) => {
+    const data = bookRepositories.getImageHandler(bookInfo);
     return data;
 };

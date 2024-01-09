@@ -7,7 +7,7 @@ import config from "../config";
 import { IPage } from "./../interfaces/book";
 import { IAuthRequest } from "../interfaces/auth";
 
-//get book
+//get books
 export const getBooks = async (req: Request, res: Response) => {
     const page: IPage = {
         skip: Number(req.query.skip) || 0,
@@ -15,6 +15,13 @@ export const getBooks = async (req: Request, res: Response) => {
     };
     const data = await bookServices.getBooks(page);
     //console.log(data);
+    res.json({ data });
+};
+
+//get book by ID
+export const getBookById = async (req: Request, res: Response) => {
+    const bookId = Number(req.params.id);
+    const data = await bookServices.getBookById(bookId);
     res.json({ data });
 };
 
@@ -83,7 +90,16 @@ export const downloadBookHandler = async (req: Request, res: Response) => {
     }
     res.setHeader("content-type", "application/pdf");
     res.setHeader("Content-disposition", "attachment; filename=book.pdf");
-    data.pipe(res);
+    return data.pipe(res);
+};
+
+export const getImageHandler = async (req: Request, res: Response) => {
+    const bookInfo = Number(req.params.bookId);
+    const data = await bookServices.getImageHandler(bookInfo);
+    if ("error" in data) {
+        return res.status(404).json({ error: data.error });
+    }
+    return data.pipe(res);
 };
 
 // export const getPageHandler = async (req: Request, res: Response) => {

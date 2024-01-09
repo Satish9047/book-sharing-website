@@ -14,6 +14,12 @@ export const getBooks = async (page: IPage) => {
     return data;
 };
 
+//get the book by ID handler
+export const getBookById = async (bookId: number) => {
+    const data = await prisma.book.findUnique({ where: { book_id: bookId } });
+    return data;
+};
+
 
 //handling the the search with query paramters
 export const getSearchedBooks = async (query: IQueryBookDb) => {
@@ -106,4 +112,14 @@ export const downloadBookHandler = async (bookInfo: number) => {
     const bookPath = book.pdf_file_path;
 
     return fs.createReadStream(bookPath);
+};
+
+export const getImageHandler = async (bookInfo: number) => {
+    const book = await prisma.book.findUnique({ where: { book_id: bookInfo } });
+    if (!book) {
+        return { error: "book not found" };
+    }
+    const imgPath = book.img_file_path;
+    // const imageExist = fs.existsSync(imagePath.img_file_path);
+    return fs.createReadStream(imgPath);
 };
