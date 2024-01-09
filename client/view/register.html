@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body class="bg-gray-100 flex items-center justify-center h-screen">
+
+    <div class="w-3/12 bg-white p-8 rounded-md shadow-md">
+        <header class="mb-6">
+            <h2 class="text-2xl font-semibold">Register</h2>
+        </header>
+        <form class="flex flex-col">
+            <label class="mb-2 text-gray-700">User Name</label>
+            <input type="text" class="px-4 py-2 border rounded-md mb-4 focus:outline-none focus:ring focus:border-blue-500">
+
+            <label class="mb-2 text-gray-700">Email</label>
+            <input type="email" class="px-4 py-2 border rounded-md mb-4 focus:outline-none focus:ring focus:border-blue-500">
+
+            <label class="mb-2 text-gray-700">Password</label>
+            <input type="password" class="px-4 py-2 border rounded-md mb-6 focus:outline-none focus:ring focus:border-blue-500">
+
+            <button class="bg-[#00796B] text-white px-6 py-2 rounded-md hover:bg-[#00796bba] active:bg-[#235c55]">
+                Register
+            </button>
+
+            <div class="text-md mt-2">
+                <p>Already have an account? <span class="text-blue-500 font-semibold hover:text-[#00796bba] active:text-[#235c55]">Login Here</span></p>
+            </div>
+        </form>
+    </div>
+
+    <script type="module" src="../src/main.ts"></script>
+</body>
+</html>
