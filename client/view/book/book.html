@@ -1,32 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../src/style.css">
     <title>Recon Book</title>
 </head>
-<body>
+
+<body class="bg-[#D8D8D8] h-screen w-screen">
     <main>
         <navbar class="px-4 py-5 flex justify-center  bg-[#00796B]">
             <h1 class="font-semibold text-3xl">Book Details</h1>
         </navbar>
-        <div>
-            <figure>
-                <img>
-            </figure>
-            <div>
-                <h3>Book Name</h3>
-                <h3>Author Name</h3>
-                <h3>Catagory</h3>
-                <p>keyword</p>
-                <p>description</p>
-
-                <button>Download</button>
+        <div class="m-10 flex justify-center">
+            <div class="w-7/12 flex bg-[#F3F3F3] shadow-lg rounded-md gap-5 justify-center">
+                <figure class="w-1/2 bg-cover">
+                    <img src="/image/book1-min.jpg" class="w-full">
+                </figure>
+                <div class="p-5 w-4/6">
+                    <div class="flex"><h3 class="font-semibold">Book Name : </h3><span> The boy and the Heroine</span></div>
+                    <div class="flex"><h3 class="font-semibold">Author Name : </h3><span> Satish Prajapti</span></div>
+                    <div class="flex"><h3 class="font-semibold">Catagory : </h3><span> Fantasty</span></div>
+                    <div class="flex"><p class="font-semibold">keyword : </p><span> Heroie</span></div>
+                    <div class=""><p class="font-semibold">description : </p><span> During the Pacific War in Tokyo, Mahito Maki loses his mother Hisako in a hospital fire. Mahito's father Shoichi, an air munitions factory owner, marries his late wife's sister, Natsuko. They evacuate to her rural estate. Mahito, distant to the pregnant Natsuko, encounters a peculiar grey heron leading him to a sealed tower, the last known location of Natsuko's architect granduncle. </span></div>
+                    <div>
+                        <button class=" my-3 p-3 w-2/6 bg-[#00796B] rounded-md shadow-md">Download</button>
+                    </div>
+                </div>
             </div>
         </div>
 
     </main>
     <script type="module" src="./index.ts"></script>
 </body>
+
 </html>
