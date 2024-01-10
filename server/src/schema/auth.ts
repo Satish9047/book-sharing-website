@@ -21,7 +21,7 @@ export const registerSchema = Joi.object({
         .messages({
             "string.base": "Username should be a string",
             "string.empty": "Username cannot be empty",
-            "string.min": "Username must be at least 8 characters long",
+            "string.min": "Username must be at least 2 characters long",
             "any.required": "Username is required",
         }),
     email: Joi.string().email().required().trim()
