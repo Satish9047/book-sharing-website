@@ -9,7 +9,7 @@ registerElement.addEventListener("click", async (e) => {
     const userName = userNameElement.value;
     const email = emailElement.value;
     const password = passwordElement.value;
-    console.log({ userName: userName, email: email, password: password });
+    //console.log({ userName: userName, email: email, password: password });
 
     try {
         const res = await HTTP.post("/auth/register", {
