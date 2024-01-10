@@ -5,6 +5,7 @@
   <meta charset="UTF-8" />
   <link rel="icon" type="image/svg+xml" href="/vite.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./src/style.css">
   <title>Recon Books</title>
 </head>
 
@@ -13,17 +14,17 @@
     <h1 class="font-semibold text-3xl">Recon Book</h1>
   </navbar>
   <section class="h-screen bg-[#D8D8D8] flex ">
-    <aside class=" p-5 w-2/12">
-      <div class="p-4 w-full h-auto  bg-[#F3F3F3]  rounded-md flex flex-col shadow-md">
+    <aside class=" p-5 w-3/12">
+      <div class="p-4 w-full h-auto  bg-[#F3F3F350]  rounded-md flex flex-col shadow-md gap-3">
         <h2 class="text-xl font-semibold">Search By</h2>
-        <div class="flex gap-2"><input type="radio">Get by Book</input></div>
-        <div class="flex gap-2"><input type="radio">Get by Author</input></div>
-        <div class="flex gap-2"><input type="radio">Get by Keyword</input></div>
-        <div class="flex gap-2"><input type="radio">Get by Catagory</input></div>
+        <div class="p-2 flex gap-2 bg-[#F3F3F3] shadow-lg rounded-md"><input type="radio">Get by Book</input></div>
+        <div class="p-2 flex gap-2 bg-[#F3F3F3] shadow-lg rounded-md"><input type="radio">Get by Author</input></div>
+        <div class="p-2 flex gap-2 bg-[#F3F3F3] shadow-lg rounded-md"><input type="radio">Get by Keyword</input></div>
+        <div class="p-2 flex gap-2 bg-[#F3F3F3] shadow-lg rounded-md"><input type="radio">Get by Catagory</input></div>
       </div>
       </div>
     </aside>
-    <aside class="w-10/12 p-5 bg-[#D8D8D8] flex flex-col gap-10">
+    <aside class="w-9/12 p-5 bg-[#D8D8D8] flex flex-col gap-10">
       <div class="flex justify-center">
         <input placeholder="search books here" class="w-1/2 px-3 py-2 rounded-md shadow-md">
       </div>
@@ -46,11 +47,8 @@
           <p>Natte Lotte</p>
           <figure><img src="public/icon/download-icon.png"></figure>
         </div>
-
       </div>
     </aside>
-    
-    
   </section>
 
   <script type="module" src="./src/main.ts"></script>
