@@ -1,41 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../src/style.css">
     <title>Recon Book</title>
 </head>
-<body>
-    <card>
-        <header>
-            <h2>Upload Book PDF</h2>
-        </header>
-        <form>
-            <label for="book-name">Book Name</label>
-            <input name="book-name" id="book-name">
 
-            <label for="author">Author</label>
-            <input name="author" id="author">
+<body class="bg-[#D8D8D8] h-screen w-screen">
+    <main>
+        <navbar class="px-4 py-5 flex justify-center  bg-[#00796B]">
+            <h1 class="font-semibold text-3xl">Upload Book</h1>
+        </navbar>
+        <div class="p-10 flex justify-center">
+            <form class="p-10 w-4/6 flex bg-[#F3F3F3] rounded-md shadow-lg gap-10">
+                <div class="flex flex-col w-1/2">
+                    <label for="book-name">Book Name</label>
+                    <input name="book-name" id="book-name" class="px-3 py-1 rounded-md shadow-md">
 
-            <label for="category">Category</label>
-            <input name="category" id="category">
+                    <label for="author">Author</label>
+                    <input name="author" id="author" class="px-3 py-1 rounded-md shadow-md">
 
-            <label for="keyword">Keyword</label>
-            <input name="keyword" id="keyword">
+                    <label for="category">Category</label>
+                    <input name="category" id="category" class="px-3 py-1 rounded-md shadow-md">
 
-            <label for="image">Image</label>
-            <input name="image" id="image">
+                    <label for="keyword">Keyword</label>
+                    <input name="keyword" id="keyword" class="px-3 py-1 rounded-md shadow-md">
 
-            <label for="bookpdf">PDF file</label>
-            <input name="bookpdf" id="bookpdf">
-            
-            <label for="description">Decription</label>
-            <input name="description" id="description">
 
-            <button>Upload Book</button>
-        </form>
-    </card>
+                </div>
+
+                <div class="flex flex-col w-1/2">
+                    <label for="image">Image</label>
+                    <input type="file" name="image" id="image" class="mt-1 p-2 border rounded-md shadow-md">
+
+                    <label for="bookpdf">PDF file</label>
+                    <input type="file" name="bookpdf" id="bookpdf" class="mt-1 p-2 border rounded-md shadow-md">
+
+                    <label for="description">Decription</label>
+                    <textarea name="description" id="description" class="px-3 py-1 rounded-md shadow-md"></textarea>
+
+                    <button class="my-4 p-3 w-full rounded-md shadow-md bg-[#00796B] hover:bg-[#007951] active:bg-[#F3F3F3]">Upload Book</button>
+                </div>
+            </form>
+        </div>
+    </main>
     <script type="module" src="./index.ts"></script>
 </body>
+
 </html>
