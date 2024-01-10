@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import * as authService from "../services/auth";
 import { ILogin, IRegister } from "../interfaces/auth";
+import defatultCookieOption from "../constants/expiry";
 
 export const registerHandler = async (req: Request, res: Response) => {
     // console.log(req.headers);
@@ -12,9 +13,10 @@ export const registerHandler = async (req: Request, res: Response) => {
 export const loginHandler = async (req: Request, res: Response) => {
     const userInfo: ILogin = req.body;
     const data = await authService.loginHandler(userInfo);
-    res.cookie("accessToken", data.accessToken, { httpOnly: true });
-    res.cookie("refreshToken", data.refreshToken, { httpOnly: true });
-    res.json({ meg: data.msg });
+    console.log(data);
+    res.cookie("accessToken", data.accessToken, defatultCookieOption);
+    res.cookie("refreshToken", data.refreshToken, defatultCookieOption);
+    res.json({ msg: data });
 };
 
 export const logoutHandler = async (req: Request, res: Response) => {

@@ -1,5 +1,5 @@
 import express from "express";
-import helmet from "helmet";
+// import helmet from "helmet";
 import cors from "cors";
 import morgan from "morgan";
 import cookieParser from "cookie-parser";
@@ -10,8 +10,11 @@ import config from "./config";
 import router from "./routers";
 
 const app = express();
-app.use(cors());
-app.use(helmet());
+app.use(cors({
+    origin: "http://localhost:5173",
+    credentials: true
+}));
+// app.use(helmet());
 app.use(morgan("combined"));
 app.use(compression());
 app.use(express.json());
