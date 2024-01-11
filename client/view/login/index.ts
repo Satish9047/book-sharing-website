@@ -1,3 +1,4 @@
+
 // import axios from "axios";
 import HTTP from "../../src/config";
 
@@ -16,11 +17,14 @@ loginBtn.addEventListener("click", async (e) => {
             email,
             password,
         });
-        console.log(res,"respond from server");
+        //console.log(res,"respond from server");
         if(res.status === 200){
             window.location.href = "../../index.html";
         }
+        
     } catch (error) {
-        console.log(error, "error from server");
+        if(error.response.status === 400){
+            console.log(error.response.data.err);
+        }
     }
 });

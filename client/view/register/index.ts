@@ -22,6 +22,8 @@ registerElement.addEventListener("click", async (e) => {
             window.location.href = "../login/login.html";
         }
     } catch (error) {
-        console.log(error, "error from server");
+        if(error.response.status === 400){
+            console.log(error.response.data.error);
+        }
     }
 });

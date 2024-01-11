@@ -1,12 +1,12 @@
 import { Router } from "express";
 import * as bookController from "../controllers/book";
 import { filesUpload } from "../middlewares/fileUpload";
-import { queryBookMiddlware, queryPageMiddlware } from "../middlewares/book";
+import { queryBookMiddlware } from "../middlewares/book";
 
 const bookRouter = Router();
-
+// queryPageMiddlware
 //bookRouter handlers
-bookRouter.get("/", queryPageMiddlware, bookController.getBooks);
+bookRouter.get("/", bookController.getBooks);
 bookRouter.get("/:id", bookController.getBookById);
 bookRouter.get("/getby", queryBookMiddlware, bookController.getSearchedBook);
 bookRouter.post("/addbook", filesUpload, bookController.addBookHandler);

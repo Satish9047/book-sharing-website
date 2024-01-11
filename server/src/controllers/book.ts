@@ -9,13 +9,14 @@ import { IAuthRequest } from "../interfaces/auth";
 
 //get books
 export const getBooks = async (req: Request, res: Response) => {
+    console.log(req.query.skip, req.query.take, "hello fro the cotroller");
     const page: IPage = {
         skip: Number(req.query.skip) || 0,
         take: Number(req.query.take) || 10,
     };
     const data = await bookServices.getBooks(page);
-    //console.log(data);
-    res.json({ data });
+    console.log(data);
+    res.json(data);
 };
 
 //get book by ID

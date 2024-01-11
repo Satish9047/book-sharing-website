@@ -25,7 +25,7 @@ export const loginHandler = async (req: Request, res: Response) => {
     }
     res.cookie("accessToken", data.accessToken, { httpOnly: true });
     res.cookie("refreshToken", data.refreshToken, { httpOnly: true });
-    return res.status(201).json(data);
+    return res.status(200).json(data);
 };
 
 export const logoutHandler = async (req: Request, res: Response) => {

@@ -1,14 +1,16 @@
 // vite.config.js
-import { resolve } from 'path'
-import { defineConfig } from 'vite'
+import { resolve } from "path";
+import { defineConfig } from "vite";
 
 export default defineConfig({
-  build: {
-    rollupOptions: {
-      input: {
-        main: resolve(__dirname, 'index.html'),
-        nested: resolve(__dirname, 'view/index.html'),
-      },
+    build: {
+        rollupOptions: {
+            input: {
+                // eslint-disable-next-line no-undef
+                main: resolve(__dirname, "index.html"),
+                // eslint-disable-next-line no-undef
+                nested: resolve(__dirname, "view/index.html"),
+            },
+        },
     },
-  },
-})
+});

@@ -8,7 +8,7 @@ import config from "../config";
 export const loginAuth = (req: Request, res: Response, next: NextFunction) => {
     const { error } = loginSchema.validate(req.body);
     if (error) {
-        return res.status(400).json({ error: `${error}` });
+        return res.status(400).json({ error: `${error.message}` });
     }
     next();
 };

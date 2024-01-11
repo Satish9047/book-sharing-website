@@ -30,10 +30,15 @@ uploadBtn.addEventListener("click", async (e) => {
             pdfFile,
             imgFile,
             description,
+        }, {
+            headers: {
+                "Content-Type": "multipart/form-data"
+            }
         });
 
         if(res.status === 200) {
-            console.log("successfully upload book");
+            console.log("successfully upload book", res);
+            
         }
         
     } catch (error) {
