@@ -1,6 +1,7 @@
 import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
+import jwt, { JwtPayload } from "jsonwebtoken";
 import { PrismaClient } from "@prisma/client";
+// import { IUserInfo } from "../interfaces/auth";
 
 import { ILogin, IRegister } from "../interfaces/auth";
 import { ACCESS_TOKEN_EXPIRY, REFRESH_TOKEN_EXPIRY } from "../constants/expiry";
@@ -41,6 +42,7 @@ export const registerHandler = async (userInfo: IRegister) => {
 export const loginHandler = async (userInfo: ILogin) => {
     console.log(userInfo);
 
+
     const userExists = await prisma.user.findFirst({ where: { email: userInfo.email } });
     if (!userExists) {
         return { err: "user does not exist" };
@@ -59,6 +61,26 @@ export const loginHandler = async (userInfo: ILogin) => {
     } catch (error) {
         console.log("error while logining in : ", error);
         return { err: "server error while logging" };
+    }
+};
+
+//get user info
+export const getUserInfo = async (userInfo: string) => {
+    try {
+        const verifyToken = jwt.verify(userInfo, ACCESS_TOKEN_SECRET) as JwtPayload;
+        const userId = verifyToken.id;
+        const user = await prisma.user.findFirst({
+            where: { user_id: userId },
+            select: {
+                user_id: true,
+                user_name: true,
+                email: true
+            }
+        });
+        return user;
+    } catch (error) {
+        console.log(error);
+        return { error: "error while geting user info" };
     }
 };
 

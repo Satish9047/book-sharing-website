@@ -10,3 +10,8 @@ export const loginHandler = async (userInfo: ILogin) => {
     const data = authRepositories.loginHandler(userInfo);
     return data;
 };
+
+export const getUserInfo = async (userInfo: string)=>{
+    const data = authRepositories.getUserInfo(userInfo);
+    return data;
+};

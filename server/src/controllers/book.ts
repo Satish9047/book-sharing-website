@@ -86,7 +86,7 @@ export const deleteBookHandler = async (req: IAuthRequest, res: Response) => {
 export const downloadBookHandler = async (req: Request, res: Response) => {
     const bookInfo = Number(req.params.id);
     const data = await bookServices.downloadBookHandler(bookInfo);
-    console.log(bookInfo, "download book ")
+    console.log(bookInfo, "download book ");
     // return res.json(data);
     if ("error" in data) {
         return res.status(404).json({ error: data.error });
@@ -105,6 +105,17 @@ export const getImageHandler = async (req: Request, res: Response) => {
     }
     res.set("Content-Type", "image/jpeg");
     return data.pipe(res);
+};
+
+
+export const getBookByUser = async(req: IAuthRequest, res: Response)=>{
+    const userId = Number(req.user);
+    console.log(userId);
+    const data = await bookServices.getBookByUser(userId);
+    // if(data){
+    //     return res.status(400).json({error: data});
+    // }
+    return res.status(200).json(data);
 };
 
 

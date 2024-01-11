@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import * as authService from "../services/auth";
-import { ILogin, IRegister } from "../interfaces/auth";
+import { ILogin, IRegister, IUserInfo } from "../interfaces/auth";
 // import defatultCookieOption from "../constants/expiry";
 
 export const registerHandler = async (req: Request, res: Response) => {
@@ -32,5 +32,15 @@ export const logoutHandler = async (req: Request, res: Response) => {
     res.clearCookie("accessToken");
     res.clearCookie("refreshToken");
     return res.json({ msg: "logged out successful" });
+};
+
+export const getUserInfo = async (req:Request, res: Response) => {
+    const token:string = req.cookies.accessToken;
+    const data = await authService.getUserInfo(token);
+    console.log(data);
+    // if(data.error){
+    //     return res.status(400).json({error: data.error});
+    // }
+    return res.status(200).json(data);
 };
 

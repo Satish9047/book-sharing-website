@@ -46,3 +46,8 @@ export const getImageHandler = async (bookInfo: number) => {
     const data = bookRepositories.getImageHandler(bookInfo);
     return data;
 };
+
+export const getBookByUser = async(userId: number) => {
+    const data = bookRepositories.getBookByUser(userId);
+    return data;
+};

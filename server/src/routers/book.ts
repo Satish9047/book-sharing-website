@@ -14,6 +14,7 @@ bookRouter.put("/updatebook/:id", bookController.updateBookHandler);
 bookRouter.delete("/:id", bookController.deleteBookHandler);
 bookRouter.get("/download/:id", bookController.downloadBookHandler);
 bookRouter.get("/image/:bookId", bookController.getImageHandler);
+bookRouter.get("/user", bookController.getBookByUser);
 // bookRouter.get("/page", bookController.getPageHandler);
 
 export default bookRouter;

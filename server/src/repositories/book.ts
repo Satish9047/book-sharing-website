@@ -21,7 +21,7 @@ export const getBooks = async (page: IPage) => {
 
 //get the book by ID handler
 export const getBookById = async (bookId: number) => {
-    const data = await prisma.book.findUnique({ where: { book_id: bookId } });
+    const data = await prisma.book.findFirst({ where: { book_id: bookId } });
     return data;
 };
 
@@ -132,4 +132,26 @@ export const getImageHandler = async (bookInfo: number) => {
     const imgPath = book.img_file_path;
     // const imageExist = fs.existsSync(imagePath.img_file_path);
     return fs.createReadStream(imgPath);
+};
+
+export const getBookByUser = async (userId: number) => {
+    try {
+        console.log(userId, "logging the user id ine getBookUser");
+        const books = await prisma.book.findMany({
+            where: { user_id: userId },
+            select: {
+                book_id: true,
+                book_name: true,
+                author_name: true,
+            }
+        });
+        if (!books) {
+            return { error: "book not found" };
+        }
+        return books;
+    } catch (error) {
+        console.log(error);
+        return { error: "error while getting books" };
+    }
+
 };

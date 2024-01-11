@@ -14,6 +14,8 @@ export interface ILogin {
 
 export interface IAuthRequest extends Request {
     user?: JwtPayload,
+}
 
-
+export interface IUserInfo {
+    userInfo: JwtPayload
 }
