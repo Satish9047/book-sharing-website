@@ -17,7 +17,8 @@ export const loginAuth = (req: Request, res: Response, next: NextFunction) => {
 export const registerAuth = (req: Request, res: Response, next: NextFunction) => {
     const { error } = registerSchema.validate(req.body);
     if (error) {
-        return res.status(400).json({ error: `${error}` });
+        console.log(error.message);
+        return res.status(400).json({ error: `${error.message}` });
     }
     next();
 };
