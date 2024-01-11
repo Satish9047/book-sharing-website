@@ -30,6 +30,11 @@ window.addEventListener("load", async () => {
             div.appendChild(heading);
             div.appendChild(paragraph);
             div.appendChild(figure);
+
+            div.addEventListener("click", ()=>{
+                window.location.href = "../view/book/book.html?"+"bookId="+book.book_id;
+            });
+
             figure.addEventListener("click", async () => {
                 console.log(book);
 
