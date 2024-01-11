@@ -31,9 +31,7 @@ window.addEventListener("load", async () => {
             div.appendChild(paragraph);
             div.appendChild(figure);
 
-            div.addEventListener("click", ()=>{
-                window.location.href = "../view/book/book.html?"+"bookId="+book.book_id;
-            });
+            
 
             figure.addEventListener("click", async () => {
                 console.log(book);
@@ -45,13 +43,17 @@ window.addEventListener("load", async () => {
                         const blob = new Blob([res.data], { type: "application/pdf" });
                         const link = document.createElement("a");
                         link.href = window.URL.createObjectURL(blob);
-                        link.download = "book.pdf";
+                        link.download = "bookhome.pdf";
                         link.click();
                     }
                 } catch (error) {
                     console.log(error);
                 }
 
+            });
+
+            heading.addEventListener("click", ()=>{
+                window.location.href = "../view/book/book.html?"+"bookId="+book.book_id;
             });
             bookItemsElement.appendChild(div);
 

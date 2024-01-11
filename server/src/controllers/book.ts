@@ -12,7 +12,7 @@ export const getBooks = async (req: Request, res: Response) => {
     console.log(req.query.skip, req.query.take, "hello fro the cotroller");
     const page: IPage = {
         skip: Number(req.query.skip) || 0,
-        take: Number(req.query.take) || 10,
+        take: Number(req.query.take) || 5,
     };
     const data = await bookServices.getBooks(page);
     console.log(data);
@@ -39,7 +39,7 @@ export const getSearchedBook = async (req: Request, res: Response) => {
     res.json(data);
 };
 
-
+//upload book handler
 export const addBookHandler = async (req: Request, res: Response) => {
     const bookInfo: IAddBook = req.body;
     try {
@@ -53,8 +53,6 @@ export const addBookHandler = async (req: Request, res: Response) => {
         bookInfo.pdfPath = bookFile?.pdfFile?.[0].path;
         //@ts-ignore
         bookInfo.imgPath = bookFile?.imgFile?.[0].path;
-
-
         //console.log(bookInfo);
         const data = await bookServices.addBookHandler(bookInfo);
         res.json({ data });
@@ -64,6 +62,7 @@ export const addBookHandler = async (req: Request, res: Response) => {
     }
 };
 
+//update book handler
 export const updateBookHandler = async (req: Request, res: Response) => {
     console.log(req.headers);
     const bookInfo: string = req.params.id;
@@ -71,6 +70,7 @@ export const updateBookHandler = async (req: Request, res: Response) => {
     res.json({ msg: "hello from the update book controller", data });
 };
 
+//delete book handler
 export const deleteBookHandler = async (req: IAuthRequest, res: Response) => {
     console.log(req.user, "user id from controller");
     const userId = req.user;
@@ -82,9 +82,11 @@ export const deleteBookHandler = async (req: IAuthRequest, res: Response) => {
     return res.json(data);
 };
 
+//download pdf handler
 export const downloadBookHandler = async (req: Request, res: Response) => {
     const bookInfo = Number(req.params.id);
     const data = await bookServices.downloadBookHandler(bookInfo);
+    console.log(bookInfo, "download book ")
     // return res.json(data);
     if ("error" in data) {
         return res.status(404).json({ error: data.error });
@@ -94,17 +96,15 @@ export const downloadBookHandler = async (req: Request, res: Response) => {
     return data.pipe(res);
 };
 
+//get image handler
 export const getImageHandler = async (req: Request, res: Response) => {
     const bookInfo = Number(req.params.bookId);
     const data = await bookServices.getImageHandler(bookInfo);
     if ("error" in data) {
         return res.status(404).json({ error: data.error });
     }
+    res.set("Content-Type", "image/jpeg");
     return data.pipe(res);
 };
-
-// export const getPageHandler = async (req: Request, res: Response) => {
-
-// };
 
 
