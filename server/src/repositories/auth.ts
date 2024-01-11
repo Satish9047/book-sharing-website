@@ -58,7 +58,7 @@ export const loginHandler = async (userInfo: ILogin) => {
 
     } catch (error) {
         console.log("error while logining in : ", error);
-        return { err: "error" };
+        return { err: "server error while logging" };
     }
 };
 
