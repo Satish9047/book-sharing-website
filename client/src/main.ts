@@ -4,6 +4,7 @@ import { IBook } from "./interface/book";
 const bookItemsElement = document.getElementById("bookItems") as HTMLDivElement;
 const searchByList = document.getElementById("searchByList") as HTMLDivElement;
 const searchInputElement = document.getElementById("searchInput") as HTMLInputElement;
+const navAvatar = document.getElementById("navAvatar") as HTMLElement;
 
 //array for label
 const searchLabel = ["By Book Name", "by Author Name", "by Keyword", "by Category"];
@@ -23,7 +24,7 @@ let value = "";
 window.addEventListener("load", async () => {
 
     //fetching the data from the server
-    const res = await getBook();
+    const res = await HTTP.get("/books");
     console.log(res);
     if (res.status === 200) {
         console.log(res.data);
@@ -180,6 +181,16 @@ searchInputElement.addEventListener("keydown", async(ev)=>{
     }
 });
 
+// navAvatar.addEventListener("click", () => {
+//     const div = document.createElement("div") as HTMLElement;
+//     const div1 = document.createElement("div") as HTMLElement;
+//     const heading = document.createElement("h2") as HTMLElement;
+//     heading.innerText = "Logout";
+
+//     div.appendChild(div1);
+//     div1.appendChild(heading);
+// });
+
 
 /**
  * Get book data from the Backend api accoring to the search by options
@@ -190,7 +201,7 @@ function getBook() {
     let url = "";
     console.log("hello world",value);
     if (state["By Book Name"]) {
-        url += `name=${value}`;
+        url += `&name=${value}`;
     }
     if(state["by Author Name"]){
         url += `&author=${value}`;

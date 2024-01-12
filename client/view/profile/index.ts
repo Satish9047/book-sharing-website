@@ -3,7 +3,7 @@ import HTTP from "../../src/config";
 
 // const profileImgElement = document.getElementById("profileImg") as HTMLImageElement;
 const bookItemElement = document.getElementById("bookList") as HTMLDivElement;
-const deleteElement = document.getElementById("deleteIcon") as HTMLImageElement;
+// const deleteElement = document.getElementById("deleteIcon") as HTMLImageElement;
 const uploadPageBtn = document.getElementById("uploadPageBtn") as HTMLButtonElement;
 const userNameElement = document.getElementById("userName") as HTMLHeadingElement;
 const emailElement = document.getElementById("email") as HTMLHeadingElement;
@@ -70,6 +70,6 @@ uploadPageBtn.addEventListener("click", () => {
     window.location.href = "../upload/upload.html";
 });
 
-deleteElement.addEventListener("click", () => {
+// deleteElement.addEventListener("click", () => {
 
-});
+// });
