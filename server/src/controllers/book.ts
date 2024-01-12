@@ -22,8 +22,13 @@ export const getBooks = async (req: Request, res: Response) => {
 //get book by ID
 export const getBookById = async (req: Request, res: Response) => {
     const bookId = Number(req.params.id);
-    const data = await bookServices.getBookById(bookId);
-    res.json({ data });
+    try{
+        const data = await bookServices.getBookById(bookId);
+        res.json( data );
+    }catch(error)
+    {
+        console.log(error);        
+    }
 };
 
 //search book handler
@@ -112,9 +117,10 @@ export const getBookByUser = async(req: IAuthRequest, res: Response)=>{
     const userId = Number(req.user);
     console.log(userId);
     const data = await bookServices.getBookByUser(userId);
-    // if(data){
-    //     return res.status(400).json({error: data});
-    // }
+    // console.log(data);
+    if(!data){
+        return res.status(400).json({error: "no book found"});
+    }
     return res.status(200).json(data);
 };
 

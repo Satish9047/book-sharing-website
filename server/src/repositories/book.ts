@@ -20,9 +20,23 @@ export const getBooks = async (page: IPage) => {
 };
 
 //get the book by ID handler
+// export const getBookById = async (bookId: number) => {
+//     const data = await prisma.book.findFirst({ where: { book_id: bookId } });
+//     return data;
+// };
+
 export const getBookById = async (bookId: number) => {
-    const data = await prisma.book.findFirst({ where: { book_id: bookId } });
-    return data;
+    try {
+        console.log(bookId, "from the repo getbookById");
+        const data =  await prisma.book.findFirst({where: {book_id: bookId } });
+        if(!data){
+            return {error: "book not found"};
+        }
+        return data;
+    } catch (error) {
+        console.log(error);
+        return { error: "Can't find book !!!!" };
+    }
 };
 
 
@@ -153,5 +167,4 @@ export const getBookByUser = async (userId: number) => {
         console.log(error);
         return { error: "error while getting books" };
     }
-
 };
