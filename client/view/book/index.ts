@@ -21,22 +21,24 @@ window.addEventListener("load", async () => {
 
         // console.log(res);
         if (res.status === 200 && resImg.status === 200) {
-            console.log(res.data.data);
+            console.log(res.data);
             console.log(resImg.data);
-            const bookData = res.data.data;
+            const bookData = res.data;
+            // const bookImg = resImg.data;
 
             bookNameElement.textContent = bookData.book_name;
             authorElement.textContent = bookData.author_name;
             bookCategoryElement.textContent = bookData.category_name;
             bookDescriptionElement.textContent = bookData.description;
             bookKeywordsElement.textContent = bookData.keyword;
-            
+            bookImgElement.src = `http://localhost:8080/books/image/${bookId}`;
+            //console.log(bookData.img_file_path);
             // const base64String = btoa(
             //     String.fromCharCode.apply(null, new Uint8Array(resImg.data))
             // );
 
             
-            bookImgElement.src = URL.createObjectURL(new Blob([resImg.data], { type: "image/jpeg" }));
+            // bookImgElement.src = URL.createObjectURL(new Blob([resImg.data], { type: "image/jpeg" }));
         }
     } catch (error) {
         console.log(error);

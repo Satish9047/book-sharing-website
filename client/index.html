@@ -15,18 +15,18 @@
   </navbar>
   <section class="h-screen bg-[#D8D8D8] flex ">
     <aside class=" p-5 w-3/12">
-      <div class="p-4 w-full h-auto  bg-[#F3F3F350]  rounded-md flex flex-col shadow-md gap-3">
+      <div id="searchByList" class="p-4 w-full h-auto  bg-[#F3F3F350]  rounded-md flex flex-col shadow-md gap-3">
         <h2 class="text-xl font-semibold">Search By</h2>
-        <div class="p-2 flex gap-2 bg-[#F3F3F3] shadow-lg rounded-md"><input type="radio">Get by Book</input></div>
-        <div class="p-2 flex gap-2 bg-[#F3F3F3] shadow-lg rounded-md"><input type="radio">Get by Author</input></div>
-        <div class="p-2 flex gap-2 bg-[#F3F3F3] shadow-lg rounded-md"><input type="radio">Get by Keyword</input></div>
-        <div class="p-2 flex gap-2 bg-[#F3F3F3] shadow-lg rounded-md"><input type="radio">Get by Catagory</input></div>
+        <!-- <div class="p-2 flex gap-2 bg-[#F3F3F3] shadow-lg rounded-md"><input id="byBook" type="checkbox">Get by Book</input></div>
+        <div class="p-2 flex gap-2 bg-[#F3F3F3] shadow-lg rounded-md"><input id="byAuthor" type="checkbox">Get by Author</input></div>
+        <div class="p-2 flex gap-2 bg-[#F3F3F3] shadow-lg rounded-md"><input id="byKeyword" type="checkbox">Get by Keyword</input></div>
+        <div class="p-2 flex gap-2 bg-[#F3F3F3] shadow-lg rounded-md"><input id="byCategory" type="checkbox">Get by Category</input></div> -->
       </div>
       </div>
     </aside>
     <aside class="w-9/12 p-5 bg-[#D8D8D8] flex flex-col gap-10">
       <div class="flex justify-center">
-        <input placeholder="search books here" class="w-1/2 px-3 py-2 rounded-md shadow-md">
+        <input id="searchInput" placeholder="search books here" class="w-1/2 px-3 py-2 rounded-md shadow-md">
       </div>
       <div id="bookItems" class="mx-auto w-10/12 flex flex-col gap-3">
 
