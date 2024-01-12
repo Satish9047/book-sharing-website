@@ -42,37 +42,48 @@ export const getBookById = async (bookId: number) => {
 
 //handling the the search with query paramters
 export const getSearchedBooks = async (query: IQueryBookDb) => {
-
     const { book_name, author_name, keyword, category_name } = query;
-    //getting the book accoridng to the query parameter without having case sensitive
+
+    // getting the book according to the query parameter without case sensitivity
     const data = await prisma.book.findMany({
         where: {
-            book_name: {
-                contains: book_name,
-                mode: "insensitive",
-            },
-            author_name: {
-                contains: author_name,
-                mode: "insensitive",
-            },
-
-            keyword: {
-                contains: keyword,
-                mode: "insensitive",
-            },
-            category_name: {
-                contains: category_name,
-                mode: "insensitive",
-            }
+            OR: [
+                {
+                    book_name: {
+                        contains: book_name,
+                        mode: "insensitive",
+                    },
+                },
+                {
+                    author_name: {
+                        contains: author_name,
+                        mode: "insensitive",
+                    },
+                },
+                {
+                    keyword: {
+                        contains: keyword,
+                        mode: "insensitive",
+                    },
+                },
+                {
+                    category_name: {
+                        contains: category_name,
+                        mode: "insensitive",
+                    },
+                },
+            ],
         },
         select: {
             book_id: true,
             book_name: true,
             author_name: true,
-        }
+        },
     });
+
     return data;
 };
+
 
 export const addBookHandler = async (bookInfo: IAddBook) => {
     console.log(bookInfo);
