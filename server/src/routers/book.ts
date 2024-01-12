@@ -8,8 +8,8 @@ const bookRouter = Router();
 //bookRouter handlers
 bookRouter.get("/", bookController.getBooks);
 bookRouter.get("/user", bookController.getBookByUser);
-bookRouter.get("/:id", bookController.getBookById);
 bookRouter.get("/getby", queryBookMiddlware, bookController.getSearchedBook);
+bookRouter.get("/:id", bookController.getBookById);
 bookRouter.post("/addbook", filesUpload, bookController.addBookHandler);
 bookRouter.put("/updatebook/:id", bookController.updateBookHandler);
 bookRouter.delete("/:id", bookController.deleteBookHandler);
