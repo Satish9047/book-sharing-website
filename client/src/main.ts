@@ -15,6 +15,8 @@ const state = {
     "by Keyword": false,
     "by Category": false,
 };
+
+//search value
 let value = "";
 
 
@@ -43,10 +45,62 @@ for (let i = 0; i < searchLabel.length; i++) {
 
 
 //adding event listeners to the input field
-searchInputElement.addEventListener("keydown", (ev)=>{
+searchInputElement.addEventListener("keydown", async(ev)=>{
     if(ev.key === "Enter"){
         value = searchInputElement.value;
         console.log("enter is clicked", value);
+        const res = await getBook();
+        console.log(res);
+
+        const bookItems = res.data;
+        bookItemsElement.innerHTML = "";
+
+        //rendering the list of books in the dom
+        bookItems.forEach((bookItem:IBook)=>{
+            const div = document.createElement("div") as HTMLDivElement;
+            div.classList.add("p-2", "flex", "gap-2", "justify-between", "bg-[#F3F3F3]", "shadow-lg", "rounded-md");
+
+            const heading = document.createElement("h1") as HTMLHeadingElement;
+            heading.innerText = bookItem.book_name;
+            div.appendChild(heading);
+
+            const paragraph= document.createElement("p") as HTMLParagraphElement;
+            paragraph.innerText = bookItem.author_name;
+            div.appendChild(paragraph);
+
+            const figure = document.createElement("figure");
+            figure.classList.add("w-[30px]");
+
+            const downloadImage = document.createElement("img");
+            downloadImage.src = "../../public/icon/download-icon.png";
+            downloadImage.classList.add("w-[30px]");
+            
+            figure.appendChild(downloadImage);
+            div.appendChild(heading);
+            div.appendChild(paragraph);
+            div.appendChild(figure);
+
+            //for download event listeners
+            figure.addEventListener("click", async () => {
+                
+                //console.log(book);
+                try {
+                    //sending the request to download book pdf
+                    const res = await HTTP.get(`/books/download/${bookItem.book_id}`, { responseType: "arraybuffer" });
+                    console.log(res);
+                    if (res.status === 200) {
+                        const blob = new Blob([res.data], { type: "application/pdf" });
+                        const link = document.createElement("a");
+                        link.href = window.URL.createObjectURL(blob);
+                        link.download = "bookhome.pdf";
+                        link.click();
+                    }
+                } catch (error) {
+                    console.log(error);
+                }
+            });
+            bookItemsElement.appendChild(div);
+        });
     }
 });
 
@@ -118,12 +172,16 @@ window.addEventListener("load", async () => {
 
 
 
-//get book function 
+/**
+ * Get book data from the Backend api accoring to the search by options
+ * 
+ * @returns object //it returns the fetch data from the API
+ */
 function getBook() {
     let url = "";
     console.log("hello world",value);
     if (state["By Book Name"]) {
-        url += `&name=${value}`;
+        url += `name=${value}`;
     }
     if(state["by Author Name"]){
         url += `&author=${value}`;

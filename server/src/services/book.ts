@@ -14,7 +14,6 @@ export const getBookById = async (bookId: number) => {
 };
 
 export const getSearchedBooks = async (query: IQueryBook) => {
-
     const data = bookRepositories.getSearchedBooks(query);
     console.log(query);
 
@@ -32,7 +31,7 @@ export const updateBookHandler = async (bookInfo: string) => {
 };
 
 export const deleteBookHandler = async (bookInfo: IBookInfo) => {
-    console.log(bookInfo.userId, "from services deleteBookHandler");
+    //console.log(bookInfo.userId, "from services deleteBookHandler");
     const data = bookRepositories.deleteBookHandler(bookInfo);
     return data;
 };
