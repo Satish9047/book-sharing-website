@@ -57,3 +57,20 @@ export function renderData(bookdata: []) {
         });
     });
 }
+
+
+
+export async function sendRefreshRequest() {
+    try {
+        const res = await HTTP.get("/auth/refresh");
+        if (res.status === 200) {
+            window.location.reload();
+            return true;
+        } else {
+            return "fail";
+        }
+    } catch (error) {
+        console.error(error);
+        return false;
+    }
+}

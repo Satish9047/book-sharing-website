@@ -1,5 +1,6 @@
 import queryString from "query-string";
 import HTTP from "../../src/config";
+import { sendRefreshRequest } from "../../src/utils/utils";
 
 const bookNameElement = document.getElementById("bookName") as HTMLElement;
 const authorElement = document.getElementById("bookAuthor") as HTMLElement;
@@ -32,16 +33,16 @@ window.addEventListener("load", async () => {
             bookDescriptionElement.textContent = bookData.description;
             bookKeywordsElement.textContent = bookData.keyword;
             bookImgElement.src = `http://localhost:8080/books/image/${bookId}`;
-            //console.log(bookData.img_file_path);
-            // const base64String = btoa(
-            //     String.fromCharCode.apply(null, new Uint8Array(resImg.data))
-            // );
 
-            
-            // bookImgElement.src = URL.createObjectURL(new Blob([resImg.data], { type: "image/jpeg" }));
         }
     } catch (error) {
         console.log(error);
+        if (error.response.status === 401) {
+            const res = await sendRefreshRequest();
+            if (!res) {
+                console.log("authentication failed");
+            }
+        }
     }
 });
 

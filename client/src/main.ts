@@ -1,6 +1,7 @@
 import HTTP from "./config";
 import { IState } from "./interface/book";
-import { renderData } from "./utils/render";
+import { renderData } from "./utils/utils";
+import { sendRefreshRequest } from "./utils/utils";
 
 // const bookItemsElement = document.getElementById("bookItems") as HTMLDivElement;
 const searchByList = document.getElementById("searchByList") as HTMLDivElement;
@@ -18,9 +19,9 @@ let pageIndex = 0;
 const itemsPerPage = 8;
 
 if (pageIndex <= itemsPerPage) {
-    prevElement.classList.add("hidden");
+    prevElement.style.display = "none";
 } else {
-    prevElement.classList.remove("hidden");
+    prevElement.style.display = "block";
 }
 //state for getting data query
 const state: IState = {
@@ -33,14 +34,29 @@ const state: IState = {
 //search value
 let value = "";
 
+//isProfile clicked
+let isProfile = false;
+
 //on load
 window.addEventListener("load", async (): Promise<void> => {
     //fetching the data from the server
-    const res = await HTTP.get(`/books?take=${itemsPerPage}&skip=${pageIndex}`);
-    // console.log(res);
-    if (res.status === 200) {
-        console.log(res.data);
-        renderData(res.data);
+    try {
+        const res = await HTTP.get(`/books?take=${itemsPerPage}&skip=${pageIndex}`);
+        // console.log(res);
+        if (res.status === 200) {
+            console.log(res.data);
+            renderData(res.data);
+        }
+    } catch (error) {
+        if (error.response && error.response.status === 401) {
+            try {
+                sendRefreshRequest();
+
+            } catch (error) {
+                console.log(error);
+                window.location.replace("../view/login/login.html");
+            }
+        }
     }
 });
 
@@ -81,8 +97,16 @@ searchInputElement.addEventListener("keydown", async (ev) => {
 });
 
 navAvatar.addEventListener("click", () => {
-    avatarDiv.classList.add("hidden");
-    console.log("navAvatar is clicked");
+    isProfile = !isProfile;
+    if (isProfile) {
+        avatarDiv.style.display = "block";
+        console.log("navAvatar is clicked");
+    }else{
+        avatarDiv.style.display = "none";
+        console.log("navAvatar is clicked");
+    }
+
+
 });
 
 nextElement.addEventListener("click", () => {
@@ -94,13 +118,23 @@ prevElement.addEventListener("click", () => {
 });
 
 async function getnextIndexBook() {
+    prevElement.style.display = "block";
+
     pageIndex += 8;
     const res = await HTTP.get(`/books?take=${itemsPerPage}&skip=${pageIndex}`);
     console.log(res.data);
     renderData(res.data);
+    if (!res.data[0]) {
+        pageIndex = 0;
+        const res = await HTTP.get(`/books?take=${itemsPerPage}&skip=${pageIndex}`);
+        renderData(res.data);
+    }
 }
 
 async function getPrevIndexBook() {
+    if (pageIndex <= itemsPerPage) {
+        prevElement.style.display = "none";
+    }
     pageIndex -= 8;
     const res = await HTTP.get(`/books?take=${itemsPerPage}&skip=${pageIndex}`);
     console.log(res.data);
@@ -116,7 +150,9 @@ async function getPrevIndexBook() {
 function getBook() {
     let url = "";
     console.log("hello world", value);
-
+    if (!value) {
+        return HTTP.get(`/books?take=${itemsPerPage}&skip=${pageIndex}`);
+    }
     if (state["By Book Name"]) {
         url += `&name=${value}`;
     }
