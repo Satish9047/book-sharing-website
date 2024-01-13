@@ -7,35 +7,36 @@ const prisma = new PrismaClient();
 
 //get the book from the database
 export const getBooks = async (page: IPage) => {
-    const data = await prisma.book.findMany({
-        skip: page.skip,
-        take: page.take,
-        select: {
-            book_id: true,
-            book_name: true,
-            author_name: true,
-        }
-    });
-    return data;
+    try {
+        const data = await prisma.book.findMany({
+            skip: page.skip,
+            take: page.take,
+            select: {
+                book_id: true,
+                book_name: true,
+                author_name: true,
+            }
+        });
+        return data;
+
+    } catch (error) {
+        console.log("error while geeting books: ", error);
+        return { error: "error while geeting books: " };
+    }
 };
 
-//get the book by ID handler
-// export const getBookById = async (bookId: number) => {
-//     const data = await prisma.book.findFirst({ where: { book_id: bookId } });
-//     return data;
-// };
-
+//getting bookById
 export const getBookById = async (bookId: number) => {
     try {
         console.log(bookId, "from the repo getbookById");
-        const data =  await prisma.book.findFirst({where: {book_id: bookId } });
-        if(!data){
-            return {error: "book not found"};
+        const data = await prisma.book.findFirst({ where: { book_id: bookId } });
+        if (!data) {
+            return { error: "book not found" };
         }
         return data;
     } catch (error) {
         console.log(error);
-        return { error: "Can't find book !!!!" };
+        return { error: "Can't find book" };
     }
 };
 
@@ -43,45 +44,49 @@ export const getBookById = async (bookId: number) => {
 //handling the the search with query paramters
 export const getSearchedBooks = async (query: IQueryBookDb) => {
     const { book_name, author_name, keyword, category_name } = query;
-
     // getting the book according to the query parameter without case sensitivity
-    const data = await prisma.book.findMany({
-        where: {
-            OR: [
-                {
-                    book_name: {
-                        contains: book_name,
-                        mode: "insensitive",
+    try {
+        const data = await prisma.book.findMany({
+            where: {
+                OR: [
+                    {
+                        book_name: {
+                            contains: book_name,
+                            mode: "insensitive",
+                        },
                     },
-                },
-                {
-                    author_name: {
-                        contains: author_name,
-                        mode: "insensitive",
+                    {
+                        author_name: {
+                            contains: author_name,
+                            mode: "insensitive",
+                        },
                     },
-                },
-                {
-                    keyword: {
-                        contains: keyword,
-                        mode: "insensitive",
+                    {
+                        keyword: {
+                            contains: keyword,
+                            mode: "insensitive",
+                        },
                     },
-                },
-                {
-                    category_name: {
-                        contains: category_name,
-                        mode: "insensitive",
+                    {
+                        category_name: {
+                            contains: category_name,
+                            mode: "insensitive",
+                        },
                     },
-                },
-            ],
-        },
-        select: {
-            book_id: true,
-            book_name: true,
-            author_name: true,
-        },
-    });
+                ],
+            },
+            select: {
+                book_id: true,
+                book_name: true,
+                author_name: true,
+            },
+        });
+        return data;
 
-    return data;
+    } catch (error) {
+        console.log(error);
+        return { error: "Can't find book" };
+    }
 };
 
 
@@ -107,6 +112,9 @@ export const addBookHandler = async (bookInfo: IAddBook) => {
         return { error: "error while adding book" };
     }
 };
+
+
+//updating books
 export const updateBookHandler = async (bookInfo: string) => {
     console.log(bookInfo);
     return "hello from updateBookHandler repositories";
@@ -120,45 +128,54 @@ export const deleteBookHandler = async (bookInfo: IBookInfo) => {
 
     try {
         const book = await prisma.book.findFirst({ where: { book_id: bookId } });
-
         if (!book) {
-            return { err: "book not found" };
+            return { error: "book not found" };
         }
-        console.log("user_id: ", book.user_id);
-        console.log("userId: ", userId);
+        // console.log("user_id: ", book.user_id);
+        // console.log("userId: ", userId);
 
         if (book.user_id !== userId) {
-            return { err: "you are not the owner of this book" };
+            return { error: "you are not the owner of this book" };
         }
-
         const deleteBook = await prisma.book.delete({ where: { book_id: bookId } });
         return { msg: "book deleted", deleteBook: deleteBook };
 
     } catch (error) {
         console.log(error);
-        return { err: "error while deleting book" };
+        return { error: "error while deleting book" };
     }
 };
 
 
+//download book handler
 export const downloadBookHandler = async (bookInfo: number) => {
-    const book = await prisma.book.findFirst({ where: { book_id: bookInfo } });
-    if (!book) return { error: "Book not found" };
-    const bookPath = book.pdf_file_path;
+    try {
+        const book = await prisma.book.findFirst({ where: { book_id: bookInfo } });
+        if (!book) return { error: "Book not found" };
+        const bookPath = book.pdf_file_path;
 
-    return fs.createReadStream(bookPath);
+        return fs.createReadStream(bookPath);
+
+    } catch (error) {
+        console.log(error);
+        return { error: "error while downloading book" };
+    }
 };
 
+
+//get image handler
 export const getImageHandler = async (bookInfo: number) => {
     const book = await prisma.book.findUnique({ where: { book_id: bookInfo } });
     if (!book) {
         return { error: "book not found" };
     }
     const imgPath = book.img_file_path;
-    // const imageExist = fs.existsSync(imagePath.img_file_path);
+    
     return fs.createReadStream(imgPath);
 };
 
+
+//get books by user
 export const getBookByUser = async (userId: number) => {
     try {
         console.log(userId, "logging the user id ine getBookUser");

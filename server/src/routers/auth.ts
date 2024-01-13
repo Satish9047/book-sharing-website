@@ -4,9 +4,11 @@ import { loginAuth, registerAuth } from "../middlewares/auth";
 
 const authRouter = Router();
 
+//auth routers
 authRouter.get("/userInfo", authController.getUserInfo);
 authRouter.post("/register", registerAuth, authController.registerHandler);
 authRouter.post("/login", loginAuth, authController.loginHandler);
 authRouter.get("/logout", authController.logoutHandler);
+
 export default authRouter;
 
