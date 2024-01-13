@@ -37,7 +37,7 @@ export const jwtAuth = (req: Request & { user?: JwtPayload }, res: Response, nex
         const verifyToken = jwt.verify(accessToken, config.ACCESS_TOKEN_SECRET) as JwtPayload;
         if (!verifyToken) {
             res.clearCookie("accessToken");
-            // console.log(verifyToken);
+            console.log(verifyToken);
             return res.status(401).json({ error: "Access Denied! 2" });
         }
         req.user = verifyToken.id;
@@ -45,7 +45,8 @@ export const jwtAuth = (req: Request & { user?: JwtPayload }, res: Response, nex
     } catch (error) {
         console.error("Error verifying access token:", error);
         res.clearCookie("accessToken");
-        return res.status(401).json({ error: "Access Denied! 3" });
+        // res.clearCookie("refreshToken");
+        return res.status(401).json({ error: "Access Denied! 3!!!!" });
     }
 };
 
