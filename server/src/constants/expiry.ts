@@ -1,4 +1,4 @@
-export const ACCESS_TOKEN_EXPIRY = "3min";
+export const ACCESS_TOKEN_EXPIRY = "10sec";
 export const REFRESH_TOKEN_EXPIRY = "1d";
 
 // import config from "../config";

@@ -62,12 +62,12 @@ export function renderData(bookdata: []) {
 
 export async function sendRefreshRequest() {
     try {
-        const res = await HTTP.get("/auth/refresh");
+        const res = await HTTP.post("/refresh");
         if (res.status === 200) {
             window.location.reload();
             return true;
         } else {
-            return "fail";
+            return false;
         }
     } catch (error) {
         console.error(error);

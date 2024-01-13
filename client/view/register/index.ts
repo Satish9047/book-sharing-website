@@ -3,6 +3,7 @@ const registerElement = document.getElementById("registerBtn") as HTMLButtonElem
 const userNameElement = document.getElementById("userName") as HTMLButtonElement;
 const emailElement = document.getElementById("email") as HTMLButtonElement;
 const passwordElement = document.getElementById("password") as HTMLButtonElement;
+const registerDivElement = document.getElementById("register") as HTMLDivElement;
 
 registerElement.addEventListener("click", async (e) => {
     e.preventDefault();
@@ -17,13 +18,20 @@ registerElement.addEventListener("click", async (e) => {
             email,
             password,
         });
-        console.log(res,"respond from server");
-        if(res.status === 200){
+        console.log(res, "respond from server");
+        if (res.status === 200) {
             window.location.href = "../login/login.html";
         }
     } catch (error) {
-        if(error.response.status === 400){
-            console.log(error.response.data.error);
-        }
+        console.log(error.response.data);
+        const div = document.createElement("div") as HTMLElement;
+        div.classList.add("relative", "p-4", "bg-[#FF004D]");
+        const paragraph = document.createElement("p") as HTMLElement;
+        div.appendChild(paragraph);
+        paragraph.innerText = error.response.data.error;
+        registerDivElement.appendChild(div);
+        setTimeout(() => {
+            registerDivElement.removeChild(div);
+        }, 3000);
     }
 });

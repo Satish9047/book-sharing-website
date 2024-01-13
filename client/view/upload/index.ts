@@ -8,7 +8,7 @@ const bookPdfElement = document.getElementById("bookpdf") as HTMLInputElement;
 const imageElement = document.getElementById("image") as HTMLInputElement;
 const descriptionElement = document.getElementById("description") as HTMLInputElement;
 const uploadBtn = document.getElementById("uploadBtn") as HTMLButtonElement;
-
+const uploadDivElement = document.getElementById("uploadDiv")as HTMLDivElement;
 
 uploadBtn.addEventListener("click", async (e) => {
     e.preventDefault();
@@ -38,11 +38,19 @@ uploadBtn.addEventListener("click", async (e) => {
 
         if(res.status === 201) {
             console.log("successfully upload book", res);
-            
         }
         
     } catch (error) {
-        console.log("error: ", error); 
+        console.log(error.response.data);
+        const div = document.createElement("div") as HTMLElement;
+        div.classList.add("relative", "p-4", "bg-[#FF004D]");
+        const paragraph = document.createElement("p") as HTMLElement;
+        div.appendChild(paragraph);
+        paragraph.innerText = error.response.data.error;
+        uploadDivElement.appendChild(div);
+        setTimeout(() => {
+            uploadDivElement.removeChild(div);
+        }, 3000);
     }
 
 });

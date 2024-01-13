@@ -1,3 +1,4 @@
+import { AxiosError } from "axios";
 import HTTP from "./config";
 import { IState } from "./interface/book";
 import { renderData } from "./utils/utils";
@@ -48,9 +49,12 @@ window.addEventListener("load", async (): Promise<void> => {
             renderData(res.data);
         }
     } catch (error) {
-        if (error.response && error.response.status === 401) {
+        if ((error as AxiosError).response && (error as AxiosError).response?.status === 401) {
             try {
-                sendRefreshRequest();
+                const result = await sendRefreshRequest();
+                if(!result){
+                    window.location.replace("../view/login/login.html");
+                }
 
             } catch (error) {
                 console.log(error);

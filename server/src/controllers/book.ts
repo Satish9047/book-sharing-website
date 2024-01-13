@@ -58,12 +58,10 @@ export const addBookHandler = async (req: IAuthRequest, res: Response) => {
     const bookInfo: IAddBook = req.body;
     try {
         bookInfo.user = Number(req.user);
-        const bookFile = req.files;
+        const bookFile = req.files as {[fieldname: string]: Express.Multer.File[]};
         // console.log(bookFile);
 
-        //@ts-expect-error
-        bookInfo.pdfPath = bookFile?.pdfFile?.[0].path;
-        //@ts-ignore
+        bookInfo.pdfPath = bookFile?.pdfFile?.[0].path;  
         bookInfo.imgPath = bookFile?.imgFile?.[0].path;
 
         const data = await bookServices.addBookHandler(bookInfo);

@@ -5,6 +5,8 @@ import HTTP from "../../src/config";
 const emailElement = document.getElementById("email") as HTMLInputElement;
 const passwordElement = document.getElementById("password") as HTMLInputElement;
 const loginBtn = document.getElementById("loginBtn") as HTMLButtonElement;
+const loginElement = document.getElementById("login") as HTMLBodyElement;
+
 
 loginBtn.addEventListener("click", async (e) => {
     e.preventDefault();
@@ -18,13 +20,20 @@ loginBtn.addEventListener("click", async (e) => {
             password,
         });
         //console.log(res,"respond from server");
-        if(res.status === 200){
+        if (res.status === 200) {
             window.location.href = "../../index.html";
         }
-        
+
     } catch (error) {
-        if(error.response.status === 400){
-            console.log(error.response.data.err);
-        }
+        console.log(error.response.data);
+        const div = document.createElement("div") as HTMLElement;
+        div.classList.add("relative","p-4","bg-black");
+        const paragraph = document.createElement("p") as HTMLElement;
+        div.appendChild(paragraph);
+        paragraph.innerText = error.response.data.error;
+        loginElement.appendChild(div);
+        // setTimeout(() => {
+        //     loginElement.removeChild(div);
+        // }, 3000);
     }
 });
