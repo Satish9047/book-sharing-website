@@ -9,26 +9,41 @@
 </head>
 
 <body class="bg-[#F3F3F3] h-screen w-screen flex items-center justify-center">
-        <div class="flex flex-col w-3/12 bg-[#FEFCFF] shadow-lg rounded-md p-6">
-            <header class="mb-4 ">
-                <h2 class="text-xl text-center font-semibold">Login</h2>
-            </header>
-            <form class="flex flex-col">
-                <label for="email" class="mb-2 text-sm">Email</label>
-                <input type="email" name="email" id="email" class="px-3 py-2 border rounded-md mb-2">
+    
+    <!-- main -->
+    <main class="flex flex-col w-3/12 bg-[#FEFCFF] shadow-lg rounded-md p-6">
+        <!-- login header -->
+        <header class="mb-4 ">
+            <h2 class="text-xl text-center font-semibold">Login</h2>
+        </header>
 
-                <label for="password" class="mb-2 text-sm">Password</label>
-                <input type="password" name="password" id="password" class="px-3 py-2 border rounded-md mb-4">
+        <!-- login form -->
+        <form class="flex flex-col">
+            <label for="email" class="mb-2 text-sm">Email</label>
+            <input type="email" name="email" id="email" class="px-3 py-2 border rounded-md mb-2">
 
-                <button id="loginBtn" class="bg-[#00796B] text-white px-4 py-2 rounded-md hover:bg-[#00796bba] active:bg-[#235c55]">
-                    Login
-                </button>
-                <div class="mt-2 text-md">
-                    <p>Don't have an account? <span class="text-blue-500 cursor-pointer font-semibold hover:text-[#00796B] active:text-[#00793b]"><a href="../register/register.html">Click Here</a></span></p>
-                </div>
-            </form>
-        </div>
-        <script type="module" src="./index.ts"></script>
+            <label for="password" class="mb-2 text-sm">Password</label>
+            <input type="password" name="password" id="password" class="px-3 py-2 border rounded-md mb-4">
+
+            <!-- login button -->
+            <button id="loginBtn"
+                class="bg-[#00796B] text-white px-4 py-2 rounded-md hover:bg-[#00796bba] active:bg-[#235c55]">
+                Login
+            </button>
+
+            <!-- redirect to register  -->
+            <div class="mt-2 text-md">
+                <p>Don't have an account? 
+                    <span
+                        class="text-blue-500 cursor-pointer font-semibold hover:text-[#00796B] active:text-[#00793b]">
+                        <a href="../register/register.html">Click Here</a>
+                    </span>
+                </p>
+            </div>
+        </form>
+    </main>
+    <!-- script -->
+    <script type="module" src="./index.ts"></script>
 </body>
 
 </html>

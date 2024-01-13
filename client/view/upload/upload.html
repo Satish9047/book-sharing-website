@@ -9,7 +9,9 @@
 </head>
 
 <body class="bg-[#D8D8D8] h-screen w-screen">
+    <!-- main -->
     <main>
+        <!-- navbar -->
         <navbar class="px-4 py-5 flex justify-between font-semibold bg-[#00796B]">
             <h1 class="font-semibold text-3xl">Upload Book</h1>
             <ul class="flex justify-center items-center gap-5">
@@ -18,11 +20,16 @@
                 <li><a href="./upload.html">Upload Books</a></li>
             </ul>
             <figure>
-                <img src="../../public/icon/search.png" class="w-[30px]">
+                <img src="../../public/image/profile.jpg" class="w-[50px] rounded-full">
             </figure>
         </navbar>
-        <div class="p-10 flex justify-center">
+
+        <!-- upload section -->
+        <section class="p-10 flex justify-center">
+
+            <!-- upload form -->
             <form class="p-10 w-4/6 flex bg-[#F3F3F3] rounded-md shadow-lg gap-10">
+                <!-- left side -->
                 <div class="flex flex-col w-1/2">
                     <label for="book-name">Book Name</label>
                     <input name="book-name" id="book-name" class="px-3 py-1 rounded-md shadow-md">
@@ -35,10 +42,9 @@
 
                     <label for="keyword">Keyword</label>
                     <input name="keyword" id="keyword" class="px-3 py-1 rounded-md shadow-md">
-
-
                 </div>
 
+                <!-- right side -->
                 <div class="flex flex-col w-1/2">
                     <label for="image">Image</label>
                     <input type="file" name="image" id="image" class="mt-1 p-2 border rounded-md shadow-md">
@@ -49,11 +55,15 @@
                     <label for="description">Decription</label>
                     <textarea name="description" id="description" class="px-3 py-1 rounded-md shadow-md"></textarea>
 
-                    <button id="uploadBtn" class="my-4 p-3 w-full rounded-md shadow-md bg-[#00796B] hover:bg-[#007951] active:bg-[#F3F3F3]">Upload Book</button>
+                    <button id="uploadBtn"
+                        class="my-4 p-3 w-full rounded-md shadow-md bg-[#00796B] hover:bg-[#007951] active:bg-[#F3F3F3]">
+                        Upload Book
+                    </button>
                 </div>
             </form>
-        </div>
+        </section>
     </main>
+    <!-- script -->
     <script type="module" src="./index.ts"></script>
 </body>
 

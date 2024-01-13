@@ -9,58 +9,77 @@
 </head>
 
 <body class="bg-[#D8D8D8]">
-    <main>
-        <navbar class="px-4 py-5 flex justify-between font-semibold bg-[#00796B]">
-            <h1 class="font-semibold text-3xl">User Profile</h1>
-            <ul class="flex justify-center items-center gap-5">
-                <li><a href="../../index.html">Home</a></li>
-                <li><a href="../profile/profile.html">Profile</a></li>
-                <li><a href="../upload/upload.html">Upload Books</a></li>
-            </ul>
-        </navbar>
-        <section class="flex">
-            <div class="p-5 w-3/12 rounded-md flex flex-col gap-5">
-                <div class="p-5 bg-[#FEFCFF] flex flex-col gap-5 rounded-md justify-center items-center shadow-md">
-                    <figure class="w-10/12 rounded-md flex justify-center">
-                        <img id="profileImg" src="../../public/image/profile.jpg" alt="profile image" class="rounded-md items-center">
-                    </figure>
-                    <div class="p-5 w-full">
-                        <span class="font-bold">User:</span>
-                        <h3 id="userName"></h3>
-                        <span class="font-bold">Email"</span>
-                        <h3 id="email"></h3>
-                    </div>
-                </div>
-                <div class="p-3 flex justify-center">
-                    <button id="uploadPageBtn" class="my-4 p-3 w-full rounded-md shadow-md bg-[#00796B] hover:bg-[#007951] active:bg-[#F3F3F3]">Upload Book</button>
+
+    <!-- navbar -->
+    <navbar class="px-4 py-5 flex justify-between font-semibold bg-[#00796B]">
+        <h1 class="font-semibold text-3xl">User Profile</h1>
+        <ul class="flex justify-center items-center gap-5">
+            <li><a href="../../index.html">Home</a></li>
+            <li><a href="../profile/profile.html">Profile</a></li>
+            <li><a href="../upload/upload.html">Upload Books</a></li>
+        </ul>
+    </navbar>
+
+    <!-- main -->
+    <main class="flex">
+
+        <!-- user detail section -->
+        <section class="p-5 w-3/12 rounded-md flex flex-col gap-5">
+            <div class="p-5 bg-[#FEFCFF] flex flex-col gap-5 rounded-md justify-center items-center shadow-md">
+
+                <!-- user image -->
+                <figure class="w-10/12 rounded-md flex justify-center">
+                    <img id="profileImg" src="../../public/image/profile.jpg" alt="profile image"
+                        class="rounded-md items-center">
+                </figure>
+
+                <!-- user details -->
+                <div class="p-5 w-full">
+                    <span class="font-bold">User:</span>
+                    <h3 id="userName"></h3>
+                    <span class="font-bold">Email"</span>
+                    <h3 id="email"></h3>
                 </div>
             </div>
-            <div class="p-5 w-9/12 flex flex-col rounded-md">
-                <header class="p-5 flex justify-center bg-[#00796B] rounded-md shadow-md">
-                    <h2 class="font-semibold text-2xl">Your Uploaded Books</h2>
-                </header>
-                <div id="bookList" class="p-5 flex flex-col gap-3">
-                    <div  class="px-4 py-2 flex justify-between bg-[#F3F3F3] rounded-md shadow-md">
-                        <h3>The Hero and the Heroine</h3>
-                        <p>Natte Lotte</p>
-                        <figure><img id="deleteIcon" src="../../public/icon/delete.png" class="w-[30px]"></figure>
-                    </div>
+            <!-- upload button -->
+            <div class="p-3 flex justify-center">
+                <button id="uploadPageBtn"
+                    class="my-4 p-3 w-full rounded-md shadow-md bg-[#00796B] hover:bg-[#007951] active:bg-[#F3F3F3]">Upload
+                    Book</button>
+            </div>
+        </section>
 
-                    <div class="px-4 py-2 flex justify-between bg-[#F3F3F3] rounded-md shadow-md">
-                        <h3>The Hero and the Heroine</h3>
-                        <p>Natte Lotte</p>
-                        <figure><img id="deleteIcon" src="../../public/icon/delete.png" class="w-[30px]"></figure>
-                    </div>
+        <!-- user uploaded books -->
+        <section class="p-5 w-9/12 flex flex-col rounded-md">
+            <!-- header -->
+            <header class="p-5 flex justify-center bg-[#00796B] rounded-md shadow-md">
+                <h2 class="font-semibold text-2xl">Your Uploaded Books</h2>
+            </header>
 
-                    <div class="px-4 py-2 flex justify-between bg-[#F3F3F3] rounded-md shadow-md">
-                        <h3>The Hero and the Heroine</h3>
-                        <p>Natte Lotte</p>
-                        <figure><img src="../../public/icon/delete.png" class="w-[30px]"></figure>
-                    </div>
+            <!-- uploaded books list -->
+            <div id="bookList" class="p-5 flex flex-col gap-3">
+                <div class="px-4 py-2 flex justify-between bg-[#F3F3F3] rounded-md shadow-md">
+                    <h3>The Hero and the Heroine</h3>
+                    <p>Natte Lotte</p>
+                    <figure><img id="deleteIcon" src="../../public/icon/delete.png" class="w-[30px]"></figure>
+                </div>
+
+                <div class="px-4 py-2 flex justify-between bg-[#F3F3F3] rounded-md shadow-md">
+                    <h3>The Hero and the Heroine</h3>
+                    <p>Natte Lotte</p>
+                    <figure><img id="deleteIcon" src="../../public/icon/delete.png" class="w-[30px]"></figure>
+                </div>
+
+                <div class="px-4 py-2 flex justify-between bg-[#F3F3F3] rounded-md shadow-md">
+                    <h3>The Hero and the Heroine</h3>
+                    <p>Natte Lotte</p>
+                    <figure><img src="../../public/icon/delete.png" class="w-[30px]"></figure>
                 </div>
             </div>
         </section>
     </main>
+
+    <!-- script -->
     <script type="module" src="./index.ts"></script>
 </body>
 

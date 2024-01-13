@@ -9,30 +9,50 @@
 </head>
 
 <body class="bg-[#D8D8D8] h-screen w-screen">
-    <main>
-        <navbar class="px-4 py-5 flex justify-between font-semibold bg-[#00796B]">
-            <h1 class="font-semibold text-3xl">Book Details</h1>
-            <ul class="flex justify-center items-center gap-5">
-                <li><a href="../../index.html">Home</a></li>
-                <li><a href="../profile/profile.html">Profile</a></li>
-                <li><a href="../upload/upload.html">Upload Books</a></li>
-            </ul>
-        </navbar>
-        <div class="m-10 flex justify-center">
-            <div class="w-7/12 flex bg-[#F3F3F3] shadow-lg rounded-md gap-5 justify-center">
-                <figure class="w-1/2 bg-cover">
-                    <img id="bookImg" src="" class="w-full">
-                </figure>
-                <div class="p-5 w-4/6">
-                    <div class="flex"><h3 class="font-semibold">Book Name : </h3><span id="bookName"></span></div>
-                    <div class="flex"><h3 class="font-semibold">Author Name : </h3><span id="bookAuthor"> </span></div>
-                    <div class="flex"><h3 class="font-semibold">Catagory : </h3><span id="bookCatagory"></span></div>
-                    <div class="flex"><p class="font-semibold">keyword : </p><span id="bookKeyword"></span></div>
-                    <div class=""><p class="font-semibold">description : </p><span id="bookDescription"> </span></div>
-                    <div>
-                        <button id="download" class="my-4 p-3 w-full rounded-md shadow-md bg-[#00796B] hover:bg-[#007951] active:bg-[#F3F3F3]">Download</button>
-                    </div>
-                </div>
+    <!-- navbar -->
+    <navbar class="px-4 py-5 flex justify-between font-semibold bg-[#00796B]">
+        <h1 class="font-semibold text-3xl">Book Details</h1>
+
+        <!-- user profile info -->
+        <ul class="flex justify-center items-center gap-5">
+            <li><a href="../../index.html">Home</a></li>
+            <li><a href="../profile/profile.html">Profile</a></li>
+            <li><a href="../upload/upload.html">Upload Books</a></li>
+        </ul>
+
+    </navbar>
+
+    <!-- main -->
+    <main class="m-10 w-7/12 flex bg-[#F3F3F3] shadow-lg rounded-md gap-5 justify-center">
+
+        <!-- book image -->
+        <figure class="w-1/2 bg-cover">
+            <img id="bookImg" src="" class="w-full">
+        </figure>
+
+        <!-- uploaded books -->
+        <div class="p-5 w-4/6">
+            <div class="flex">
+                <h3 class="font-semibold">Book Name : </h3><span id="bookName"></span>
+            </div>
+            <div class="flex">
+                <h3 class="font-semibold">Author Name : </h3><span id="bookAuthor"> </span>
+            </div>
+            <div class="flex">
+                <h3 class="font-semibold">Catagory : </h3><span id="bookCatagory"></span>
+            </div>
+            <div class="flex">
+                <p class="font-semibold">keyword : </p><span id="bookKeyword"></span>
+            </div>
+            <div class="">
+                <p class="font-semibold">description : </p><span id="bookDescription"> </span>
+            </div>
+
+            <!-- download button -->
+            <div>
+                <button id="download" class="my-4 p-3 w-full rounded-md shadow-md bg-[#00796B] hover:bg-[#007951] active:bg-[#F3F3F3]">
+                    Download
+                </button>
             </div>
         </div>
 
