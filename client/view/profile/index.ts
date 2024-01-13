@@ -7,7 +7,11 @@ const bookItemElement = document.getElementById("bookList") as HTMLDivElement;
 const uploadPageBtn = document.getElementById("uploadPageBtn") as HTMLButtonElement;
 const userNameElement = document.getElementById("userName") as HTMLHeadingElement;
 const emailElement = document.getElementById("email") as HTMLHeadingElement;
+const navAvatar = document.getElementById("navAvatar") as HTMLElement;
+const avatarDiv = document.getElementById("avatarDiv") as HTMLDivElement;
 
+//avatar state
+let isProfile = false;
 
 window.addEventListener("load", async () => {
     try {
@@ -63,6 +67,17 @@ window.addEventListener("load", async () => {
         }
     } catch (error) {
         console.log(error);
+    }
+});
+
+navAvatar.addEventListener("click", () => {
+    isProfile = !isProfile;
+    if (isProfile) {
+        avatarDiv.style.display = "block";
+        console.log("navAvatar is clicked");
+    }else{
+        avatarDiv.style.display = "none";
+        console.log("navAvatar is clicked");
     }
 });
 

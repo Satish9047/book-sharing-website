@@ -9,7 +9,11 @@ const bookDescriptionElement = document.getElementById("bookDescription") as HTM
 const bookKeywordsElement = document.getElementById("bookKeyword") as HTMLElement;
 const downloadBtnElement = document.getElementById("download") as HTMLButtonElement;
 const bookImgElement = document.getElementById("bookImg") as HTMLImageElement;
+const navAvatar = document.getElementById("navAvatar") as HTMLElement;
+const avatarDiv = document.getElementById("avatarDiv") as HTMLDivElement;
 
+//avatar state
+let isProfile = false;
 
 const book = queryString.parse(location.search);
 // console.log(book);
@@ -43,6 +47,17 @@ window.addEventListener("load", async () => {
                 console.log("authentication failed");
             }
         }
+    }
+});
+
+navAvatar.addEventListener("click", () => {
+    isProfile = !isProfile;
+    if (isProfile) {
+        avatarDiv.style.display = "block";
+        console.log("navAvatar is clicked");
+    }else{
+        avatarDiv.style.display = "none";
+        console.log("navAvatar is clicked");
     }
 });
 

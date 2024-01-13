@@ -109,8 +109,6 @@ navAvatar.addEventListener("click", () => {
         avatarDiv.style.display = "none";
         console.log("navAvatar is clicked");
     }
-
-
 });
 
 nextElement.addEventListener("click", () => {

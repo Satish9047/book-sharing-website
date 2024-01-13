@@ -9,6 +9,22 @@ const imageElement = document.getElementById("image") as HTMLInputElement;
 const descriptionElement = document.getElementById("description") as HTMLInputElement;
 const uploadBtn = document.getElementById("uploadBtn") as HTMLButtonElement;
 const uploadDivElement = document.getElementById("uploadDiv")as HTMLDivElement;
+const navAvatar = document.getElementById("navAvatar") as HTMLElement;
+const avatarDiv = document.getElementById("avatarDiv") as HTMLDivElement;
+
+//avatar state
+let isProfile = false;
+
+navAvatar.addEventListener("click", () => {
+    isProfile = !isProfile;
+    if (isProfile) {
+        avatarDiv.style.display = "block";
+        console.log("navAvatar is clicked");
+    }else{
+        avatarDiv.style.display = "none";
+        console.log("navAvatar is clicked");
+    }
+});
 
 uploadBtn.addEventListener("click", async (e) => {
     e.preventDefault();
@@ -42,12 +58,14 @@ uploadBtn.addEventListener("click", async (e) => {
         
     } catch (error) {
         console.log(error.response.data);
+        
         const div = document.createElement("div") as HTMLElement;
         div.classList.add("relative", "p-4", "bg-[#FF004D]");
         const paragraph = document.createElement("p") as HTMLElement;
         div.appendChild(paragraph);
         paragraph.innerText = error.response.data.error;
         uploadDivElement.appendChild(div);
+
         setTimeout(() => {
             uploadDivElement.removeChild(div);
         }, 3000);

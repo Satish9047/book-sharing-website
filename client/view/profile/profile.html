@@ -11,14 +11,30 @@
 <body class="bg-[#D8D8D8]">
 
     <!-- navbar -->
-    <navbar class="px-4 py-5 flex justify-between font-semibold bg-[#00796B]">
-        <h1 class="font-semibold text-3xl">User Profile</h1>
-        <ul class="flex justify-center items-center gap-5">
-            <li><a href="../../index.html">Home</a></li>
-            <li><a href="../profile/profile.html">Profile</a></li>
-            <li><a href="../upload/upload.html">Upload Books</a></li>
+    <navbar class="px-4 py-5 flex justify-between bg-[#00796B] relative">
+        <h1 class="font-semibold text-3xl">Recon Book</h1>
+        <ul class="flex justify-center items-center gap-5 font-semibold">
+          <li><a href="../../index.html">Home</a></li>
+          <li><a href="../profile/profile.html">Profile</a></li>
+          <li><a href="../upload/upload.html">Uploads</a></li>
         </ul>
-    </navbar>
+    
+        <!-- profile -->
+        <figure id="navAvatar" class="w-[40px] h-[40px] rounded-full overflow-hidden">
+          <img class="" src="../../public/image/profile.jpg" />
+        </figure>
+    
+        <!-- drop down -->
+        <div id="avatarDiv" class="hidden p-5 absolute flex-col justify-center right-10 top-20 bg-[#F3F3F3] shadow-lg rounded-md">
+          <figure class="flex justify-center">
+            <img class="w-[50px]" src="../../public/icon/setting-icon.svg" />
+          </figure>
+          <div class="p-5 flex flex-col gap-2">
+            <h3><a href="">Setting</a></h3>
+            <h3><a href="./view/login/login.html">Logout</a></h3>
+          </div>
+        </div>
+      </navbar>
 
     <!-- main -->
     <main class="flex">
