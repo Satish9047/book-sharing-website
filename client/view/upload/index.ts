@@ -36,7 +36,7 @@ uploadBtn.addEventListener("click", async (e) => {
             }
         });
 
-        if(res.status === 200) {
+        if(res.status === 201) {
             console.log("successfully upload book", res);
             
         }

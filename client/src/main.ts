@@ -1,16 +1,29 @@
 import HTTP from "./config";
-import { IBook } from "./interface/book";
+import { IState } from "./interface/book";
+import { renderData } from "./utils/render";
 
-const bookItemsElement = document.getElementById("bookItems") as HTMLDivElement;
+// const bookItemsElement = document.getElementById("bookItems") as HTMLDivElement;
 const searchByList = document.getElementById("searchByList") as HTMLDivElement;
 const searchInputElement = document.getElementById("searchInput") as HTMLInputElement;
 const navAvatar = document.getElementById("navAvatar") as HTMLElement;
+const avatarDiv = document.getElementById("avatarDiv") as HTMLDivElement;
+const prevElement = document.getElementById("prev") as HTMLDivElement;
+const nextElement = document.getElementById("next") as HTMLDivElement;
 
 //array for label
-const searchLabel = ["By Book Name", "by Author Name", "by Keyword", "by Category"];
+const searchLabel: string[] = ["By Book Name", "by Author Name", "by Keyword", "by Category"];
 
+// let settingState = false;
+let pageIndex = 0;
+const itemsPerPage = 8;
+
+if (pageIndex <= itemsPerPage) {
+    prevElement.classList.add("hidden");
+} else {
+    prevElement.classList.remove("hidden");
+}
 //state for getting data query
-const state = {
+const state: IState = {
     "By Book Name": false,
     "by Author Name": false,
     "by Keyword": false,
@@ -20,68 +33,14 @@ const state = {
 //search value
 let value = "";
 
-//onload event listeners
-window.addEventListener("load", async () => {
-
+//on load
+window.addEventListener("load", async (): Promise<void> => {
     //fetching the data from the server
-    const res = await HTTP.get("/books");
-    console.log(res);
+    const res = await HTTP.get(`/books?take=${itemsPerPage}&skip=${pageIndex}`);
+    // console.log(res);
     if (res.status === 200) {
         console.log(res.data);
-        const bookItems = res.data;
-        bookItemsElement.innerHTML = "";
-
-        //rendering the list of books
-        bookItems.forEach((book: IBook) => {
-
-            const div = document.createElement("div") as HTMLDivElement;
-            div.classList.add("px-4", "py-2", "flex", "justify-between", "bg-[#F3F3F3]", "rounded-md", "shadow-md");
-
-            const heading = document.createElement("h1");
-            heading.innerText = book.book_name;
-
-            const paragraph = document.createElement("p");
-            paragraph.innerText = book.author_name;
-
-            const figure = document.createElement("figure");
-            figure.classList.add("w-[30px]");
-
-            const downloadImage = document.createElement("img");
-            downloadImage.src = "../../public/icon/download-icon.png";
-            downloadImage.classList.add("w-[30px]");
-
-            figure.appendChild(downloadImage);
-            div.appendChild(heading);
-            div.appendChild(paragraph);
-            div.appendChild(figure);
-
-            bookItemsElement.appendChild(div);
-
-            //add event listener to the download icon
-            figure.addEventListener("click", async () => {
-                console.log(book);
-
-                try {
-                    //sending the request to download book pdf
-                    const res = await HTTP.get(`/books/download/${book.book_id}`, { responseType: "arraybuffer" });
-                    console.log(res);
-                    if (res.status === 200) {
-                        const blob = new Blob([res.data], { type: "application/pdf" });
-                        const link = document.createElement("a");
-                        link.href = window.URL.createObjectURL(blob);
-                        link.download = "bookhome.pdf";
-                        link.click();
-                    }
-                } catch (error) {
-                    console.log(error);
-                }
-            });
-
-            //redirecting to the book detail page
-            heading.addEventListener("click", () => {
-                window.location.href = "../view/book/book.html?" + "bookId=" + book.book_id;
-            });
-        });
+        renderData(res.data);
     }
 });
 
@@ -111,106 +70,65 @@ for (let i = 0; i < searchLabel.length; i++) {
 
 
 //adding event listeners to the input field
-searchInputElement.addEventListener("keydown", async(ev)=>{
-    if(ev.key === "Enter"){
+searchInputElement.addEventListener("keydown", async (ev) => {
+    if (ev.key === "Enter") {
         value = searchInputElement.value;
         console.log("enter is clicked", value);
         const res = await getBook();
         console.log(res);
-
-        const bookItems = res.data;
-        bookItemsElement.innerHTML = "";
-
-        //rendering the list of books in the dom
-        bookItems.forEach((bookItem:IBook)=>{
-
-            //create the html element
-            const div = document.createElement("div") as HTMLDivElement;
-            div.classList.add("p-2", "flex", "gap-2", "justify-between", "bg-[#F3F3F3]", "shadow-lg", "rounded-md");
-
-            const heading = document.createElement("h1") as HTMLHeadingElement;
-            heading.innerText = bookItem.book_name;
-            div.appendChild(heading);
-
-            const paragraph= document.createElement("p") as HTMLParagraphElement;
-            paragraph.innerText = bookItem.author_name;
-            div.appendChild(paragraph);
-
-            const figure = document.createElement("figure");
-            figure.classList.add("w-[30px]");
-
-            const downloadImage = document.createElement("img");
-            downloadImage.src = "../../public/icon/download-icon.png";
-            downloadImage.classList.add("w-[30px]");
-            
-
-            //appending the html element into the div
-            figure.appendChild(downloadImage);
-            div.appendChild(heading);
-            div.appendChild(paragraph);
-            div.appendChild(figure);
-
-            bookItemsElement.appendChild(div);
-
-            //for download event listeners
-            figure.addEventListener("click", async () => {
-                
-                //console.log(book);
-                try {
-                    //sending the request to download book pdf
-                    const res = await HTTP.get(`/books/download/${bookItem.book_id}`, { responseType: "arraybuffer" });
-                    console.log(res);
-                    if (res.status === 200) {
-                        const blob = new Blob([res.data], { type: "application/pdf" });
-                        const link = document.createElement("a");
-                        link.href = window.URL.createObjectURL(blob);
-                        link.download = "bookhome.pdf";
-                        link.click();
-                    }
-                } catch (error) {
-                    console.log(error);
-                }
-            });
-
-
-            //redirecting to the book detail page
-            heading.addEventListener("click", () => {
-                window.location.href = "../view/book/book.html?" + "bookId=" + bookItem.book_id;
-            });
-        });
+        renderData(res.data);
     }
 });
 
-// navAvatar.addEventListener("click", () => {
-//     const div = document.createElement("div") as HTMLElement;
-//     const div1 = document.createElement("div") as HTMLElement;
-//     const heading = document.createElement("h2") as HTMLElement;
-//     heading.innerText = "Logout";
+navAvatar.addEventListener("click", () => {
+    avatarDiv.classList.add("hidden");
+    console.log("navAvatar is clicked");
+});
 
-//     div.appendChild(div1);
-//     div1.appendChild(heading);
-// });
+nextElement.addEventListener("click", () => {
+    getnextIndexBook();
+});
+
+prevElement.addEventListener("click", () => {
+    getPrevIndexBook();
+});
+
+async function getnextIndexBook() {
+    pageIndex += 8;
+    const res = await HTTP.get(`/books?take=${itemsPerPage}&skip=${pageIndex}`);
+    console.log(res.data);
+    renderData(res.data);
+}
+
+async function getPrevIndexBook() {
+    pageIndex -= 8;
+    const res = await HTTP.get(`/books?take=${itemsPerPage}&skip=${pageIndex}`);
+    console.log(res.data);
+    renderData(res.data);
+}
 
 
 /**
  * Get book data from the Backend api accoring to the search by options
  * 
- * @returns object //it returns the fetch data from the API
+ * @returns object[] //it returns the fetch data from the API
  */
 function getBook() {
     let url = "";
-    console.log("hello world",value);
+    console.log("hello world", value);
+
     if (state["By Book Name"]) {
         url += `&name=${value}`;
     }
-    if(state["by Author Name"]){
+    if (state["by Author Name"]) {
         url += `&author=${value}`;
     }
-    if(state["by Keyword"]){
+    if (state["by Keyword"]) {
         url += `&keyword=${value}`;
     }
-    if(state["by Category"]){
+    if (state["by Category"]) {
         url += `&category=${value}`;
     }
-    return HTTP.get("/books/getby?"+url);
+    return HTTP.get("/books/getby?" + url);
 }
+
