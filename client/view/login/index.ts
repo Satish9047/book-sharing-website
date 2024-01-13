@@ -25,18 +25,12 @@ loginBtn.addEventListener("click", async (e) => {
     } catch (error) {
         console.log(error.response.data);
         const div = document.createElement("div") as HTMLElement;
-        div.classList.add(
-            "relative",
-            "p-4",
-            "bg-black",
-            "errorColor",
-            "rounded-md"
-        );
+        div.classList.add("p-2","errorColor", "rounded-md", "shadow-md");
         // div.style.backgroundColor = "red";
         const paragraph = document.createElement("p") as HTMLElement;
         div.appendChild(paragraph);
         paragraph.innerText = error.response.data.error;
-        document.body.appendChild(div);
+        loginElement.appendChild(div);
         setTimeout(() => {
             loginElement.removeChild(div);
         }, 3000);

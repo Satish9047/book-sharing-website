@@ -25,7 +25,7 @@ registerElement.addEventListener("click", async (e) => {
     } catch (error) {
         console.log(error.response.data);
         const div = document.createElement("div") as HTMLElement;
-        div.classList.add("relative", "p-4", "bg-[#FF004D]");
+        div.classList.add("errorColor", "p-2", "rounded-md", "shadow-md");
         const paragraph = document.createElement("p") as HTMLElement;
         div.appendChild(paragraph);
         paragraph.innerText = error.response.data.error;

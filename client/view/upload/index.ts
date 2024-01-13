@@ -1,14 +1,14 @@
 import HTTP from "../../src/config";
 
 const bookNameElement = document.getElementById("book-name") as HTMLInputElement;
-const authorElement  = document.getElementById("author") as HTMLInputElement;
+const authorElement = document.getElementById("author") as HTMLInputElement;
 const categoryElement = document.getElementById("category") as HTMLInputElement;
 const keywordElement = document.getElementById("keyword") as HTMLInputElement;
 const bookPdfElement = document.getElementById("bookpdf") as HTMLInputElement;
 const imageElement = document.getElementById("image") as HTMLInputElement;
 const descriptionElement = document.getElementById("description") as HTMLInputElement;
 const uploadBtn = document.getElementById("uploadBtn") as HTMLButtonElement;
-const uploadDivElement = document.getElementById("uploadDiv")as HTMLDivElement;
+const uploadDivElement = document.getElementById("uploadDiv") as HTMLDivElement;
 const navAvatar = document.getElementById("navAvatar") as HTMLElement;
 const avatarDiv = document.getElementById("avatarDiv") as HTMLDivElement;
 
@@ -20,7 +20,7 @@ navAvatar.addEventListener("click", () => {
     if (isProfile) {
         avatarDiv.style.display = "block";
         console.log("navAvatar is clicked");
-    }else{
+    } else {
         avatarDiv.style.display = "none";
         console.log("navAvatar is clicked");
     }
@@ -52,15 +52,26 @@ uploadBtn.addEventListener("click", async (e) => {
             }
         });
 
-        if(res.status === 201) {
+        if (res.status === 201) {
             console.log("successfully upload book", res);
+
+            const div = document.createElement("div") as HTMLElement;
+            div.classList.add("p-2", "successColor", "shadow-md", "rounded-md");
+            const paragraph = document.createElement("p") as HTMLElement;
+            div.appendChild(paragraph);
+            paragraph.innerText = "book is successfully uploaded";
+            uploadDivElement.appendChild(div);
+
+            setTimeout(() => {
+                uploadDivElement.removeChild(div);
+            }, 3000);
         }
-        
+
     } catch (error) {
         console.log(error.response.data);
-        
+
         const div = document.createElement("div") as HTMLElement;
-        div.classList.add("relative", "p-4", "bg-[#FF004D]");
+        div.classList.add("p-2", "errorColor", "rounded-md", "shadow-md");
         const paragraph = document.createElement("p") as HTMLElement;
         div.appendChild(paragraph);
         paragraph.innerText = error.response.data.error;

@@ -20,7 +20,7 @@ export function renderData(bookdata: []) {
         figure.classList.add("w-[30px]");
 
         const downloadImage = document.createElement("img");
-        downloadImage.src = "../../public/icon/download-icon.png";
+        downloadImage.src = "/icon/download-icon.png";
         downloadImage.classList.add("w-[30px]");
 
         figure.appendChild(downloadImage);
