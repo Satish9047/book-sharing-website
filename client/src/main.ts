@@ -46,19 +46,14 @@ let isProfile = false;
 
 //on load
 window.addEventListener("load", async (): Promise<void> => {
-    //fetching the data from the server
     try {
         const res = await HTTP.get(`/books?take=${itemsPerPage}&skip=${pageIndex}`);
-        // console.log(res);
         if (res.status === 200) {
             console.log(res.data);
             renderData(res.data);
         }
     } catch (error) {
-        if (
-            (error as AxiosError).response &&
-            (error as AxiosError).response?.status === 401
-        ) {
+        if ((error as AxiosError).response &&(error as AxiosError).response?.status === 401) {
             try {
                 const result = await sendRefreshRequest();
                 if (!result) {
@@ -68,7 +63,9 @@ window.addEventListener("load", async (): Promise<void> => {
                 console.log(error);
                 window.location.replace("../view/login/login.html");
             }
-        }
+        }else{
+            window.location.replace("../view/login/login.html");
+        }  
     }
 });
 
@@ -77,16 +74,14 @@ navAvatar.addEventListener("click", () => {
     isProfile = !isProfile;
     if (isProfile) {
         avatarDiv.style.display = "block";
-        // console.log("navAvatar is clicked");
     } else {
         avatarDiv.style.display = "none";
-        // console.log("navAvatar is clicked");
     }
 });
 
 //eventlistner to the logout button
 logoutElement.addEventListener("click", async () => {
-    const result =  await logout();
+    const result = await logout();
     if (result) {
         window.location.replace("../view/login/login.html");
     }
@@ -95,14 +90,7 @@ logoutElement.addEventListener("click", async () => {
 //rendering the searchBy div
 for (let i = 0; i < searchLabel.length; i++) {
     const div = document.createElement("div") as HTMLDivElement;
-    div.classList.add(
-        "p-2",
-        "flex",
-        "gap-2",
-        "bg-[#F3F3F3]",
-        "shadow-lg",
-        "rounded-md"
-    );
+    div.classList.add("p-2", "flex", "gap-2", "bg-[#F3F3F3]", "shadow-lg", "rounded-md");
 
     const input = document.createElement("input") as HTMLInputElement;
     input.type = "checkbox";
@@ -115,7 +103,7 @@ for (let i = 0; i < searchLabel.length; i++) {
 
     input.addEventListener("change", async () => {
         // console.log(searchLabel[i], input.checked);
-        state[searchLabel[i]] = input.checked;
+        state[searchLabel[i]as keyof IState] = input.checked;
         console.log(state);
         // await getBook();
     });

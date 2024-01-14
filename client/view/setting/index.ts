@@ -1,5 +1,29 @@
-// index.ts
+import { AxiosError } from "axios";
 import HTTP from "../../src/config";
+import { sendRefreshRequest } from "../../src/utils/utils";
+
+// onload
+window.addEventListener("load", async () => {
+    try {
+        const res = await HTTP.get("/auth/userInfo");
+        console.log(res);
+    } catch (error) {
+        console.log(error);
+        if (
+            (error as AxiosError).response &&(error as AxiosError).response?.status === 401) {
+            try {
+                const result = await sendRefreshRequest();
+                if (!result) {
+                    window.location.replace("../login/login.html");
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        }else{
+            window.location.replace("../login/login.html");
+        } 
+    }
+});
 
 document.addEventListener("DOMContentLoaded", () => {
     const oldPasswordInput = document.getElementById("old-Password") as HTMLInputElement;
@@ -29,6 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
             });
 
             if (res.status === 200) {
+
                 const div = document.createElement("div") as HTMLElement;
                 div.classList.add("p-2", "successColor", "shadow-md", "rounded-md");
                 const paragraph = document.createElement("p") as HTMLElement;

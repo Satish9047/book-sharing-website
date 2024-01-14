@@ -1,6 +1,7 @@
 // import { IBook } from "./../../src/interface/book";
+import { AxiosError } from "axios";
 import HTTP from "../../src/config";
-import {logout, renderUserUploads} from "../../src/utils/utils";
+import {logout, renderUserUploads, sendRefreshRequest} from "../../src/utils/utils";
 
 // const profileImgElement = document.getElementById("profileImg") as HTMLImageElement;
 // const bookItemElement = document.getElementById("bookList") as HTMLDivElement;
@@ -35,6 +36,19 @@ window.addEventListener("load", async () => {
         }
     } catch (error) {
         console.log(error);
+        if (
+            (error as AxiosError).response &&(error as AxiosError).response?.status === 401) {
+            try {
+                const result = await sendRefreshRequest();
+                if (!result) {
+                    window.location.replace("../login/login.html");
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        }else{
+            window.location.replace("../login/login.html");
+        } 
     }
 });
 

@@ -1,5 +1,6 @@
+import { AxiosError } from "axios";
 import HTTP from "../../src/config";
-import { logout } from "../../src/utils/utils";
+import { logout, sendRefreshRequest } from "../../src/utils/utils";
 
 const bookNameElement = document.getElementById("book-name") as HTMLInputElement;
 const authorElement = document.getElementById("author") as HTMLInputElement;
@@ -17,6 +18,31 @@ const logoutElement = document.getElementById("logout") as HTMLElement;
 
 //avatar state
 let isProfile = false;
+
+//on load
+window.addEventListener("load", async () => {
+    try {
+        const res = await HTTP.get("/auth/userInfo");
+        if (res.status === 200) {
+            console.log(res);
+        }
+    } catch (error) {
+        console.log(error);
+        if (
+            (error as AxiosError).response &&(error as AxiosError).response?.status === 401) {
+            try {
+                const result = await sendRefreshRequest();
+                if (!result) {
+                    window.location.replace("../login/login.html");
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        }else{
+            window.location.replace("../login/login.html");
+        } 
+    }
+});
 
 
 //eventlistener to nav profile

@@ -1,8 +1,9 @@
 import queryString from "query-string";
 import HTTP from "../../src/config";
 import { sendRefreshRequest, logout } from "../../src/utils/utils";
+import { AxiosError } from "axios";
 
-
+//DOM Elements
 const bookNameElement = document.getElementById("bookName") as HTMLElement;
 const authorElement = document.getElementById("bookAuthor") as HTMLElement;
 const bookCategoryElement = document.getElementById("bookCatagory") as HTMLElement;
@@ -13,26 +14,25 @@ const bookImgElement = document.getElementById("bookImg") as HTMLImageElement;
 const navAvatar = document.getElementById("navAvatar") as HTMLElement;
 const avatarDiv = document.getElementById("avatarDiv") as HTMLDivElement;
 const logoutElement = document.getElementById("logout") as HTMLElement;
-// const settingElement = document.getElementById("setting") as HTMLDivElement;
 
-//avatar state
+//state
 let isProfile = false;
 
+//getting book id from previous page
 const book = queryString.parse(location.search);
-// console.log(book);
 const bookId = Number(book.bookId);
 
+
+//onload listner
 window.addEventListener("load", async () => {
     try {
         const res = await HTTP.get(`books/${bookId}`);
         const resImg = await HTTP.get(`/books/image/${bookId}`);
 
-        // console.log(res);
         if (res.status === 200 && resImg.status === 200) {
             console.log(res.data);
             console.log(resImg.data);
             const bookData = res.data;
-            // const bookImg = resImg.data;
 
             bookNameElement.textContent = bookData.book_name;
             authorElement.textContent = bookData.author_name;
@@ -44,15 +44,24 @@ window.addEventListener("load", async () => {
         }
     } catch (error) {
         console.log(error);
-        if (error.response.status === 401) {
-            const res = await sendRefreshRequest();
-            if (!res) {
-                console.log("authentication failed");
+        if (
+            (error as AxiosError).response &&(error as AxiosError).response?.status === 401) {
+            try {
+                const result = await sendRefreshRequest();
+                if (!result) {
+                    window.location.replace("../login/login.html");
+                }
+            } catch (error) {
+                console.log(error);
             }
-        }
+        }else{
+            window.location.replace("../login/login.html");
+        } 
     }
 });
-//eventlistner to nav profile
+
+
+//nav profile listner
 navAvatar.addEventListener("click", () => {
     isProfile = !isProfile;
     if (isProfile) {
@@ -64,7 +73,7 @@ navAvatar.addEventListener("click", () => {
     }
 });
 
-//eventlistner to logout button
+//logout button listner
 logoutElement.addEventListener("click", async () => {
     const result =  await logout();
     if (result) {
@@ -72,6 +81,7 @@ logoutElement.addEventListener("click", async () => {
     }
 });
 
+//download button listner
 downloadBtnElement.addEventListener("click", async () => {
     try {
         console.log("sending request...");
