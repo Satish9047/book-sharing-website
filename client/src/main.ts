@@ -1,19 +1,29 @@
 import { AxiosError } from "axios";
 import HTTP from "./config";
 import { IState } from "./interface/book";
-import { renderData } from "./utils/utils";
-import { sendRefreshRequest } from "./utils/utils";
+import { renderData, sendRefreshRequest, logout } from "./utils/utils";
+
+
 
 // const bookItemsElement = document.getElementById("bookItems") as HTMLDivElement;
 const searchByList = document.getElementById("searchByList") as HTMLDivElement;
-const searchInputElement = document.getElementById("searchInput") as HTMLInputElement;
+const searchInputElement = document.getElementById(
+    "searchInput"
+) as HTMLInputElement;
 const navAvatar = document.getElementById("navAvatar") as HTMLElement;
 const avatarDiv = document.getElementById("avatarDiv") as HTMLDivElement;
 const prevElement = document.getElementById("prev") as HTMLDivElement;
 const nextElement = document.getElementById("next") as HTMLDivElement;
+const logoutElement = document.getElementById("logout") as HTMLElement;
+// const settingElement = document.getElementById("setting") as HTMLDivElement;
 
 //array for label
-const searchLabel: string[] = ["By Book Name", "by Author Name", "by Keyword", "by Category"];
+const searchLabel: string[] = [
+    "By Book Name",
+    "by Author Name",
+    "by Keyword",
+    "by Category",
+];
 
 // let settingState = false;
 let pageIndex = 0;
@@ -49,13 +59,15 @@ window.addEventListener("load", async (): Promise<void> => {
             renderData(res.data);
         }
     } catch (error) {
-        if ((error as AxiosError).response && (error as AxiosError).response?.status === 401) {
+        if (
+            (error as AxiosError).response &&
+            (error as AxiosError).response?.status === 401
+        ) {
             try {
                 const result = await sendRefreshRequest();
-                if(!result){
+                if (!result) {
                     window.location.replace("../view/login/login.html");
                 }
-
             } catch (error) {
                 console.log(error);
                 window.location.replace("../view/login/login.html");
@@ -64,11 +76,37 @@ window.addEventListener("load", async (): Promise<void> => {
     }
 });
 
+//eventlistner to the nav profile
+navAvatar.addEventListener("click", () => {
+    isProfile = !isProfile;
+    if (isProfile) {
+        avatarDiv.style.display = "block";
+        // console.log("navAvatar is clicked");
+    } else {
+        avatarDiv.style.display = "none";
+        // console.log("navAvatar is clicked");
+    }
+});
+
+//eventlistner to the logout button
+logoutElement.addEventListener("click", async () => {
+    const result =  await logout();
+    if (result) {
+        window.location.replace("../view/login/login.html");
+    }
+});
 
 //rendering the searchBy div
 for (let i = 0; i < searchLabel.length; i++) {
     const div = document.createElement("div") as HTMLDivElement;
-    div.classList.add("p-2", "flex", "gap-2", "bg-[#F3F3F3]", "shadow-lg", "rounded-md");
+    div.classList.add(
+        "p-2",
+        "flex",
+        "gap-2",
+        "bg-[#F3F3F3]",
+        "shadow-lg",
+        "rounded-md"
+    );
 
     const input = document.createElement("input") as HTMLInputElement;
     input.type = "checkbox";
@@ -87,9 +125,7 @@ for (let i = 0; i < searchLabel.length; i++) {
     });
 }
 
-
-
-//adding event listeners to the input field
+//event listeners to search input field
 searchInputElement.addEventListener("keydown", async (ev) => {
     if (ev.key === "Enter") {
         value = searchInputElement.value;
@@ -100,17 +136,7 @@ searchInputElement.addEventListener("keydown", async (ev) => {
     }
 });
 
-navAvatar.addEventListener("click", () => {
-    isProfile = !isProfile;
-    if (isProfile) {
-        avatarDiv.style.display = "block";
-        console.log("navAvatar is clicked");
-    }else{
-        avatarDiv.style.display = "none";
-        console.log("navAvatar is clicked");
-    }
-});
-
+//event listeners to the pagination
 nextElement.addEventListener("click", () => {
     getnextIndexBook();
 });
@@ -120,9 +146,8 @@ prevElement.addEventListener("click", () => {
 });
 
 async function getnextIndexBook() {
-    prevElement.style.display = "block";
-
     pageIndex += 8;
+    prevElement.style.display = "block";
     const res = await HTTP.get(`/books?take=${itemsPerPage}&skip=${pageIndex}`);
     console.log(res.data);
     renderData(res.data);
@@ -143,10 +168,9 @@ async function getPrevIndexBook() {
     renderData(res.data);
 }
 
-
 /**
  * Get book data from the Backend api accoring to the search by options
- * 
+ *
  * @returns object[] //it returns the fetch data from the API
  */
 function getBook() {
@@ -169,4 +193,3 @@ function getBook() {
     }
     return HTTP.get("/books/getby?" + url);
 }
-

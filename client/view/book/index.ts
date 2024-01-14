@@ -1,6 +1,7 @@
 import queryString from "query-string";
 import HTTP from "../../src/config";
-import { sendRefreshRequest } from "../../src/utils/utils";
+import { sendRefreshRequest, logout } from "../../src/utils/utils";
+
 
 const bookNameElement = document.getElementById("bookName") as HTMLElement;
 const authorElement = document.getElementById("bookAuthor") as HTMLElement;
@@ -11,6 +12,8 @@ const downloadBtnElement = document.getElementById("download") as HTMLButtonElem
 const bookImgElement = document.getElementById("bookImg") as HTMLImageElement;
 const navAvatar = document.getElementById("navAvatar") as HTMLElement;
 const avatarDiv = document.getElementById("avatarDiv") as HTMLDivElement;
+const logoutElement = document.getElementById("logout") as HTMLElement;
+// const settingElement = document.getElementById("setting") as HTMLDivElement;
 
 //avatar state
 let isProfile = false;
@@ -49,7 +52,7 @@ window.addEventListener("load", async () => {
         }
     }
 });
-
+//eventlistner to nav profile
 navAvatar.addEventListener("click", () => {
     isProfile = !isProfile;
     if (isProfile) {
@@ -58,6 +61,14 @@ navAvatar.addEventListener("click", () => {
     }else{
         avatarDiv.style.display = "none";
         console.log("navAvatar is clicked");
+    }
+});
+
+//eventlistner to logout button
+logoutElement.addEventListener("click", async () => {
+    const result =  await logout();
+    if (result) {
+        window.location.replace("../login/login.html");
     }
 });
 

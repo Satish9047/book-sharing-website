@@ -1,8 +1,8 @@
 import HTTP from "../config";
 import { IBook } from "../interface/book";
 
+//rendering the bookList in the browser
 const bookItemsElement = document.getElementById("bookItems") as HTMLDivElement;
-
 export function renderData(bookdata: []) {
     bookItemsElement.innerHTML = "";
     const bookList = bookdata;
@@ -59,7 +59,7 @@ export function renderData(bookdata: []) {
 }
 
 
-
+//request access token
 export async function sendRefreshRequest() {
     try {
         const res = await HTTP.post("/refresh");
@@ -71,6 +71,20 @@ export async function sendRefreshRequest() {
         }
     } catch (error) {
         console.error(error);
+        return false;
+    }
+}
+
+//logout
+export async function logout() {
+    try {
+        const res = await HTTP.get("/auth/logout");
+        if (res.status === 200) {
+            return true;
+        }
+        return false;
+    } catch (error) {
+        console.log(error);
         return false;
     }
 }

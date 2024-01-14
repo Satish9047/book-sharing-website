@@ -1,18 +1,21 @@
 import { IBook } from "./../../src/interface/book";
 import HTTP from "../../src/config";
+import {logout} from "../../src/utils/utils";
 
 // const profileImgElement = document.getElementById("profileImg") as HTMLImageElement;
 const bookItemElement = document.getElementById("bookList") as HTMLDivElement;
-// const deleteElement = document.getElementById("deleteIcon") as HTMLImageElement;
 const uploadPageBtn = document.getElementById("uploadPageBtn") as HTMLButtonElement;
 const userNameElement = document.getElementById("userName") as HTMLHeadingElement;
 const emailElement = document.getElementById("email") as HTMLHeadingElement;
 const navAvatar = document.getElementById("navAvatar") as HTMLElement;
 const avatarDiv = document.getElementById("avatarDiv") as HTMLDivElement;
+const logoutElement = document.getElementById("logout") as HTMLElement;
+// const settingElement = document.getElementById("setting") as HTMLDivElement;
 
 //avatar state
 let isProfile = false;
 
+//on load 
 window.addEventListener("load", async () => {
     try {
         const res = await HTTP.get("/auth/userInfo");
@@ -70,6 +73,7 @@ window.addEventListener("load", async () => {
     }
 });
 
+//eventlistner to nav profile
 navAvatar.addEventListener("click", () => {
     isProfile = !isProfile;
     if (isProfile) {
@@ -81,10 +85,15 @@ navAvatar.addEventListener("click", () => {
     }
 });
 
+//eventlistner to the logout button
+logoutElement.addEventListener("click", async () => {
+    const result =  await logout();
+    if (result) {
+        window.location.replace("../login/login.html");
+    }
+});
+
+//eventlistner to upload page
 uploadPageBtn.addEventListener("click", () => {
     window.location.href = "../upload/upload.html";
 });
-
-// deleteElement.addEventListener("click", () => {
-
-// });

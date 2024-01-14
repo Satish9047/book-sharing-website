@@ -1,4 +1,5 @@
 import HTTP from "../../src/config";
+import { logout } from "../../src/utils/utils";
 
 const bookNameElement = document.getElementById("book-name") as HTMLInputElement;
 const authorElement = document.getElementById("author") as HTMLInputElement;
@@ -11,10 +12,14 @@ const uploadBtn = document.getElementById("uploadBtn") as HTMLButtonElement;
 const uploadDivElement = document.getElementById("uploadDiv") as HTMLDivElement;
 const navAvatar = document.getElementById("navAvatar") as HTMLElement;
 const avatarDiv = document.getElementById("avatarDiv") as HTMLDivElement;
+const logoutElement = document.getElementById("logout") as HTMLElement;
+// const settingElement = document.getElementById("setting") as HTMLDivElement;
 
 //avatar state
 let isProfile = false;
 
+
+//eventlistener to nav profile
 navAvatar.addEventListener("click", () => {
     isProfile = !isProfile;
     if (isProfile) {
@@ -23,6 +28,14 @@ navAvatar.addEventListener("click", () => {
     } else {
         avatarDiv.style.display = "none";
         console.log("navAvatar is clicked");
+    }
+});
+
+//eventlistner to logout button
+logoutElement.addEventListener("click", async () => {
+    const result =  await logout();
+    if (result) {
+        window.location.replace("../login/login.html");
     }
 });
 
