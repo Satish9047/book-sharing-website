@@ -38,6 +38,12 @@ export const getBookById = async (req: Request, res: Response) => {
 //search book handler
 export const getSearchedBook = async (req: Request, res: Response) => {
     const { name, author, keyword, category } = req.query;
+
+    const page: IPage = {
+        skip: Number(req.query?.skip) || 0,
+        take: Number(req.query?.take) || 10,
+    };
+
     const queryBook: IQueryBookDb = {
         book_name: typeof name === "string" ? name : undefined,
         author_name: typeof author === "string" ? author : undefined,
@@ -45,7 +51,7 @@ export const getSearchedBook = async (req: Request, res: Response) => {
         category_name: typeof category === "string" ? category : undefined,
     };
     try {
-        const data = await bookServices.getSearchedBooks(queryBook);
+        const data = await bookServices.getSearchedBooks(queryBook, page);
         return res.status(200).json(data);
     } catch (error) {
         console.log(error);
@@ -140,8 +146,12 @@ export const getImageHandler = async (req: Request, res: Response) => {
 //get book by user controller
 export const getBookByUser = async (req: IAuthRequest, res: Response) => {
     const userId = Number(req.user);
+    const page: IPage = {
+        skip: Number(req.query?.skip) || 0,
+        take: Number(req.query?.take) || 10,
+    };
     try {
-        const data = await bookServices.getBookByUser(userId);
+        const data = await bookServices.getBookByUser(userId, page);
         return res.status(200).json(data);
     } catch (error) {
         console.log(error);

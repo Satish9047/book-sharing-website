@@ -42,8 +42,9 @@ export const getBookById = async (bookId: number) => {
 
 
 //handling the the search with query paramters
-export const getSearchedBooks = async (query: IQueryBookDb) => {
+export const getSearchedBooks = async (query: IQueryBookDb, page:IPage) => {
     const { book_name, author_name, keyword, category_name } = query;
+
     // getting the book according to the query parameter without case sensitivity
     try {
         const data = await prisma.book.findMany({
@@ -75,6 +76,8 @@ export const getSearchedBooks = async (query: IQueryBookDb) => {
                     },
                 ],
             },
+            skip: page.skip,
+            take: page.take,
             select: {
                 book_id: true,
                 book_name: true,
@@ -176,11 +179,14 @@ export const getImageHandler = async (bookInfo: number) => {
 
 
 //get books by user
-export const getBookByUser = async (userId: number) => {
+export const getBookByUser = async (userId: number, page:IPage) => {
+    
     try {
         console.log(userId, "logging the user id ine getBookUser");
         const books = await prisma.book.findMany({
             where: { user_id: userId },
+            skip: page.skip,
+            take: page.take,
             select: {
                 book_id: true,
                 book_name: true,

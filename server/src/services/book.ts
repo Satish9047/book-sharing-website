@@ -15,8 +15,8 @@ export const getBookById = async (bookId: number) => {
 };
 
 //get book by search service
-export const getSearchedBooks = async (query: IQueryBook) => {
-    const data = bookRepositories.getSearchedBooks(query);
+export const getSearchedBooks = async (query: IQueryBook, page:IPage) => {
+    const data = bookRepositories.getSearchedBooks(query, page);
     console.log(query);
     return data;
 };
@@ -58,7 +58,7 @@ export const getImageHandler = async (bookInfo: number) => {
 
 
 //get book by user service
-export const getBookByUser = async(userId: number) => {
-    const data = bookRepositories.getBookByUser(userId);
+export const getBookByUser = async(userId: number, page:IPage) => {
+    const data = bookRepositories.getBookByUser(userId, page);
     return data;
 };

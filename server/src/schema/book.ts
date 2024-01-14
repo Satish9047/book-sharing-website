@@ -15,7 +15,9 @@ export const queryBookSchema = Joi.object({
     name: Joi.string().min(2),
     author: Joi.string().min(2),
     category: Joi.string().min(2),
-    keyword: Joi.string().min(2)
+    keyword: Joi.string().min(2),
+    skip: Joi.number(),
+    take: Joi.number()
 });
 
 
