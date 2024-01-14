@@ -23,7 +23,7 @@ loginBtn.addEventListener("click", async (e) => {
             window.location.href = "../../index.html";
         }
     } catch (error) {
-        console.log(error.response.data);
+        console.log(error.response.data.error);
         const div = document.createElement("div") as HTMLElement;
         div.classList.add("p-2","errorColor", "rounded-md", "shadow-md");
         // div.style.backgroundColor = "red";

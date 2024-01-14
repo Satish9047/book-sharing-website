@@ -3,8 +3,6 @@ import HTTP from "./config";
 import { IState } from "./interface/book";
 import { renderData, sendRefreshRequest, logout } from "./utils/utils";
 
-
-
 // const bookItemsElement = document.getElementById("bookItems") as HTMLDivElement;
 const searchByList = document.getElementById("searchByList") as HTMLDivElement;
 const searchInputElement = document.getElementById(
