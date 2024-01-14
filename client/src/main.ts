@@ -23,7 +23,7 @@ const searchLabel: string[] = [
 
 // let settingState = false;
 let pageIndex = 0;
-const itemsPerPage = 8;
+const itemsPerPage = 5;
 
 if (pageIndex <= itemsPerPage) {
     prevElement.style.display = "none";
@@ -53,7 +53,7 @@ window.addEventListener("load", async (): Promise<void> => {
             renderData(res.data);
         }
     } catch (error) {
-        if ((error as AxiosError).response &&(error as AxiosError).response?.status === 401) {
+        if ((error as AxiosError).response && (error as AxiosError).response?.status === 401) {
             try {
                 const result = await sendRefreshRequest();
                 if (!result) {
@@ -63,9 +63,9 @@ window.addEventListener("load", async (): Promise<void> => {
                 console.log(error);
                 window.location.replace("../view/login/login.html");
             }
-        }else{
+        } else {
             window.location.replace("../view/login/login.html");
-        }  
+        }
     }
 });
 
@@ -103,7 +103,7 @@ for (let i = 0; i < searchLabel.length; i++) {
 
     input.addEventListener("change", async () => {
         // console.log(searchLabel[i], input.checked);
-        state[searchLabel[i]as keyof IState] = input.checked;
+        state[searchLabel[i] as keyof IState] = input.checked;
         console.log(state);
         // await getBook();
     });
@@ -122,30 +122,28 @@ searchInputElement.addEventListener("keydown", async (ev) => {
 
 //event listeners to the pagination
 nextElement.addEventListener("click", () => {
-    if(value){
-        getNextSearchbook();
-    }else{
-        getnextIndexBook();
-    }
+
+    getnextIndexBook();
+
 });
 
 prevElement.addEventListener("click", () => {
-    if(value){
-        getPrevSearchbook();
-    }else{
-        getPrevIndexBook();
-    }
+
+    getPrevIndexBook();
+
 });
 
 async function getnextIndexBook() {
-    pageIndex += 8;
+    pageIndex += 5;
     prevElement.style.display = "block";
-    const res = await HTTP.get(`/books?take=${itemsPerPage}&skip=${pageIndex}`);
+    // const res = await HTTP.get(`/books?take=${itemsPerPage}&skip=${pageIndex}`);
+    const res = await getBook();
     console.log(res.data);
     renderData(res.data);
     if (!res.data[0]) {
         pageIndex = 0;
-        const res = await HTTP.get(`/books?take=${itemsPerPage}&skip=${pageIndex}`);
+        // const res = await HTTP.get(`/books?take=${itemsPerPage}&skip=${pageIndex}`);
+        const res = await getBook();
         renderData(res.data);
     }
 }
@@ -154,8 +152,8 @@ async function getPrevIndexBook() {
     if (pageIndex <= itemsPerPage) {
         prevElement.style.display = "none";
     }
-    pageIndex -= 8;
-    const res = await HTTP.get(`/books/?take=${itemsPerPage}&skip=${pageIndex}`);
+    pageIndex -= 5;
+    const res = await getBook();
     console.log(res.data);
     renderData(res.data);
 }
@@ -206,5 +204,5 @@ function getBook() {
     if (state["by Category"]) {
         url += `&category=${value}`;
     }
-    return HTTP.get("/books/getby?" + url);
+    return HTTP.get("/books/getby?" + url + `&take=${itemsPerPage}&skip=${pageIndex}`);
 }

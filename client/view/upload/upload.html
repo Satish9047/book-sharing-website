@@ -39,14 +39,14 @@
 
         <!-- upload section -->
         <section id="uploadDiv" class="p-10 flex flex-col justify-center items-center">
-            <div>
-                <h2 class="text-2xl font-semibold p-5">Upload books</h2>
+            <div class="w-full md:w-4/6 flex bg-[#00796B] justify-center rounded-md shadow-lg">
+                <h2 class="text-lg md:text-2xl font-semibold p-5">Upload books</h2>
             </div>
 
             <!-- upload form -->
-            <form class="p-10 w-4/6 flex bg-[#F3F3F3] rounded-md shadow-lg gap-10">
+            <form class="p-5 w-full md:p-10 md:w-4/6 md:flex bg-[#F3F3F3] rounded-md shadow-lg gap-10">
                 <!-- left side -->
-                <div class="flex flex-col w-1/2">
+                <div class="p-5 flex flex-col md:w-1/2">
                     <label for="book-name">Book Name</label>
                     <input name="book-name" id="book-name" class="px-3 py-1 rounded-md shadow-md">
 
@@ -61,7 +61,7 @@
                 </div>
 
                 <!-- right side -->
-                <div class="flex flex-col w-1/2">
+                <div class="p-5 flex flex-col md:w-1/2">
                     <label for="image">Image</label>
                     <input type="file" name="image" id="image" class="mt-1 p-2 border rounded-md shadow-md">
 

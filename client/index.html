@@ -9,11 +9,11 @@
   <title>Recon Books</title>
 </head>
 
-<body class="bg-[#D8D8D8] h-full">
+<body class="bg-[#D8D8D8] h-full w-full">
   <!-- navbar -->
   <navbar class="px-4 py-5 flex justify-between bg-[#00796B] relative">
     <h1 class="font-semibold text-3xl">Recon Book</h1>
-    <ul class="flex justify-center items-center gap-5 font-semibold">
+    <ul class="hidden md:flex justify-center items-center gap-5 font-semibold">
       <li><a href="../../index.html">Home</a></li>
       <li><a href="./view/profile/profile.html">Profile</a></li>
       <li><a href="./view/upload/upload.html">Uploads</a></li>
@@ -37,9 +37,9 @@
   </navbar>
 
   <!-- main -->
-  <main class="h-screen bg-[#D8D8D8] flex">
+  <main class="h-full w-full bg-[#D8D8D8] md:flex">
     <!-- left section -->
-    <section class="p-5 w-3/12">
+    <section class="p-5 w-full md:w-3/12">
       <div id="searchByList" class="p-4 w-full h-auto bg-[#F3F3F350] rounded-md flex flex-col shadow-md gap-3">
         <h2 class="text-xl font-semibold">Search By</h2>
         <!-- render the search by options -->
@@ -47,20 +47,20 @@
     </section>
 
     <!-- right section -->
-    <section class="w-9/12 p-5 bg-[#D8D8D8] flex flex-col gap-10">
+    <section class=" w-full md:w-9/12 p-5 bg-[#D8D8D8] flex flex-col gap-10">
       <div class="flex justify-center">
-        <input id="searchInput" placeholder="search books here" class="w-1/2 px-3 py-2 rounded-md shadow-md" />
+        <input id="searchInput" placeholder="search books here" class="w-10/12 md:w-1/2 px-3 py-2 rounded-md shadow-md" />
       </div>
 
       <!-- list the books -->
-      <div id="bookItems" class="mx-auto w-10/12 flex flex-col gap-3">
+      <div id="bookItems" class="mx-auto w-full md:w-10/12 flex flex-col gap-3">
         <!-- render book items -->
       </div>
     </section>
   </main>
 
   <!-- footer -->
-  <div class="bottom-5 left-3/4 fixed flex gap-4  justify-center">
+  <div class="bottom-15 relative flex gap-4 justify-center">
     <div id="prev" class="bg-[#F3F3F3] shadow-md rounded-md p-2">Prev</div>
     <div id="next" class="bg-[#F3F3F3] shadow-md rounded-md p-2">Next</div>
   </div>
