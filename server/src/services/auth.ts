@@ -1,5 +1,5 @@
 import * as authRepositories from "../repositories/auth";
-import { ILogin, IRegister } from "../interfaces/auth";
+import { ILogin, IRegister, IUpdatePassword } from "../interfaces/auth";
 
 //register service
 export const registerHandler = async (userInfo: IRegister) => {
@@ -16,5 +16,10 @@ export const loginHandler = async (userInfo: ILogin) => {
 //user info service
 export const getUserInfo = async (userInfo: string)=>{
     const data = authRepositories.getUserInfo(userInfo);
+    return data;
+};
+
+export const changePasswordHandler = async (userId: number, updatePassword: IUpdatePassword)=>{
+    const data = authRepositories.changePasswordHandler(userId, updatePassword);
     return data;
 };

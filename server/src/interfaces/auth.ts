@@ -19,3 +19,8 @@ export interface IAuthRequest extends Request {
 export interface IUserInfo {
     userInfo: JwtPayload
 }
+
+export interface IUpdatePassword{
+    oldPassword: string,
+    newPassword: string
+}

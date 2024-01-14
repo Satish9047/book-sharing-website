@@ -1,4 +1,3 @@
-
 import Joi from "joi";
 
 //login validation schema
@@ -40,4 +39,20 @@ export const registerSchema = Joi.object({
         }),
 });
 
-
+//change password schema
+export const changePasswordSchema = Joi.object({
+    oldPassword: Joi.string().trim().pattern(new RegExp("^[a-zA-Z0-9]{8,100}$"))
+        .messages({
+            "string.base": "Password should be a string",
+            "string.empty": "Password cannot be empty",
+            "string.pattern.base": "Password must be between 8 to 100 characters long",
+            "any.required": "Old password is required",
+        }),
+    newPassword: Joi.string().trim().pattern(new RegExp("^[a-zA-Z0-9]{8,100}$"))
+        .messages({
+            "string.base": "Password should be a string",
+            "string.empty": "Password cannot be empty",
+            "string.pattern.base": "New password must be between 8 to 100 characters long",
+            "any.required": "New password is required",
+        }),
+});

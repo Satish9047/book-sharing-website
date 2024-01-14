@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import * as authService from "../services/auth";
-import { ILogin, IRegister } from "../interfaces/auth";
+import { IAuthRequest, ILogin, IRegister } from "../interfaces/auth";
 
 // register controller
 export const registerHandler = async (req: Request, res: Response) => {
@@ -21,7 +21,7 @@ export const loginHandler = async (req: Request, res: Response) => {
     const data = await authService.loginHandler(userInfo);
     console.log(data);
     if("error" in data){
-        return res.status(400).json({error: data});
+        return res.status(400).json(data);
     }
     res.cookie("accessToken", data.accessToken, { httpOnly: true });
     res.cookie("refreshToken", data.refreshToken, { httpOnly: true });
@@ -44,5 +44,24 @@ export const getUserInfo = async (req:Request, res: Response) => {
         return res.status(400).json({error: "can't get user info"});
     }
     return res.status(200).json(data);
+};
+
+
+//change password handler
+export const changePasswordHandler = async (req: IAuthRequest, res: Response)=>{
+    const userId = Number(req.user);
+    const updatePassword = req.body;
+    console.log("userId:", userId, "updatePassword:", updatePassword); 
+    try {
+        const data = await authService.changePasswordHandler(userId, updatePassword);
+        if(data?.error) {
+            return res.status(400).json(data);
+        }
+        return res.status(200).json(data);
+        
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({error: "error while changing password"});
+    }
 };
 

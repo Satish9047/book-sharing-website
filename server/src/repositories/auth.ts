@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
 import { PrismaClient } from "@prisma/client";
 import jwt, { JwtPayload } from "jsonwebtoken";
-import { ILogin, IRegister } from "../interfaces/auth";
+import { ILogin, IRegister, IUpdatePassword } from "../interfaces/auth";
 import { ACCESS_TOKEN_EXPIRY, REFRESH_TOKEN_EXPIRY } from "../constants/expiry";
 import config from "../config";
 
@@ -16,11 +16,11 @@ export const registerHandler = async (userInfo: IRegister) => {
     //verify user exist
     const userExist = await prisma.user.findFirst({ where: { email: userInfo.email } });
     if (userExist) return { err: "user already existed" };
-    
+
     try {
         //password hashing
         const hashedPassword = await bcrypt.hash(userInfo.password, saltRounds);
-        if(!hashedPassword) return {error: "invalid credentials"};
+        if (!hashedPassword) return { error: "invalid credentials" };
 
         //saving user into database
         const newUser = await prisma.user.create({
@@ -31,7 +31,7 @@ export const registerHandler = async (userInfo: IRegister) => {
             }
         });
         console.log(newUser);
-        return { msg: "User created"};
+        return { msg: "User created" };
     } catch (error) {
         console.error("Error during registration:", error);
         return { error: "error during registration" };
@@ -65,7 +65,7 @@ export const getUserInfo = async (userInfo: string) => {
     try {
         //verify token
         const verifyToken = jwt.verify(userInfo, ACCESS_TOKEN_SECRET) as JwtPayload;
-        if(!verifyToken) return { error: "invalid user" };
+        if (!verifyToken) return { error: "invalid user" };
         const userId = verifyToken.id;
 
         //get user info
@@ -79,8 +79,33 @@ export const getUserInfo = async (userInfo: string) => {
         });
         return user;
     } catch (error) {
-        console.log("error while getting user info: ",error);
+        console.log("error while getting user info: ", error);
         return { error: "error while geting user info" };
+    }
+};
+
+//change password
+export const changePasswordHandler = async (userId: number, updatedPassword: IUpdatePassword) => {
+    try {
+        const userExist = await prisma.user.findFirst({ where: { user_id: userId } });
+        if (!userExist) return { error: "Invalid user" };
+
+        const verfiyPassword = await bcrypt.compare( updatedPassword.oldPassword, userExist.password);
+        if (!verfiyPassword) return { error: "old password does not match" };
+
+        const newHashedPassword = await bcrypt.hash(updatedPassword.newPassword, saltRounds);
+        await prisma.user.update({
+            where: {
+                user_id: userId,
+            },
+            data: {
+                password: newHashedPassword
+            }
+        });
+        return { msg: "password changed" };
+
+    } catch (error) {
+        console.log("error while changing password: ", error);
     }
 };
 

@@ -1,6 +1,6 @@
 import jwt, { JwtPayload } from "jsonwebtoken";
 import { Request, Response, NextFunction } from "express";
-import { loginSchema, registerSchema } from "../schema/auth";
+import { changePasswordSchema, loginSchema, registerSchema } from "../schema/auth";
 import config from "../config";
 
 
@@ -23,6 +23,15 @@ export const registerAuth = (req: Request, res: Response, next: NextFunction) =>
     next();
 };
 
+//change password middleware
+export const chnagePasswordVerify = (req: Request, res: Response, next: NextFunction) => {
+    const { error } = changePasswordSchema.validate(req.body);
+    if (error) {
+        console.log(error.message);
+        return res.status(400).json({ error: `${error.message}` });
+    }
+    next();
+};
 
 //jwt token Validation
 export const jwtAuth = (req: Request & { user?: JwtPayload }, res: Response, next: NextFunction) => {
