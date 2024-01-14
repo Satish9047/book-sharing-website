@@ -122,11 +122,19 @@ searchInputElement.addEventListener("keydown", async (ev) => {
 
 //event listeners to the pagination
 nextElement.addEventListener("click", () => {
-    getnextIndexBook();
+    if(value){
+        getNextSearchbook();
+    }else{
+        getnextIndexBook();
+    }
 });
 
 prevElement.addEventListener("click", () => {
-    getPrevIndexBook();
+    if(value){
+        getPrevSearchbook();
+    }else{
+        getPrevIndexBook();
+    }
 });
 
 async function getnextIndexBook() {
@@ -147,10 +155,33 @@ async function getPrevIndexBook() {
         prevElement.style.display = "none";
     }
     pageIndex -= 8;
-    const res = await HTTP.get(`/books?take=${itemsPerPage}&skip=${pageIndex}`);
+    const res = await HTTP.get(`/books/?take=${itemsPerPage}&skip=${pageIndex}`);
     console.log(res.data);
     renderData(res.data);
 }
+
+// async function getNextSearchbook() {
+//     pageIndex += 8;
+//     prevElement.style.display = "block";
+//     const res = await HTTP.get(`/books?take=${itemsPerPage}&skip=${pageIndex}`);
+//     console.log(res.data);
+//     renderData(res.data);
+//     if (!res.data[0]) {
+//         pageIndex = 0;
+//         const res = await HTTP.get(`/books?take=${itemsPerPage}&skip=${pageIndex}`);
+//         renderData(res.data);
+//     }
+// }
+
+// async function getPrevSearchbook() {
+//     if (pageIndex <= itemsPerPage) {
+//         prevElement.style.display = "none";
+//     }
+//     pageIndex -= 8;
+//     const res = await HTTP.get(`/books?take=${itemsPerPage}&skip=${pageIndex}`);
+//     console.log(res.data);
+//     renderData(res.data);
+// }
 
 /**
  * Get book data from the Backend api accoring to the search by options
