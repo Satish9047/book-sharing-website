@@ -1,12 +1,15 @@
 import HTTP from "../config";
 import { IBook } from "../interface/book";
 
+const bookItemElement = document.getElementById("bookList") as HTMLDivElement;
+
 //rendering the bookList in the browser
 const bookItemsElement = document.getElementById("bookItems") as HTMLDivElement;
 export function renderData(bookdata: []) {
     bookItemsElement.innerHTML = "";
     const bookList = bookdata;
-    bookList.forEach((book:IBook) => {
+    bookList.forEach((book: IBook) => {
+
         const div = document.createElement("div") as HTMLDivElement;
         div.classList.add("px-4", "py-2", "flex", "justify-between", "bg-[#F3F3F3]", "rounded-md", "shadow-md");
 
@@ -87,4 +90,49 @@ export async function logout() {
         console.log(error);
         return false;
     }
+}
+
+
+//render user uploads
+export function renderUserUploads(userBookData:[]) {
+
+    const bookItem = userBookData;
+    bookItemElement.innerHTML = "";
+    bookItem.forEach((book: IBook) => {
+        const div = document.createElement("div") as HTMLDivElement;
+        div.classList.add("px-4", "py-2", "flex", "justify-between", "bg-[#F3F3F3]", "rounded-md", "shadow-md");
+
+        const heading = document.createElement("h1") as HTMLHeadElement;
+        heading.innerText = book.book_name;
+
+        const paragraph = document.createElement("p") as HTMLParagraphElement;
+        paragraph.innerText = book.author_name;
+
+        const figure = document.createElement("figure") as HTMLElement;
+        figure.classList.add("w-[30px]");
+        const deleteImage = document.createElement("img") as HTMLImageElement;
+        // deleteImage.classList.add("w-3");
+        deleteImage.src = "../../public/icon/delete.png";
+
+        figure.appendChild(deleteImage);
+        div.appendChild(heading);
+        div.appendChild(paragraph);
+        div.appendChild(figure);
+
+        bookItemElement.appendChild(div);
+
+
+        figure.addEventListener("click", async () => {
+            try {
+                const res = await HTTP.delete(`/books/${book.book_id}`);
+                console.log(res);
+            } catch (error) {
+                console.log(error);
+            }
+        });
+
+        heading.addEventListener("click", () => {
+            window.location.href = "../book/book.html?" + "bookId=" + book.book_id;
+        });
+    });
 }

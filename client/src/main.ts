@@ -5,9 +5,7 @@ import { renderData, sendRefreshRequest, logout } from "./utils/utils";
 
 // const bookItemsElement = document.getElementById("bookItems") as HTMLDivElement;
 const searchByList = document.getElementById("searchByList") as HTMLDivElement;
-const searchInputElement = document.getElementById(
-    "searchInput"
-) as HTMLInputElement;
+const searchInputElement = document.getElementById("searchInput") as HTMLInputElement;
 const navAvatar = document.getElementById("navAvatar") as HTMLElement;
 const avatarDiv = document.getElementById("avatarDiv") as HTMLDivElement;
 const prevElement = document.getElementById("prev") as HTMLDivElement;
