@@ -1,6 +1,6 @@
 import queryString from "query-string";
-import HTTP from "../../src/config";
-import { sendRefreshRequest, logout } from "../../src/utils/utils";
+import HTTP from "../../config";
+import { sendRefreshRequest, logout } from "../../utils/utils";
 import { AxiosError } from "axios";
 
 //DOM Elements
@@ -45,18 +45,18 @@ window.addEventListener("load", async () => {
     } catch (error) {
         console.log(error);
         if (
-            (error as AxiosError).response &&(error as AxiosError).response?.status === 401) {
+            (error as AxiosError).response && (error as AxiosError).response?.status === 401) {
             try {
                 const result = await sendRefreshRequest();
                 if (!result) {
-                    window.location.replace("../login/login.html");
+                    window.location.replace("/src/view/login/login.html");
                 }
             } catch (error) {
                 console.log(error);
             }
-        }else{
-            window.location.replace("../login/login.html");
-        } 
+        } else {
+            window.location.replace("src/view/login/login.html");
+        }
     }
 });
 
@@ -67,7 +67,7 @@ navAvatar.addEventListener("click", () => {
     if (isProfile) {
         avatarDiv.style.display = "block";
         console.log("navAvatar is clicked");
-    }else{
+    } else {
         avatarDiv.style.display = "none";
         console.log("navAvatar is clicked");
     }
@@ -75,7 +75,7 @@ navAvatar.addEventListener("click", () => {
 
 //logout button listner
 logoutElement.addEventListener("click", async () => {
-    const result =  await logout();
+    const result = await logout();
     if (result) {
         window.location.replace("../login/login.html");
     }

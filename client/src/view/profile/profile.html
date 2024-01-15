@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../../style.css">
+  <title>Recon Book</title>
+</head>
+
+<body class="bg-[#D8D8D8]">
+  <!-- navbar -->
+  <navbar class="px-4 py-5 flex justify-between bg-[#00796B] relative">
+    <h1 class="font-semibold text-3xl">Recon Book</h1>
+    <ul class="flex justify-center items-center gap-5 font-semibold">
+      <li><a href="../../index.html">Home</a></li>
+      <li><a href="../profile/profile.html">Profile</a></li>
+      <li><a href="../upload/upload.html">Uploads</a></li>
+    </ul>
+
+    <!-- profile -->
+    <figure id="navAvatar" class="w-[40px] h-[40px] rounded-full overflow-hidden">
+      <img class="" src="/image/profile.jpg" />
+    </figure>
+
+    <!-- drop down -->
+    <div id="avatarDiv"
+      class="hidden p-5 absolute flex-col justify-center right-10 top-20 bg-[#F3F3F3] shadow-lg rounded-md">
+      <figure class="flex justify-center">
+        <img class="w-[50px]" src="/icon/setting-icon.svg" />
+      </figure>
+      <div class="p-5 flex flex-col gap-2">
+        <h3><a href="/src/view/setting/setting.html">Setting</a></h3>
+        <h3 id="logout"><a>Logout</a></h3>
+      </div>
+    </div>
+  </navbar>
+
+  <!-- main -->
+  <main class="flex flex-col md:flex md:flex-row justify-center">
+
+    <!-- user detail section -->
+    <section class="p-5 mx-auto w-11/12 md:w-3/12 rounded-md flex flex-col gap-5 justify-center">
+      <div class="p-5 bg-[#FEFCFF] flex flex-col gap-5 rounded-md shadow-md">
+
+        <!-- user image -->
+        <figure class="w-10/12 rounded-md flex justify-center">
+          <img id="profileImg" src="/image/profile.jpg" alt="profile image" class="rounded-md items-center">
+        </figure>
+
+        <!-- user details -->
+        <div class="p-5 w-full">
+          <span class="font-bold">User:</span>
+          <h3 id="userName"></h3>
+          <span class="font-bold">Email:</span>
+          <h3 id="email"></h3>
+        </div>
+      </div>
+      <!-- upload button -->
+      <div class="p-3 flex justify-center">
+        <button id="uploadPageBtn"
+          class="my-4 p-3 w-full rounded-md shadow-md bg-[#00796B] hover:bg-[#00796bba] active:bg-[#F3F3F3]">Upload
+          Book</button>
+      </div>
+    </section>
+
+    <!-- user uploaded books -->
+    <section class="p-5 mx-auto w-11/12 md:w-9/12 flex flex-col rounded-md">
+      <!-- header -->
+      <header class="p-5 flex justify-center bg-[#00796B] rounded-md shadow-md">
+        <h2 class="font-semibold text-2xl">Your Uploaded Books</h2>
+      </header>
+
+      <!-- uploaded books list -->
+      <div id="bookList" class="my-2 flex flex-col gap-3">
+
+      </div>
+    </section>
+  </main>
+
+  <div class="bottom-5 relative flex gap-4  justify-center">
+    <div id="prev" class="bg-[#F3F3F3] shadow-md rounded-md p-2">Prev</div>
+    <div id="next" class="bg-[#F3F3F3] shadow-md rounded-md p-2">Next</div>
+  </div>
+
+  <!-- script -->
+  <script type="module" src="./index.ts"></script>
+</body>
+
+</html>

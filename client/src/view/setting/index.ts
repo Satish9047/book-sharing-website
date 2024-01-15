@@ -1,6 +1,6 @@
 import { AxiosError } from "axios";
-import HTTP from "../../src/config";
-import { sendRefreshRequest } from "../../src/utils/utils";
+import HTTP from "../../config";
+import { sendRefreshRequest } from "../../utils/utils";
 
 
 const oldPasswordInput = document.getElementById("old-Password") as HTMLInputElement;
@@ -21,13 +21,13 @@ window.addEventListener("load", async () => {
             try {
                 const result = await sendRefreshRequest();
                 if (!result) {
-                    window.location.replace("../login/login.html");
+                    window.location.replace("/src/view/login/login.html");
                 }
             } catch (error) {
                 console.log(error);
             }
         } else {
-            window.location.replace("../login/login.html");
+            window.location.replace("/src/view/login/login.html");
         }
     }
 });
@@ -67,7 +67,7 @@ changePasswordBtn.addEventListener("click", async (e) => {
                 settingElement.removeChild(div);
 
             }, 3000);
-            window.location.replace("../../index.html");
+            window.location.replace("/index.html");
         }
         console.log(res);
     } catch (error) {

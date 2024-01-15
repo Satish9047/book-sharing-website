@@ -1,6 +1,6 @@
 // import axios from "axios";
 import { AxiosResponse } from "axios";
-import HTTP from "../../src/config";
+import HTTP from "../../config";
 
 const emailElement = document.getElementById("email") as HTMLInputElement;
 const passwordElement = document.getElementById("password") as HTMLInputElement;
@@ -20,18 +20,20 @@ loginBtn.addEventListener("click", async (e) => {
         });
         //console.log(res,"respond from server");
         if (res.status === 200) {
-            window.location.href = "../../index.html";
+            window.location.href = "/index.html";
         }
     } catch (error) {
-        console.log(error.response.data.error);
+        console.log(error, "from me");
+
         const div = document.createElement("div") as HTMLElement;
-        div.classList.add("p-2","errorColor", "rounded-md", "shadow-md");
-        // div.style.backgroundColor = "red";
+        div.classList.add("p-2", "errorColor", "rounded-md", "shadow-md");
         const paragraph = document.createElement("p") as HTMLElement;
         div.appendChild(paragraph);
         paragraph.innerText = error.response.data.error;
+
         loginElement.appendChild(div);
-        setTimeout(() => {
+
+        setTimeout((): void => {
             loginElement.removeChild(div);
         }, 3000);
     }

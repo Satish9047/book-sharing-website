@@ -1,6 +1,6 @@
 import { AxiosError } from "axios";
-import HTTP from "../../src/config";
-import { logout, sendRefreshRequest } from "../../src/utils/utils";
+import HTTP from "../../config";
+import { logout, sendRefreshRequest } from "../../utils/utils";
 
 const bookNameElement = document.getElementById("book-name") as HTMLInputElement;
 const authorElement = document.getElementById("author") as HTMLInputElement;
@@ -29,7 +29,7 @@ window.addEventListener("load", async () => {
     } catch (error) {
         console.log(error);
         if (
-            (error as AxiosError).response &&(error as AxiosError).response?.status === 401) {
+            (error as AxiosError).response && (error as AxiosError).response?.status === 401) {
             try {
                 const result = await sendRefreshRequest();
                 if (!result) {
@@ -38,9 +38,9 @@ window.addEventListener("load", async () => {
             } catch (error) {
                 console.log(error);
             }
-        }else{
-            window.location.replace("../login/login.html");
-        } 
+        } else {
+            window.location.replace("src/view/login/login.html");
+        }
     }
 });
 
@@ -59,9 +59,9 @@ navAvatar.addEventListener("click", () => {
 
 //eventlistner to logout button
 logoutElement.addEventListener("click", async () => {
-    const result =  await logout();
+    const result = await logout();
     if (result) {
-        window.location.replace("../login/login.html");
+        window.location.replace("src/view/login/login.html");
     }
 });
 

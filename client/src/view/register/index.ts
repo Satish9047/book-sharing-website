@@ -1,4 +1,4 @@
-import HTTP from "../../src/config";
+import HTTP from "../../config";
 const registerElement = document.getElementById("registerBtn") as HTMLButtonElement;
 const userNameElement = document.getElementById("userName") as HTMLButtonElement;
 const emailElement = document.getElementById("email") as HTMLButtonElement;
@@ -20,7 +20,7 @@ registerElement.addEventListener("click", async (e) => {
         });
         console.log(res, "respond from server");
         if (res.status === 200) {
-            window.location.href = "../login/login.html";
+            window.location.href = "/src/view/login/login.html";
         }
     } catch (error) {
         console.log(error.response.data);

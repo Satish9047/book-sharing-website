@@ -1,7 +1,7 @@
 // import { IBook } from "./../../src/interface/book";
 import { AxiosError } from "axios";
-import HTTP from "../../src/config";
-import {logout, renderUserUploads, sendRefreshRequest} from "../../src/utils/utils";
+import HTTP from "../../config";
+import { logout, renderUserUploads, sendRefreshRequest } from "../../utils/utils";
 
 // const profileImgElement = document.getElementById("profileImg") as HTMLImageElement;
 // const bookItemElement = document.getElementById("bookList") as HTMLDivElement;
@@ -37,18 +37,18 @@ window.addEventListener("load", async () => {
     } catch (error) {
         console.log(error);
         if (
-            (error as AxiosError).response &&(error as AxiosError).response?.status === 401) {
+            (error as AxiosError).response && (error as AxiosError).response?.status === 401) {
             try {
                 const result = await sendRefreshRequest();
                 if (!result) {
-                    window.location.replace("../login/login.html");
+                    window.location.replace("/src/view/login/login.html");
                 }
             } catch (error) {
                 console.log(error);
             }
-        }else{
-            window.location.replace("../login/login.html");
-        } 
+        } else {
+            window.location.replace("/src/view/login/login.html");
+        }
     }
 });
 
@@ -58,7 +58,7 @@ navAvatar.addEventListener("click", () => {
     if (isProfile) {
         avatarDiv.style.display = "block";
         console.log("navAvatar is clicked");
-    }else{
+    } else {
         avatarDiv.style.display = "none";
         console.log("navAvatar is clicked");
     }
@@ -66,15 +66,15 @@ navAvatar.addEventListener("click", () => {
 
 //eventlistner to the logout button
 logoutElement.addEventListener("click", async () => {
-    const result =  await logout();
+    const result = await logout();
     if (result) {
-        window.location.replace("../login/login.html");
+        window.location.replace("/src/view/login/login.html");
     }
 });
 
 //eventlistner to upload page
 uploadPageBtn.addEventListener("click", () => {
-    window.location.href = "../upload/upload.html";
+    window.location.href = "/src/view/upload/upload.html";
 });
 
 //eventlistner to pagination

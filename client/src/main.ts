@@ -57,14 +57,14 @@ window.addEventListener("load", async (): Promise<void> => {
             try {
                 const result = await sendRefreshRequest();
                 if (!result) {
-                    window.location.replace("../view/login/login.html");
+                    window.location.replace("/src/view/login/login.html");
                 }
             } catch (error) {
                 console.log(error);
-                window.location.replace("../view/login/login.html");
+                window.location.replace("/src/view/login/login.html");
             }
         } else {
-            window.location.replace("../view/login/login.html");
+            window.location.replace("/src/view/login/login.html");
         }
     }
 });
@@ -83,7 +83,7 @@ navAvatar.addEventListener("click", () => {
 logoutElement.addEventListener("click", async () => {
     const result = await logout();
     if (result) {
-        window.location.replace("../view/login/login.html");
+        window.location.replace("/src/view/login/login.html");
     }
 });
 
@@ -100,6 +100,11 @@ for (let i = 0; i < searchLabel.length; i++) {
     div.appendChild(input);
     div.appendChild(label);
     searchByList.appendChild(div);
+
+    if(i === 0){
+        input.checked = true;
+        state[searchLabel[i] as keyof IState]=true;
+    }
 
     input.addEventListener("change", async () => {
         // console.log(searchLabel[i], input.checked);
