@@ -83,6 +83,7 @@ uploadBtn.addEventListener("click", async (e) => {
 
             const div = document.createElement("div") as HTMLElement;
             div.classList.add("p-2", "bg-[#00796B]", "shadow-md", "rounded-md");
+            div.style.backgroundColor = "#00796B";
             const paragraph = document.createElement("p") as HTMLElement;
             div.appendChild(paragraph);
             paragraph.innerText = "book is successfully uploaded";

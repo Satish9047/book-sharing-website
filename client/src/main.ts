@@ -3,7 +3,6 @@ import { IState } from "./interface/book";
 import { renderData, logout } from "./utils/utils";
 import { constant } from "./constants";
 
-// const bookItemsElement = document.getElementById("bookItems") as HTMLDivElement;
 const searchByList = document.getElementById("searchByList") as HTMLDivElement;
 const searchInputElement = document.getElementById("searchInput") as HTMLInputElement;
 const navAvatar = document.getElementById("navAvatar") as HTMLElement;
@@ -11,7 +10,6 @@ const avatarDiv = document.getElementById("avatarDiv") as HTMLDivElement;
 const prevElement = document.getElementById("prev") as HTMLDivElement;
 const nextElement = document.getElementById("next") as HTMLDivElement;
 const logoutElement = document.getElementById("logout") as HTMLElement;
-// const settingElement = document.getElementById("setting") as HTMLDivElement;
 
 //array for label
 const searchLabel: string[] = [
@@ -30,6 +28,7 @@ if (pageIndex <= itemsPerPage) {
 } else {
     prevElement.style.display = "block";
 }
+
 //state for getting data query
 const state: IState = {
     "By Book Name": false,
@@ -113,15 +112,11 @@ searchInputElement.addEventListener("keydown", async (ev) => {
 
 //event listeners to the pagination
 nextElement.addEventListener("click", () => {
-
     getnextIndexBook();
-
 });
 
 prevElement.addEventListener("click", () => {
-
     getPrevIndexBook();
-
 });
 
 async function getnextIndexBook() {

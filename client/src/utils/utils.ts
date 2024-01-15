@@ -11,7 +11,7 @@ export function renderData(bookdata: []) {
     bookList.forEach((book: IBook) => {
 
         const div = document.createElement("div") as HTMLDivElement;
-        div.classList.add("px-4", "py-2", "flex", "justify-between", "bg-[#F3F3F3]", "rounded-md", "shadow-md", "cursor-pointer", "hover:bg-[#00796B]");
+        div.classList.add("px-4", "py-2", "md:flex", "justify-between", "bg-[#F3F3F3]", "rounded-md", "shadow-md", "cursor-pointer", "hover:bg-[#00796B]");
 
         const heading = document.createElement("h1");
         heading.innerText = book.book_name;
@@ -20,11 +20,11 @@ export function renderData(bookdata: []) {
         paragraph.innerText = book.author_name;
 
         const figure = document.createElement("figure");
-        figure.classList.add("w-[30px]");
+        figure.classList.add("w-[50px]","md:w-[30px]", "mx-auto", "md:mx-0");
 
         const downloadImage = document.createElement("img");
         downloadImage.src = "/icon/download-icon.png";
-        downloadImage.classList.add("w-[30px]");
+        downloadImage.classList.add("w-[50px]");
 
         figure.appendChild(downloadImage);
         div.appendChild(heading);
@@ -100,7 +100,7 @@ export function renderUserUploads(userBookData:[]) {
     bookItemElement.innerHTML = "";
     bookItem.forEach((book: IBook) => {
         const div = document.createElement("div") as HTMLDivElement;
-        div.classList.add("px-4", "py-2", "flex", "justify-between", "bg-[#F3F3F3]", "rounded-md", "shadow-md", "cursor-pointer", "hover:bg-[#00796B]");
+        div.classList.add("px-4", "py-2", "md:flex", "justify-between", "bg-[#F3F3F3]", "rounded-md", "shadow-md", "cursor-pointer", "hover:bg-[#00796B]");
 
         const heading = document.createElement("h1") as HTMLHeadElement;
         heading.innerText = book.book_name;
@@ -109,9 +109,9 @@ export function renderUserUploads(userBookData:[]) {
         paragraph.innerText = book.author_name;
 
         const figure = document.createElement("figure") as HTMLElement;
-        figure.classList.add("w-[30px]");
+        figure.classList.add("w-[50px]","md:w-[30px]", "mx-auto", "md:mx-0");
         const deleteImage = document.createElement("img") as HTMLImageElement;
-        deleteImage.classList.add("w-[30px]");
+        deleteImage.classList.add("w-[50px]");
         deleteImage.src = "/icon/delete.png";
 
         figure.appendChild(deleteImage);
