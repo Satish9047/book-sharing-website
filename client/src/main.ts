@@ -85,6 +85,10 @@ for (let i = 0; i < searchLabel.length; i++) {
     div.appendChild(input);
     div.appendChild(label);
     searchByList.appendChild(div);
+    div.classList.add("hover:bg-[#00796B]");
+    div.addEventListener("click", () => {
+        input.checked = !input.checked;
+    });
 
     if(i === 0){
         input.checked = true;
@@ -138,7 +142,7 @@ async function getPrevIndexBook() {
     }
     pageIndex -= itemsPerPage;
     const res = await getBook();
-    
+
     console.log(res.data);
     renderData(res.data);
 }
