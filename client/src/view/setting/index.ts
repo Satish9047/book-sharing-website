@@ -1,7 +1,5 @@
-// import { AxiosError } from "axios";
+import { AxiosError } from "axios";
 import HTTP from "../../config";
-// import { sendRefreshRequest } from "../../utils/utils";
-
 
 const oldPasswordInput = document.getElementById("old-Password") as HTMLInputElement;
 const newPasswordInput = document.getElementById("new-password") as HTMLInputElement;
@@ -16,19 +14,6 @@ window.addEventListener("load", async () => {
         console.log(res);
     } catch (error) {
         console.log(error);
-        // if (
-        //     (error as AxiosError).response && (error as AxiosError).response?.status === 401) {
-        //     try {
-        //         const result = await sendRefreshRequest();
-        //         if (!result) {
-        //             window.location.replace("/src/view/login/login.html");
-        //         }
-        //     } catch (error) {
-        //         console.log(error);
-        //     }
-        // } else {
-        //     window.location.replace("/src/view/login/login.html");
-        // }
     }
 });
 
@@ -71,17 +56,18 @@ changePasswordBtn.addEventListener("click", async (e) => {
         }
         console.log(res);
     } catch (error) {
-        console.log(error);
-        const div = document.createElement("div") as HTMLElement;
-        div.classList.add("p-2", "errorColor", "rounded-md", "shadow-md");
-        // div.style.backgroundColor = "red";
-        const paragraph = document.createElement("p") as HTMLElement;
-        div.appendChild(paragraph);
-        paragraph.innerText = error.response.data.error;
-        settingElement.appendChild(div);
-        setTimeout(() => {
-            settingElement.removeChild(div);
-        }, 3000);
+        if(error instanceof AxiosError){
+            console.log(error);
+            const div = document.createElement("div") as HTMLElement;
+            div.classList.add("p-2", "errorColor", "rounded-md", "shadow-md");
+            const paragraph = document.createElement("p") as HTMLElement;
+            div.appendChild(paragraph);
+            paragraph.innerText = error.response?.data.error;
+            settingElement.appendChild(div);
+            setTimeout(() => {
+                settingElement.removeChild(div);
+            }, 3000);
+        }
     }
 });
 

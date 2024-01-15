@@ -1,7 +1,7 @@
+import { AxiosError } from "axios";
 import queryString from "query-string";
 import HTTP from "../../config";
 import { sendRefreshRequest, logout } from "../../utils/utils";
-import { AxiosError } from "axios";
 
 //DOM Elements
 const bookNameElement = document.getElementById("bookName") as HTMLElement;

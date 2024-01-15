@@ -1,5 +1,3 @@
-// import axios from "axios";
-// import { AxiosResponse } from "axios";
 import { AxiosError } from "axios";
 import HTTP from "../../config";
 
@@ -24,18 +22,18 @@ loginBtn.addEventListener("click", async (e) => {
             window.location.href = "/index.html";
         }
     } catch (error) {
+        if(error instanceof AxiosError) {
+            const errorDiv = document.createElement("div") as HTMLElement;
+            errorDiv.classList.add("p-2", "errorColor", "rounded-md", "shadow-md");
+            const paragraph = document.createElement("p") as HTMLElement;
+            errorDiv.appendChild(paragraph);
+        
+            paragraph.innerText = error.response?.data.error;
+            loginElement.appendChild(errorDiv);
 
-        const errorDiv = document.createElement("div") as HTMLElement;
-        errorDiv.classList.add("p-2", "errorColor", "rounded-md", "shadow-md");
-        const paragraph = document.createElement("p") as HTMLElement;
-        errorDiv.appendChild(paragraph);
-        //@ts-ignore
-        paragraph.innerText = (error as AxiosError).response.data.error;
-
-        loginElement.appendChild(errorDiv);
-
-        setTimeout((): void => {
-            loginElement.removeChild(errorDiv);
-        }, 3000);
+            setTimeout((): void => {
+                loginElement.removeChild(errorDiv);
+            }, 3000);
+        }
     }
 });

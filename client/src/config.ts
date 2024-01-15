@@ -16,15 +16,18 @@ HTTP.interceptors.response.use(
         if((error as AxiosError).response?.status === 401){
             try {
                 console.log(error.response?.data);
-                const res = await HTTP.post("/refresh");
+                const res = await axios.post("http://localhost:8080/refresh", {
+                    withCredentials: true,
+                });
                 console.log(res.status);
                 if(res.status === 200){
-                    window.location.reload();
+                    //window.location.reload();
+                    return HTTP(error.config as unknown as string);
                 }
                 
             } catch (error) {
                 console.log(error);
-                window.location.replace("./view/login/login.html");
+                window.location.replace("/src/view/login/login.html");
             }
             
         }

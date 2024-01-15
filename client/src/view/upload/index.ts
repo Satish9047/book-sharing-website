@@ -1,6 +1,6 @@
 import { AxiosError } from "axios";
 import HTTP from "../../config";
-import { logout, sendRefreshRequest } from "../../utils/utils";
+import { logout } from "../../utils/utils";
 
 const bookNameElement = document.getElementById("book-name") as HTMLInputElement;
 const authorElement = document.getElementById("author") as HTMLInputElement;
@@ -28,19 +28,6 @@ window.addEventListener("load", async () => {
         }
     } catch (error) {
         console.log(error);
-        // if (
-        //     (error as AxiosError).response && (error as AxiosError).response?.status === 401) {
-        //     try {
-        //         const result = await sendRefreshRequest();
-        //         if (!result) {
-        //             window.location.replace("../login/login.html");
-        //         }
-        //     } catch (error) {
-        //         console.log(error);
-        //     }
-        // } else {
-        //     
-        // }
     }
 });
 
@@ -108,18 +95,19 @@ uploadBtn.addEventListener("click", async (e) => {
         }
 
     } catch (error) {
-        console.log(error.response.data);
+        if(error instanceof AxiosError){
+            //console.log(error.response.data);
+            const div = document.createElement("div") as HTMLElement;
+            div.classList.add("p-2", "errorColor", "rounded-md", "shadow-md");
+            const paragraph = document.createElement("p") as HTMLElement;
+            div.appendChild(paragraph);
+            paragraph.innerText = error.response?.data.error;
+            uploadDivElement.appendChild(div);
 
-        const div = document.createElement("div") as HTMLElement;
-        div.classList.add("p-2", "errorColor", "rounded-md", "shadow-md");
-        const paragraph = document.createElement("p") as HTMLElement;
-        div.appendChild(paragraph);
-        paragraph.innerText = error.response.data.error;
-        uploadDivElement.appendChild(div);
-
-        setTimeout(() => {
-            uploadDivElement.removeChild(div);
-        }, 3000);
+            setTimeout(() => {
+                uploadDivElement.removeChild(div);
+            }, 3000);
+        }
     }
 
 });

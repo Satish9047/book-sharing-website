@@ -1,11 +1,7 @@
-// import { IBook } from "./../../src/interface/book";
-// import { AxiosError } from "axios";
 import HTTP from "../../config";
 import { logout, renderUserUploads} from "../../utils/utils";
 import { constant } from "../../constants";
 
-// const profileImgElement = document.getElementById("profileImg") as HTMLImageElement;
-// const bookItemElement = document.getElementById("bookList") as HTMLDivElement;
 const uploadPageBtn = document.getElementById("uploadPageBtn") as HTMLButtonElement;
 const userNameElement = document.getElementById("userName") as HTMLHeadingElement;
 const emailElement = document.getElementById("email") as HTMLHeadingElement;

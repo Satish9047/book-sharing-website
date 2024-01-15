@@ -95,10 +95,8 @@ for (let i = 0; i < searchLabel.length; i++) {
     }
 
     input.addEventListener("change", async () => {
-        // console.log(searchLabel[i], input.checked);
         state[searchLabel[i] as keyof IState] = input.checked;
         console.log(state);
-        // await getBook();
     });
 }
 

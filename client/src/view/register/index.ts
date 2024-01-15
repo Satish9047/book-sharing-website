@@ -1,4 +1,6 @@
+import { AxiosError } from "axios";
 import HTTP from "../../config";
+
 const registerElement = document.getElementById("registerBtn") as HTMLButtonElement;
 const userNameElement = document.getElementById("userName") as HTMLButtonElement;
 const emailElement = document.getElementById("email") as HTMLButtonElement;
@@ -10,7 +12,6 @@ registerElement.addEventListener("click", async (e) => {
     const userName = userNameElement.value;
     const email = emailElement.value;
     const password = passwordElement.value;
-    //console.log({ userName: userName, email: email, password: password });
 
     try {
         const res = await HTTP.post("/auth/register", {
@@ -24,17 +25,18 @@ registerElement.addEventListener("click", async (e) => {
         }
     } catch (error) {
         console.log(error);
+        if(error instanceof AxiosError){
+            const div = document.createElement("div") as HTMLElement;
+            const paragraph = document.createElement("p") as HTMLElement;
+            div.classList.add("errorColor", "p-2", "rounded-md", "shadow-md");
+            paragraph.innerText = error.response?.data.error;
 
-        const div = document.createElement("div") as HTMLElement;
-        const paragraph = document.createElement("p") as HTMLElement;
-        div.classList.add("errorColor", "p-2", "rounded-md", "shadow-md");
-
-        div.appendChild(paragraph);
-        paragraph.innerText = error.response.data.error;
-        registerDivElement.appendChild(div);
+            div.appendChild(paragraph);
+            registerDivElement.appendChild(div);
         
-        setTimeout(() => {
-            registerDivElement.removeChild(div);
-        }, 3000);
+            setTimeout(() => {
+                registerDivElement.removeChild(div);
+            }, 3000);
+        }
     }
 });
