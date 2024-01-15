@@ -1,11 +1,13 @@
 import { AxiosError } from "axios";
 import HTTP from "../../config";
 
+//refrencing DOM in variables
 const emailElement = document.getElementById("email") as HTMLInputElement;
 const passwordElement = document.getElementById("password") as HTMLInputElement;
 const loginBtn = document.getElementById("loginBtn") as HTMLButtonElement;
 const loginElement = document.getElementById("login") as HTMLBodyElement;
 
+//login btn handler
 loginBtn.addEventListener("click", async (e) => {
     e.preventDefault();
     const email = emailElement.value;
@@ -23,6 +25,8 @@ loginBtn.addEventListener("click", async (e) => {
         }
     } catch (error) {
         if(error instanceof AxiosError) {
+
+            //error message
             const errorDiv = document.createElement("div") as HTMLElement;
             errorDiv.classList.add("p-2", "errorColor", "rounded-md", "shadow-md");
             const paragraph = document.createElement("p") as HTMLElement;

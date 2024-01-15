@@ -2,6 +2,7 @@ import { AxiosError } from "axios";
 import HTTP from "../../config";
 import { logout } from "../../utils/utils";
 
+//refrenching dom elements
 const bookNameElement = document.getElementById("book-name") as HTMLInputElement;
 const authorElement = document.getElementById("author") as HTMLInputElement;
 const categoryElement = document.getElementById("category") as HTMLInputElement;
@@ -15,7 +16,7 @@ const navAvatar = document.getElementById("navAvatar") as HTMLElement;
 const avatarDiv = document.getElementById("avatarDiv") as HTMLDivElement;
 const logoutElement = document.getElementById("logout") as HTMLElement;
 
-//avatar state
+//state
 let isProfile = false;
 
 //on load
@@ -51,6 +52,7 @@ logoutElement.addEventListener("click", async () => {
     }
 });
 
+//upload btn handler
 uploadBtn.addEventListener("click", async (e) => {
     e.preventDefault();
     const bookName = bookNameElement.value;
@@ -59,9 +61,8 @@ uploadBtn.addEventListener("click", async (e) => {
     const keyword = keywordElement.value;
     const pdfFile = bookPdfElement.files?.[0];
     const imgFile = imageElement.files?.[0];
-
     const description = descriptionElement.value;
-    console.log({ bookName: bookName, author: author, category: category, keyword: keyword, bookPdf: pdfFile, image: imgFile, description: description });
+
     try {
         const res = await HTTP.post("/books/addbook", {
             bookName,
@@ -80,7 +81,7 @@ uploadBtn.addEventListener("click", async (e) => {
 
         if (res.status === 201) {
             console.log("successfully upload book", res);
-
+            //for success message
             const div = document.createElement("div") as HTMLElement;
             div.classList.add("p-2", "bg-[#00796B]", "shadow-md", "rounded-md");
             div.style.backgroundColor = "#00796B";
@@ -95,8 +96,9 @@ uploadBtn.addEventListener("click", async (e) => {
         }
 
     } catch (error) {
-        if(error instanceof AxiosError){
-            //console.log(error.response?.data.error.details[0].message);
+        if (error instanceof AxiosError) {
+
+            //for error message
             const div = document.createElement("div") as HTMLElement;
             div.classList.add("p-2", "errorColor", "rounded-md", "shadow-md");
             const paragraph = document.createElement("p") as HTMLElement;
@@ -109,5 +111,4 @@ uploadBtn.addEventListener("click", async (e) => {
             }, 3000);
         }
     }
-
 });

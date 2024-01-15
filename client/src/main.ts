@@ -3,6 +3,7 @@ import { IState } from "./interface/book";
 import { renderData, logout } from "./utils/utils";
 import { constant } from "./constants";
 
+
 const searchByList = document.getElementById("searchByList") as HTMLDivElement;
 const searchInputElement = document.getElementById("searchInput") as HTMLInputElement;
 const navAvatar = document.getElementById("navAvatar") as HTMLElement;
@@ -23,13 +24,15 @@ const searchLabel: string[] = [
 let pageIndex = 0;
 const itemsPerPage = constant.take;
 
+
 if (pageIndex <= itemsPerPage) {
     prevElement.style.display = "none";
 } else {
     prevElement.style.display = "block";
 }
 
-//state for getting data query
+//state
+let isProfile = false;
 const state: IState = {
     "By Book Name": false,
     "by Author Name": false,
@@ -39,7 +42,6 @@ const state: IState = {
 
 //search value
 let value = "";
-let isProfile = false;
 
 //on load
 window.addEventListener("load", async (): Promise<void> => {
@@ -75,26 +77,26 @@ logoutElement.addEventListener("click", async () => {
 //rendering the searchBy div
 for (let i = 0; i < searchLabel.length; i++) {
     const div = document.createElement("div") as HTMLDivElement;
-    div.classList.add("p-2", "flex", "gap-2", "bg-[#F3F3F3]", "shadow-lg", "rounded-md");
-
     const input = document.createElement("input") as HTMLInputElement;
-    input.type = "checkbox";
-
     const label = document.createElement("label") as HTMLLabelElement;
+    div.classList.add("p-2", "flex", "gap-2", "bg-[#F3F3F3]", "shadow-lg", "rounded-md", "hover:bg-[#00796B]");
+    input.type = "checkbox";
     label.innerText = searchLabel[i];
     div.appendChild(input);
     div.appendChild(label);
     searchByList.appendChild(div);
-    div.classList.add("hover:bg-[#00796B]");
+
     div.addEventListener("click", () => {
         input.checked = !input.checked;
     });
 
+    //1st Element default checked
     if(i === 0){
         input.checked = true;
         state[searchLabel[i] as keyof IState]=true;
     }
 
+    
     input.addEventListener("change", async () => {
         state[searchLabel[i] as keyof IState] = input.checked;
         console.log(state);

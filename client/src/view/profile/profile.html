@@ -28,17 +28,20 @@
     </figure>
 
     <!-- drop down -->
-    <div id="avatarDiv" class="hidden p-5 absolute flex-col justify-center right-10 top-20 bg-[#F3F3F3] shadow-lg rounded-md">
+    <div id="avatarDiv"
+      class="hidden p-5 absolute flex-col justify-center right-10 top-20 bg-[#F3F3F3] shadow-lg rounded-md">
       <figure class="flex justify-center">
         <img class="w-[50px]" src="/icon/setting-icon.svg" />
       </figure>
       <div class="p-5 flex flex-col gap-2">
-        <h3 class="hover:bg-[#00796B] cursor-pointer p-2 rounded-md" id="setting"><a href="/src/view/setting/setting.html">Setting</a></h3>
+        <h3 class="hover:bg-[#00796B] cursor-pointer p-2 rounded-md" id="setting"><a
+            href="/src/view/setting/setting.html">Setting</a></h3>
         <h3 class="hover:bg-[#00796B] cursor-pointer p-2 rounded-md" id="logout">Logout</h3>
       </div>
     </div>
   </navbar>
 
+  <!-- nav menu for mobile -->
   <div id="navList" class="bg-[#F3F3F3]">
     <ul class="py-4  md:hidden flex flex-col justify-center items-center gap-4 font-semibold">
       <li class="w-full flex justify-center"><a href="/index.html">Home</a></li>
@@ -90,7 +93,8 @@
   </main>
 
   <div class="bottom-5 relative flex gap-4  justify-center">
-    <div id="prev" class="bg-[#F3F3F3] shadow-md rounded-md p-2 hover:bg-[#00796B] active:bg-[#F3F3F3] hidden">Prev</div>
+    <div id="prev" class="bg-[#F3F3F3] shadow-md rounded-md p-2 hover:bg-[#00796B] active:bg-[#F3F3F3] hidden">Prev
+    </div>
     <div id="next" class="bg-[#F3F3F3] shadow-md rounded-md p-2 hover:bg-[#00796B] active:bg-[#F3F3F3]">Next</div>
   </div>
 
@@ -101,9 +105,9 @@
     const navList = document.getElementById("navList");
 
     burgerBtn.addEventListener('click', () => {
-        navList.classList.toggle('hidden');
+      navList.classList.toggle('hidden');
     });
-</script>
+  </script>
 </body>
 
 </html>

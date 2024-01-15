@@ -1,7 +1,8 @@
 import HTTP from "../../config";
-import { logout, renderUserUploads} from "../../utils/utils";
+import { logout, renderUserUploads } from "../../utils/utils";
 import { constant } from "../../constants";
 
+//refrencing dom element
 const uploadPageBtn = document.getElementById("uploadPageBtn") as HTMLButtonElement;
 const userNameElement = document.getElementById("userName") as HTMLHeadingElement;
 const emailElement = document.getElementById("email") as HTMLHeadingElement;
@@ -11,7 +12,7 @@ const logoutElement = document.getElementById("logout") as HTMLElement;
 const prevElement = document.getElementById("prev") as HTMLDivElement;
 const nextElement = document.getElementById("next") as HTMLDivElement;
 
-//avatar state
+//state
 let isProfile = false;
 let pageIndex = 0;
 const itemsPerPage = constant.take;
@@ -22,14 +23,14 @@ window.addEventListener("load", async () => {
         const res = await HTTP.get("/auth/userInfo");
         const resBookdata = await HTTP.get(`books/user?skip=${pageIndex}&take=${itemsPerPage}`);
         if (res.status === 200 && resBookdata.status === 200) {
-            
+
             userNameElement.textContent = res.data.user_name;
             emailElement.textContent = res.data.email;
             const bookItem = resBookdata.data;
             renderUserUploads(bookItem);
         }
     } catch (error) {
-        // window.location.replace("/src/view/login/login.html");
+        console.log(error);
     }
 });
 
@@ -53,7 +54,7 @@ logoutElement.addEventListener("click", async () => {
     }
 });
 
-//eventlistner to upload page
+//eventlistner to upload btn
 uploadPageBtn.addEventListener("click", () => {
     window.location.href = "/src/view/upload/upload.html";
 });
@@ -67,6 +68,7 @@ prevElement.addEventListener("click", () => {
     getPrevIndexBook();
 });
 
+// pagination function
 async function getnextIndexBook() {
     pageIndex += itemsPerPage;
     prevElement.style.display = "block";
@@ -82,7 +84,7 @@ async function getnextIndexBook() {
 }
 
 async function getPrevIndexBook() {
-    if (pageIndex <= itemsPerPage ) {
+    if (pageIndex <= itemsPerPage) {
         prevElement.style.display = "none";
     }
     pageIndex -= itemsPerPage;

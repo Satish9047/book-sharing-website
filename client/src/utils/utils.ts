@@ -1,15 +1,16 @@
 import HTTP from "../config";
 import { IBook } from "../interface/book";
 
+//refrencing dom elements
 const bookItemElement = document.getElementById("bookList") as HTMLDivElement;
+const bookItemsElement = document.getElementById("bookItems") as HTMLDivElement;
 
 //rendering the bookList in the browser
-const bookItemsElement = document.getElementById("bookItems") as HTMLDivElement;
 export function renderData(bookdata: []) {
     bookItemsElement.innerHTML = "";
     const bookList = bookdata;
     bookList.forEach((book: IBook) => {
-
+        // creating bookList
         const div = document.createElement("div") as HTMLDivElement;
         div.classList.add("px-4", "py-2", "md:flex", "justify-between", "bg-[#F3F3F3]", "rounded-md", "shadow-md", "cursor-pointer", "hover:bg-[#00796B]");
 
@@ -96,10 +97,10 @@ export async function logout() {
 
 //render user uploads
 export function renderUserUploads(userBookData:[]) {
-
     const bookItem = userBookData;
     bookItemElement.innerHTML = "";
     bookItem.forEach((book: IBook) => {
+        //creating booklist element
         const div = document.createElement("div") as HTMLDivElement;
         div.classList.add("px-4", "py-2", "md:flex", "justify-between", "bg-[#F3F3F3]", "rounded-md", "shadow-md", "cursor-pointer", "hover:bg-[#00796B]");
 

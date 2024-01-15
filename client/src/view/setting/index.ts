@@ -33,7 +33,6 @@ changePasswordBtn.addEventListener("click", async (e) => {
                 throw new Error("confirm password didn't match");
             }
         }
-
         const res = await HTTP.post("/auth/changePassword", {
             oldPassword,
             newPassword,
@@ -41,6 +40,7 @@ changePasswordBtn.addEventListener("click", async (e) => {
 
         if (res.status === 200) {
 
+            //for success message
             const div = document.createElement("div") as HTMLElement;
             div.classList.add("p-2", "successColor", "shadow-md", "rounded-md");
             const paragraph = document.createElement("p") as HTMLElement;
@@ -57,7 +57,8 @@ changePasswordBtn.addEventListener("click", async (e) => {
         console.log(res);
     } catch (error) {
         if(error instanceof AxiosError){
-            console.log(error);
+            
+            //for error message
             const div = document.createElement("div") as HTMLElement;
             div.classList.add("p-2", "errorColor", "rounded-md", "shadow-md");
             const paragraph = document.createElement("p") as HTMLElement;
