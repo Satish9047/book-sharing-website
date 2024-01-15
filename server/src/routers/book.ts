@@ -13,5 +13,6 @@ bookRouter.get("/:id", bookController.getBookById);
 bookRouter.post("/addbook", filesUpload,uploadBookVerify, bookController.addBookHandler);
 bookRouter.delete("/:id", bookController.deleteBookHandler);
 bookRouter.get("/download/:id", bookController.downloadBookHandler);
+bookRouter.get("/image/:bookId", bookController.getImageHandler);
 
 export default bookRouter;
