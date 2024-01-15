@@ -1,11 +1,11 @@
-import { Router, Request, Response, NextFunction } from "express";
+import { Router, Request, Response } from "express";
 import jwt, { JwtPayload } from "jsonwebtoken";
 import { ACCESS_TOKEN_EXPIRY } from "../constants/expiry";
 import config from "../config";
 
 const jwtRefreshRouter = Router();
 
-jwtRefreshRouter.post("/", (req: Request, res: Response, next: NextFunction) => {
+jwtRefreshRouter.post("/", (req: Request, res: Response) => {
     const refreshToken = req.cookies.refreshToken;
 
     if (!refreshToken) {

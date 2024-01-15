@@ -63,17 +63,15 @@ export const uploadBookSchema = Joi.object({
             "string.max": "Description should have a maximum length of 50 characters"
         }),
         
-    pdfFile: Joi.binary().required().max(5242880)
+    pdfPath: Joi.string().required()
         .messages({
-            "binary.base": "PDF file must be a binary data",
-            "binary.empty": "PDF file is required",
-            "binary.max": "PDF file size should not exceed 5 MB"
+            "string.base": "PDF file must be a binary data",
+            "string.empty": "PDF file is required",
         }),
         
-    imgFile: Joi.binary().required().max(5242880)
+    imgPath: Joi.string().required()
         .messages({
-            "binary.base": "Image file must be a binary data",
-            "binary.empty": "Image file is required",
-            "binary.max": "Image file size should not exceed 5 MB"
+            "string.base": "Image file must be a binary data",
+            "sting.empty": "Image file is required",
         }),
 });
