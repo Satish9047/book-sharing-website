@@ -19,6 +19,7 @@ export const getUserInfo = async (userInfo: string)=>{
     return data;
 };
 
+//change password service
 export const changePasswordHandler = async (userId: number, updatePassword: IUpdatePassword)=>{
     const data = authRepositories.changePasswordHandler(userId, updatePassword);
     return data;

@@ -2,10 +2,12 @@ import multer, { FileFilterCallback } from "multer";
 import { Request } from "express";
 import path from "path";
 
+//generating the unique name
 const generateFilename = (prefix: string) => {
     return `${prefix}_${Date.now()}-${Math.round(Math.random() * 1E9)}`;
 };
 
+//giving the extension name
 const getFileType = (fileName: string) => {
     const ext = path.extname(fileName);
     if (ext === ".pdf") {
@@ -15,6 +17,7 @@ const getFileType = (fileName: string) => {
     }
 };
 
+//defiing path
 const customStorage = (destination: string) => {
     return multer.diskStorage({
         destination: (req, file, cb) => {
@@ -35,6 +38,7 @@ const customStorage = (destination: string) => {
     });
 };
 
+//creating filter
 const customFilter = (fileType: string) => {
     return (req: Request, file: Express.Multer.File, cb: FileFilterCallback) => {
         if (file.mimetype.startsWith(fileType)) {
@@ -45,7 +49,7 @@ const customFilter = (fileType: string) => {
     };
 };
 
-
+//save file and filtering the img/pdf
 export const filesUpload = multer({
     storage: customStorage("public/uploads"),
     fileFilter: (req, file, cb) => {

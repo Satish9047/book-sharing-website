@@ -27,14 +27,6 @@ export const addBookHandler = async (bookInfo: IAddBook) => {
     return data;
 };
 
-
-//update book service
-export const updateBookHandler = async (bookInfo: string) => {
-    const data = bookRepositories.updateBookHandler(bookInfo);
-    return data;
-};
-
-
 //delete book service
 export const deleteBookHandler = async (bookInfo: IBookInfo) => {
     //console.log(bookInfo.userId, "from services deleteBookHandler");

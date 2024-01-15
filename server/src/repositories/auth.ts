@@ -16,13 +16,11 @@ export const registerHandler = async (userInfo: IRegister) => {
     //verify user exist
     const userExist = await prisma.user.findFirst({ where: { email: userInfo.email } });
     if (userExist) return { err: "user already existed" };
-
     try {
-        //password hashing
+        //hash password
         const hashedPassword = await bcrypt.hash(userInfo.password, saltRounds);
         if (!hashedPassword) return { error: "invalid credentials" };
 
-        //saving user into database
         const newUser = await prisma.user.create({
             data: {
                 user_name: userInfo.userName,
@@ -45,7 +43,6 @@ export const loginHandler = async (userInfo: ILogin) => {
     const userExists = await prisma.user.findFirst({ where: { email: userInfo.email } });
     if (!userExists) return { error: "user does not exist" };
     try {
-        //verify user's password
         const passwordMatch = await bcrypt.compare(userInfo.password, userExists.password);
         if (!passwordMatch) return { error: "password does not match" };
 
@@ -68,7 +65,6 @@ export const getUserInfo = async (userInfo: string) => {
         if (!verifyToken) return { error: "invalid user" };
         const userId = verifyToken.id;
 
-        //get user info
         const user = await prisma.user.findFirst({
             where: { user_id: userId },
             select: {
@@ -90,7 +86,7 @@ export const changePasswordHandler = async (userId: number, updatedPassword: IUp
         const userExist = await prisma.user.findFirst({ where: { user_id: userId } });
         if (!userExist) return { error: "Invalid user" };
 
-        const verfiyPassword = await bcrypt.compare( updatedPassword.oldPassword, userExist.password);
+        const verfiyPassword = await bcrypt.compare(updatedPassword.oldPassword, userExist.password);
         if (!verfiyPassword) return { error: "old password does not match" };
 
         const newHashedPassword = await bcrypt.hash(updatedPassword.newPassword, saltRounds);

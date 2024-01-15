@@ -11,14 +11,7 @@ bookRouter.get("/user", bookController.getBookByUser);
 bookRouter.get("/getby", queryBookMiddlware, bookController.getSearchedBook);
 bookRouter.get("/:id", bookController.getBookById);
 bookRouter.post("/addbook", filesUpload,uploadBookVerify, bookController.addBookHandler);
-bookRouter.put("/updatebook/:id", bookController.updateBookHandler);
 bookRouter.delete("/:id", bookController.deleteBookHandler);
 bookRouter.get("/download/:id", bookController.downloadBookHandler);
-bookRouter.get("/image/:bookId", bookController.getImageHandler);
 
 export default bookRouter;
-
-
-
-
-// bookRouter.get("/page", bookController.getPageHandler);

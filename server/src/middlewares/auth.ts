@@ -54,7 +54,6 @@ export const jwtAuth = (req: Request & { user?: JwtPayload }, res: Response, nex
     } catch (error) {
         console.error("Error verifying access token:", error);
         res.clearCookie("accessToken");
-        // res.clearCookie("refreshToken");
         return res.status(401).json({ error: "Access Denied! 3!!!!" });
     }
 };

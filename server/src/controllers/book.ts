@@ -78,18 +78,6 @@ export const addBookHandler = async (req: IAuthRequest, res: Response) => {
     }
 };
 
-//update book handler
-export const updateBookHandler = async (req: Request, res: Response) => {
-    console.log(req.headers);
-    const bookInfo: string = req.params.id;
-    try {
-        const data = await bookServices.updateBookHandler(bookInfo);
-        return res.status(200).json({ data });
-    } catch (error) {
-        console.log(error);
-        return res.status(500).json({ error: "Error while updating book" });
-    }
-};
 
 //delete book handler
 export const deleteBookHandler = async (req: IAuthRequest, res: Response) => {
