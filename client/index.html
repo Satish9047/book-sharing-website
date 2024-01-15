@@ -28,12 +28,14 @@
     </figure>
 
     <!-- drop down -->
-    <div id="avatarDiv" class="hidden p-5 absolute flex-col justify-center right-10 top-20 bg-[#F3F3F3] shadow-lg rounded-md">
+    <div id="avatarDiv"
+      class="hidden p-5 absolute flex-col justify-center right-10 top-20 bg-[#F3F3F3] shadow-lg rounded-md">
       <figure class="flex justify-center">
         <img class="w-[50px]" src="icon/setting-icon.svg" />
       </figure>
       <div class="p-5 flex flex-col gap-2">
-        <h3 class="hover:bg-[#00796B] cursor-pointer p-2 rounded-md" id="setting"><a href="/src/view/setting/setting.html">Setting</a></h3>
+        <h3 class="hover:bg-[#00796B] cursor-pointer p-2 rounded-md" id="setting"><a
+            href="/src/view/setting/setting.html">Setting</a></h3>
         <h3 class="hover:bg-[#00796B] cursor-pointer p-2 rounded-md" id="logout">Logout</h3>
       </div>
     </div>
@@ -46,7 +48,7 @@
       <li class="w-full flex justify-center"><a href="/src/view/upload/upload.html">Uploads</a></li>
     </ul>
   </div>
-  
+
 
   <!-- main -->
   <main class="h-full w-full bg-[#D8D8D8] md:flex">
@@ -61,7 +63,8 @@
     <!-- right section -->
     <section class=" w-full md:w-9/12 p-5 bg-[#D8D8D8] flex flex-col gap-10">
       <div class="flex justify-center">
-        <input id="searchInput" placeholder="search books here" class="w-10/12 md:w-1/2 px-3 py-2 rounded-md shadow-md" />
+        <input id="searchInput" placeholder="search books here"
+          class="w-10/12 md:w-1/2 px-3 py-2 rounded-md shadow-md" />
       </div>
 
       <!-- list the books -->
@@ -84,9 +87,9 @@
     const navList = document.getElementById("navList");
 
     burgerBtn.addEventListener('click', () => {
-        navList.classList.toggle('hidden');
+      navList.classList.toggle('hidden');
     });
-</script>
+  </script>
 </body>
 
 </html>

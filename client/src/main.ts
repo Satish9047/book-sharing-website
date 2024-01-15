@@ -39,8 +39,6 @@ const state: IState = {
 
 //search value
 let value = "";
-
-//isProfile clicked
 let isProfile = false;
 
 //on load
@@ -119,6 +117,7 @@ prevElement.addEventListener("click", () => {
     getPrevIndexBook();
 });
 
+//pagination function
 async function getnextIndexBook() {
     pageIndex += itemsPerPage;
     prevElement.style.display = "block";

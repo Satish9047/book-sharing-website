@@ -14,6 +14,7 @@ export function renderData(bookdata: []) {
         div.classList.add("px-4", "py-2", "md:flex", "justify-between", "bg-[#F3F3F3]", "rounded-md", "shadow-md", "cursor-pointer", "hover:bg-[#00796B]");
 
         const heading = document.createElement("h1");
+        heading.classList.add("md:w-1/3");
         heading.innerText = book.book_name;
 
         const paragraph = document.createElement("p");
@@ -103,6 +104,7 @@ export function renderUserUploads(userBookData:[]) {
         div.classList.add("px-4", "py-2", "md:flex", "justify-between", "bg-[#F3F3F3]", "rounded-md", "shadow-md", "cursor-pointer", "hover:bg-[#00796B]");
 
         const heading = document.createElement("h1") as HTMLHeadElement;
+        heading.classList.add("md:w-1/3");
         heading.innerText = book.book_name;
 
         const paragraph = document.createElement("p") as HTMLParagraphElement;
