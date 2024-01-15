@@ -54,6 +54,9 @@ Client
     For development:
     cd client
     npm run dev
+go browser and send the request in:
+
+    http://localhost:5173/
 
 --------------------------------------------------------------
 Technologies Used
