@@ -14,7 +14,6 @@ const uploadDivElement = document.getElementById("uploadDiv") as HTMLDivElement;
 const navAvatar = document.getElementById("navAvatar") as HTMLElement;
 const avatarDiv = document.getElementById("avatarDiv") as HTMLDivElement;
 const logoutElement = document.getElementById("logout") as HTMLElement;
-// const settingElement = document.getElementById("setting") as HTMLDivElement;
 
 //avatar state
 let isProfile = false;
@@ -83,7 +82,7 @@ uploadBtn.addEventListener("click", async (e) => {
             console.log("successfully upload book", res);
 
             const div = document.createElement("div") as HTMLElement;
-            div.classList.add("p-2", "successColor", "shadow-md", "rounded-md");
+            div.classList.add("p-2", "bg-[#00796B]", "shadow-md", "rounded-md");
             const paragraph = document.createElement("p") as HTMLElement;
             div.appendChild(paragraph);
             paragraph.innerText = "book is successfully uploaded";
@@ -96,12 +95,12 @@ uploadBtn.addEventListener("click", async (e) => {
 
     } catch (error) {
         if(error instanceof AxiosError){
-            //console.log(error.response.data);
+            //console.log(error.response?.data.error.details[0].message);
             const div = document.createElement("div") as HTMLElement;
             div.classList.add("p-2", "errorColor", "rounded-md", "shadow-md");
             const paragraph = document.createElement("p") as HTMLElement;
             div.appendChild(paragraph);
-            paragraph.innerText = error.response?.data.error;
+            paragraph.innerText = error.response?.data.error.details[0].message;
             uploadDivElement.appendChild(div);
 
             setTimeout(() => {
