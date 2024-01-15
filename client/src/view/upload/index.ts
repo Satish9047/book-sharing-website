@@ -75,7 +75,7 @@ uploadBtn.addEventListener("click", async (e) => {
     const imgFile = imageElement.files?.[0];
 
     const description = descriptionElement.value;
-    //console.log({ bookName: bookName, author: author, category: category, keyword: keyword, bookPdf: bookPdf, image: image, description: description });
+    console.log({ bookName: bookName, author: author, category: category, keyword: keyword, bookPdf: pdfFile, image: imgFile, description: description });
     try {
         const res = await HTTP.post("/books/addbook", {
             bookName,
@@ -90,6 +90,7 @@ uploadBtn.addEventListener("click", async (e) => {
                 "Content-Type": "multipart/form-data"
             }
         });
+        console.log(res);
 
         if (res.status === 201) {
             console.log("successfully upload book", res);

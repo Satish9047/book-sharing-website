@@ -2,6 +2,7 @@
 // import { AxiosError } from "axios";
 import HTTP from "../../config";
 import { logout, renderUserUploads} from "../../utils/utils";
+import { constant } from "../../constants";
 
 // const profileImgElement = document.getElementById("profileImg") as HTMLImageElement;
 // const bookItemElement = document.getElementById("bookList") as HTMLDivElement;
@@ -13,12 +14,11 @@ const avatarDiv = document.getElementById("avatarDiv") as HTMLDivElement;
 const logoutElement = document.getElementById("logout") as HTMLElement;
 const prevElement = document.getElementById("prev") as HTMLDivElement;
 const nextElement = document.getElementById("next") as HTMLDivElement;
-// const settingElement = document.getElementById("setting") as HTMLDivElement;
 
 //avatar state
 let isProfile = false;
 let pageIndex = 0;
-const itemsPerPage = 2;
+const itemsPerPage = constant.take;
 
 //on load 
 window.addEventListener("load", async () => {
@@ -72,7 +72,7 @@ prevElement.addEventListener("click", () => {
 });
 
 async function getnextIndexBook() {
-    pageIndex += 2;
+    pageIndex += itemsPerPage;
     prevElement.style.display = "block";
     const res = await HTTP.get(`/books/user?take=${itemsPerPage}&skip=${pageIndex}`);
     console.log(res.data);
@@ -85,10 +85,10 @@ async function getnextIndexBook() {
 }
 
 async function getPrevIndexBook() {
-    if (pageIndex <= itemsPerPage) {
+    if (pageIndex <= itemsPerPage ) {
         prevElement.style.display = "none";
     }
-    pageIndex -= 2;
+    pageIndex -= itemsPerPage;
     const res = await HTTP.get(`/books/user?take=${itemsPerPage}&skip=${pageIndex}`);
     console.log(res.data);
     renderUserUploads(res.data);

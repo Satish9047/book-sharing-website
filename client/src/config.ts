@@ -11,35 +11,47 @@ HTTP.interceptors.response.use(
         return response;
     },
     async (error: AxiosError) => {
-        try {
-            await handle401Error(error);
-        } catch (error) {
-            // console.error("Error during 401 error handling:", error);
-            window.location.replace("/src/view/login/login.html");
-            return Promise.reject(error);
+        //console.log(error);
+    
+        if((error as AxiosError).response?.status === 401){
+            try {
+                console.log(error.response?.data);
+                const res = await HTTP.post("/refresh");
+                console.log(res.status);
+                if(res.status === 200){
+                    window.location.reload();
+                }
+                
+            } catch (error) {
+                console.log(error);
+                window.location.replace("./view/login/login.html");
+            }
+            
         }
+        return Promise.reject(error);
+            
     }
 );
 
 
-async function handle401Error(error: AxiosError) {
-    if (error.response?.status === 401) {
-        try {
-            const refreshTokenResponse: AxiosResponse = await HTTP.post("/refresh");
+// async function handle401Error(error: AxiosError) {
+//     if (error.response?.status === 401) {
+//         try {
+//             const refreshTokenResponse: AxiosResponse = await HTTP.post("/refresh");
 
-            if (refreshTokenResponse.status === 200) {
-                window.location.reload();
-                console.log("hello form the refresh error", refreshTokenResponse);
-                return;
-            } else {
-                window.location.replace("/src/view/login/login.html");
-            }
-        } catch (refreshError) {
-            console.error("Error during token refresh:", refreshError);
-            window.location.replace("/src/view/login/login.html");
-        }
-    }
-}
+//             if (refreshTokenResponse.status === 200) {
+//                 window.location.reload();
+//                 console.log("hello form the refresh error", refreshTokenResponse);
+//                 return;
+//             } else {
+//                 window.location.replace("/src/view/login/login.html");
+//             }
+//         } catch (refreshError) {
+//             console.error("Error during token refresh:", refreshError);
+//             window.location.replace("/src/view/login/login.html");
+//         }
+//     }
+// }
 
 
 export default HTTP;

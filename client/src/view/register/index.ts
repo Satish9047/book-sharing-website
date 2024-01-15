@@ -18,12 +18,12 @@ registerElement.addEventListener("click", async (e) => {
             email,
             password,
         });
-        console.log(res, "respond from server");
-        if (res.status === 200) {
-            window.location.href = "/src/view/login/login.html";
+        if (res.status === 201) {
+            console.log(res.data.msg);
+            window.location.replace("/src/view/login/login.html");
         }
     } catch (error) {
-        // console.log(error.response.data);
+        console.log(error);
 
         const div = document.createElement("div") as HTMLElement;
         const paragraph = document.createElement("p") as HTMLElement;

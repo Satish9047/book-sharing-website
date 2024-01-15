@@ -1,5 +1,6 @@
 // import axios from "axios";
-import { AxiosResponse } from "axios";
+// import { AxiosResponse } from "axios";
+import { AxiosError } from "axios";
 import HTTP from "../../config";
 
 const emailElement = document.getElementById("email") as HTMLInputElement;
@@ -14,7 +15,7 @@ loginBtn.addEventListener("click", async (e) => {
     console.log({ email: email, password: password });
 
     try {
-        const res: AxiosResponse = await HTTP.post("/auth/login", {
+        const res = await HTTP.post("/auth/login", {
             email,
             password,
         });
@@ -23,18 +24,18 @@ loginBtn.addEventListener("click", async (e) => {
             window.location.href = "/index.html";
         }
     } catch (error) {
-        console.log(error, "from me");
 
-        const div = document.createElement("div") as HTMLElement;
-        div.classList.add("p-2", "errorColor", "rounded-md", "shadow-md");
+        const errorDiv = document.createElement("div") as HTMLElement;
+        errorDiv.classList.add("p-2", "errorColor", "rounded-md", "shadow-md");
         const paragraph = document.createElement("p") as HTMLElement;
-        div.appendChild(paragraph);
-        paragraph.innerText = error.response.data.error;
+        errorDiv.appendChild(paragraph);
+        //@ts-ignore
+        paragraph.innerText = (error as AxiosError).response.data.error;
 
-        loginElement.appendChild(div);
+        loginElement.appendChild(errorDiv);
 
         setTimeout((): void => {
-            loginElement.removeChild(div);
+            loginElement.removeChild(errorDiv);
         }, 3000);
     }
 });

@@ -1,6 +1,7 @@
 import HTTP from "./config";
 import { IState } from "./interface/book";
 import { renderData, logout } from "./utils/utils";
+import { constant } from "./constants";
 
 // const bookItemsElement = document.getElementById("bookItems") as HTMLDivElement;
 const searchByList = document.getElementById("searchByList") as HTMLDivElement;
@@ -22,7 +23,7 @@ const searchLabel: string[] = [
 
 // let settingState = false;
 let pageIndex = 0;
-const itemsPerPage = 5;
+const itemsPerPage = constant.take;
 
 if (pageIndex <= itemsPerPage) {
     prevElement.style.display = "none";
@@ -126,15 +127,13 @@ prevElement.addEventListener("click", () => {
 });
 
 async function getnextIndexBook() {
-    pageIndex += 5;
+    pageIndex += itemsPerPage;
     prevElement.style.display = "block";
-    // const res = await HTTP.get(`/books?take=${itemsPerPage}&skip=${pageIndex}`);
     const res = await getBook();
     console.log(res.data);
     renderData(res.data);
     if (!res.data[0]) {
         pageIndex = 0;
-        // const res = await HTTP.get(`/books?take=${itemsPerPage}&skip=${pageIndex}`);
         const res = await getBook();
         renderData(res.data);
     }
@@ -144,7 +143,7 @@ async function getPrevIndexBook() {
     if (pageIndex <= itemsPerPage) {
         prevElement.style.display = "none";
     }
-    pageIndex -= 5;
+    pageIndex -= itemsPerPage;
     const res = await getBook();
     console.log(res.data);
     renderData(res.data);

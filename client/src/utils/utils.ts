@@ -45,7 +45,7 @@ export function renderData(bookdata: []) {
                     const blob = new Blob([res.data], { type: "application/pdf" });
                     const link = document.createElement("a");
                     link.href = window.URL.createObjectURL(blob);
-                    link.download = "bookhome.pdf";
+                    link.download = `${book.book_name}.pdf`;
                     link.click();
                     console.log("download suceesfull");
                 }
