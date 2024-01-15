@@ -27,25 +27,30 @@ Prerequisites
 Installation
 --------------------------------------------------------------
 Clone the repository:
-  git clone https://github.com/your-username/recon-book.git
+
+      git clone https://github.com/Satish9047/book-sharing-website
 
 Install server dependencies:
-  cd server
-  npm install
+     
+        cd server
+        npm install
 
 Install client dependencies:
-  cd client
-  npm install
+
+      cd client
+      npm install
 ---------------------------------------------------------------
 Running the App
 ---------------------------------------------------------------
 Server
 
-  For development:
+For development:
+
     cd server
     npm run dev
 
 Client
+
     For development:
     cd client
     npm run dev
@@ -54,6 +59,7 @@ Client
 Technologies Used
 --------------------------------------------------------------
 Server
+
     Node.js
     Express.js
     TypeScript
@@ -64,6 +70,7 @@ Server
     morgan for logging
 
 Client
+
     Vite
     TypeScript
     Axios
