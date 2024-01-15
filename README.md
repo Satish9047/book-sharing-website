@@ -28,7 +28,7 @@ Installation
 --------------------------------------------------------------
 Clone the repository:
 
-      git clone https://github.com/your-username/recon-book.git
+      git clone https://github.com/Satish9047/book-sharing-website
 
 Install server dependencies:
      
