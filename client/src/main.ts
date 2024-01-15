@@ -3,7 +3,7 @@ import { IState } from "./interface/book";
 import { renderData, logout } from "./utils/utils";
 import { constant } from "./constants";
 
-
+//refrencing dom elements
 const searchByList = document.getElementById("searchByList") as HTMLDivElement;
 const searchInputElement = document.getElementById("searchInput") as HTMLInputElement;
 const navAvatar = document.getElementById("navAvatar") as HTMLElement;
@@ -86,16 +86,6 @@ for (let i = 0; i < searchLabel.length; i++) {
     div.appendChild(label);
     searchByList.appendChild(div);
 
-    div.addEventListener("click", () => {
-        input.checked = !input.checked;
-    });
-
-    //1st Element default checked
-    if(i === 0){
-        input.checked = true;
-        state[searchLabel[i] as keyof IState]=true;
-    }
-
     
     input.addEventListener("change", async () => {
         state[searchLabel[i] as keyof IState] = input.checked;
@@ -174,5 +164,6 @@ function getBook() {
     if (state["by Category"]) {
         url += `&category=${value}`;
     }
+    console.log(url);
     return HTTP.get("/books/getby?" + url + `&take=${itemsPerPage}&skip=${pageIndex}`);
 }
