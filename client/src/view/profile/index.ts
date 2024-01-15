@@ -76,6 +76,7 @@ async function getnextIndexBook() {
     if (!res.data[0]) {
         pageIndex = 0;
         const res = await HTTP.get(`/books/user?take=${itemsPerPage}&skip=${pageIndex}`);
+        prevElement.style.display = "none";
         renderUserUploads(res.data);
     }
 }

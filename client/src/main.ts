@@ -127,6 +127,7 @@ async function getnextIndexBook() {
     if (!res.data[0]) {
         pageIndex = 0;
         const res = await getBook();
+        prevElement.style.display = "none";
         renderData(res.data);
     }
 }
@@ -137,6 +138,7 @@ async function getPrevIndexBook() {
     }
     pageIndex -= itemsPerPage;
     const res = await getBook();
+    
     console.log(res.data);
     renderData(res.data);
 }
