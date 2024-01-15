@@ -1,6 +1,6 @@
-import { AxiosError } from "axios";
+// import { AxiosError } from "axios";
 import HTTP from "../../config";
-import { sendRefreshRequest } from "../../utils/utils";
+// import { sendRefreshRequest } from "../../utils/utils";
 
 
 const oldPasswordInput = document.getElementById("old-Password") as HTMLInputElement;
@@ -16,19 +16,19 @@ window.addEventListener("load", async () => {
         console.log(res);
     } catch (error) {
         console.log(error);
-        if (
-            (error as AxiosError).response && (error as AxiosError).response?.status === 401) {
-            try {
-                const result = await sendRefreshRequest();
-                if (!result) {
-                    window.location.replace("/src/view/login/login.html");
-                }
-            } catch (error) {
-                console.log(error);
-            }
-        } else {
-            window.location.replace("/src/view/login/login.html");
-        }
+        // if (
+        //     (error as AxiosError).response && (error as AxiosError).response?.status === 401) {
+        //     try {
+        //         const result = await sendRefreshRequest();
+        //         if (!result) {
+        //             window.location.replace("/src/view/login/login.html");
+        //         }
+        //     } catch (error) {
+        //         console.log(error);
+        //     }
+        // } else {
+        //     window.location.replace("/src/view/login/login.html");
+        // }
     }
 });
 

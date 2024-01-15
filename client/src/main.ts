@@ -1,7 +1,6 @@
-import { AxiosError } from "axios";
 import HTTP from "./config";
 import { IState } from "./interface/book";
-import { renderData, sendRefreshRequest, logout } from "./utils/utils";
+import { renderData, logout } from "./utils/utils";
 
 // const bookItemsElement = document.getElementById("bookItems") as HTMLDivElement;
 const searchByList = document.getElementById("searchByList") as HTMLDivElement;
@@ -53,19 +52,7 @@ window.addEventListener("load", async (): Promise<void> => {
             renderData(res.data);
         }
     } catch (error) {
-        if ((error as AxiosError).response && (error as AxiosError).response?.status === 401) {
-            try {
-                const result = await sendRefreshRequest();
-                if (!result) {
-                    window.location.replace("/src/view/login/login.html");
-                }
-            } catch (error) {
-                console.log(error);
-                window.location.replace("/src/view/login/login.html");
-            }
-        } else {
-            window.location.replace("/src/view/login/login.html");
-        }
+        console.log(error);
     }
 });
 
@@ -163,28 +150,7 @@ async function getPrevIndexBook() {
     renderData(res.data);
 }
 
-// async function getNextSearchbook() {
-//     pageIndex += 8;
-//     prevElement.style.display = "block";
-//     const res = await HTTP.get(`/books?take=${itemsPerPage}&skip=${pageIndex}`);
-//     console.log(res.data);
-//     renderData(res.data);
-//     if (!res.data[0]) {
-//         pageIndex = 0;
-//         const res = await HTTP.get(`/books?take=${itemsPerPage}&skip=${pageIndex}`);
-//         renderData(res.data);
-//     }
-// }
 
-// async function getPrevSearchbook() {
-//     if (pageIndex <= itemsPerPage) {
-//         prevElement.style.display = "none";
-//     }
-//     pageIndex -= 8;
-//     const res = await HTTP.get(`/books?take=${itemsPerPage}&skip=${pageIndex}`);
-//     console.log(res.data);
-//     renderData(res.data);
-// }
 
 /**
  * Get book data from the Backend api accoring to the search by options

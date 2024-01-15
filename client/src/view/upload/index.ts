@@ -24,23 +24,23 @@ window.addEventListener("load", async () => {
     try {
         const res = await HTTP.get("/auth/userInfo");
         if (res.status === 200) {
-            console.log(res);
+            console.log(res.data);
         }
     } catch (error) {
         console.log(error);
-        if (
-            (error as AxiosError).response && (error as AxiosError).response?.status === 401) {
-            try {
-                const result = await sendRefreshRequest();
-                if (!result) {
-                    window.location.replace("../login/login.html");
-                }
-            } catch (error) {
-                console.log(error);
-            }
-        } else {
-            window.location.replace("src/view/login/login.html");
-        }
+        // if (
+        //     (error as AxiosError).response && (error as AxiosError).response?.status === 401) {
+        //     try {
+        //         const result = await sendRefreshRequest();
+        //         if (!result) {
+        //             window.location.replace("../login/login.html");
+        //         }
+        //     } catch (error) {
+        //         console.log(error);
+        //     }
+        // } else {
+        //     
+        // }
     }
 });
 

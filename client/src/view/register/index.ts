@@ -23,13 +23,16 @@ registerElement.addEventListener("click", async (e) => {
             window.location.href = "/src/view/login/login.html";
         }
     } catch (error) {
-        console.log(error.response.data);
+        // console.log(error.response.data);
+
         const div = document.createElement("div") as HTMLElement;
-        div.classList.add("errorColor", "p-2", "rounded-md", "shadow-md");
         const paragraph = document.createElement("p") as HTMLElement;
+        div.classList.add("errorColor", "p-2", "rounded-md", "shadow-md");
+
         div.appendChild(paragraph);
         paragraph.innerText = error.response.data.error;
         registerDivElement.appendChild(div);
+        
         setTimeout(() => {
             registerDivElement.removeChild(div);
         }, 3000);

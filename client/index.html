@@ -12,7 +12,10 @@
 <body class="bg-[#D8D8D8] h-full w-full">
   <!-- navbar -->
   <navbar class="px-4 py-5 flex justify-between bg-[#00796B] relative">
-    <h1 class="font-semibold text-3xl">Recon Book</h1>
+    <fig id="burgerBtn" class="md:hidden w-[35px]">
+      <img src="./public/icon/menu.png">
+    </fig>
+    <h1 class="font-semibold text-lg md:text-3xl">Recon Book</h1>
     <ul class="hidden md:flex justify-center items-center gap-5 font-semibold">
       <li><a href="/index.html">Home</a></li>
       <li><a href="/src/view/profile/profile.html">Profile</a></li>
@@ -21,7 +24,7 @@
 
     <!-- profile -->
     <figure id="navAvatar" class="w-[40px] h-[40px] rounded-full overflow-hidden">
-      <img class="" src="/image/profile.jpg" />
+      <img class="" src="/public/image/profile.jpg" />
     </figure>
 
     <!-- drop down -->
@@ -35,6 +38,15 @@
       </div>
     </div>
   </navbar>
+
+  <div id="navList" class="bg-[#F3F3F3]">
+    <ul class="py-4  md:hidden flex flex-col justify-center items-center gap-4 font-semibold">
+      <li class="w-full flex justify-center"><a href="/index.html">Home</a></li>
+      <li class="w-full flex justify-center"><a href="/src/view/profile/profile.html">Profile</a></li>
+      <li class="w-full flex justify-center"><a href="/src/view/upload/upload.html">Uploads</a></li>
+    </ul>
+  </div>
+  
 
   <!-- main -->
   <main class="h-full w-full bg-[#D8D8D8] md:flex">
@@ -67,6 +79,14 @@
 
   <!-- script -->
   <script type="module" src="/src/main.ts"></script>
+  <script>
+    const burgerBtn = document.getElementById("burgerBtn");
+    const navList = document.getElementById("navList");
+
+    burgerBtn.addEventListener('click', () => {
+        navList.classList.toggle('hidden');
+    });
+</script>
 </body>
 
 </html>

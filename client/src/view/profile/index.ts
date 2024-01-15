@@ -1,7 +1,7 @@
 // import { IBook } from "./../../src/interface/book";
-import { AxiosError } from "axios";
+// import { AxiosError } from "axios";
 import HTTP from "../../config";
-import { logout, renderUserUploads, sendRefreshRequest } from "../../utils/utils";
+import { logout, renderUserUploads} from "../../utils/utils";
 
 // const profileImgElement = document.getElementById("profileImg") as HTMLImageElement;
 // const bookItemElement = document.getElementById("bookList") as HTMLDivElement;
@@ -26,29 +26,14 @@ window.addEventListener("load", async () => {
         const res = await HTTP.get("/auth/userInfo");
         const resBookdata = await HTTP.get(`books/user?skip=${pageIndex}&take=${itemsPerPage}`);
         if (res.status === 200 && resBookdata.status === 200) {
-            console.log(res.data);
-            console.log(resBookdata.data);
-            //userId = res.data.user_id;
+            
             userNameElement.textContent = res.data.user_name;
             emailElement.textContent = res.data.email;
             const bookItem = resBookdata.data;
             renderUserUploads(bookItem);
         }
     } catch (error) {
-        console.log(error);
-        if (
-            (error as AxiosError).response && (error as AxiosError).response?.status === 401) {
-            try {
-                const result = await sendRefreshRequest();
-                if (!result) {
-                    window.location.replace("/src/view/login/login.html");
-                }
-            } catch (error) {
-                console.log(error);
-            }
-        } else {
-            window.location.replace("/src/view/login/login.html");
-        }
+        // window.location.replace("/src/view/login/login.html");
     }
 });
 

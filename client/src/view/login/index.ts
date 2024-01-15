@@ -18,7 +18,7 @@ loginBtn.addEventListener("click", async (e) => {
             email,
             password,
         });
-        //console.log(res,"respond from server");
+        
         if (res.status === 200) {
             window.location.href = "/index.html";
         }
