@@ -1,7 +1,7 @@
 import { Router } from "express";
 import * as bookController from "../controllers/book";
 import { filesUpload } from "../middlewares/fileUpload";
-import { queryBookMiddlware } from "../middlewares/book";
+import { queryBookMiddlware,uploadBookVerify } from "../middlewares/book";
 
 const bookRouter = Router();
 

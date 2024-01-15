@@ -17,17 +17,18 @@ model User {
   user_name String
   email     String @unique
   password  String
+  Book      Book[]
 }
 
 model Book {
   book_id       Int    @id @default(autoincrement())
   book_name     String
-  description   String
-  pdf_file_path String
-  img_file_path String
-  keyword       String
   user_id       Int
+  keyword       String
   category_name String
   author_name   String
+  pdf_file_path String
+  img_file_path String
+  description   String
   user          User   @relation(fields: [user_id], references: [user_id])
 }

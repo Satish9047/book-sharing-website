@@ -31,10 +31,9 @@ jwtRefreshRouter.post("/", (req: Request, res: Response, next: NextFunction) => 
         }
 
         const accessToken = jwt.sign({ email: email, id: id }, config.ACCESS_TOKEN_SECRET, { expiresIn: ACCESS_TOKEN_EXPIRY });
-        console.log(accessToken);
+        console.log("access token",accessToken);
         res.cookie("accessToken", accessToken);
         return res.status(200).json({ msg: "Token Refreshed" });
-        next();
     } catch (error) {
         console.error("Error verifying refresh token:", error);
         res.clearCookie("accessToken");

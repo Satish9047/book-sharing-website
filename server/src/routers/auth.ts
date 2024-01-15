@@ -6,7 +6,7 @@ import { loginAuth, registerAuth, jwtAuth, chnagePasswordVerify } from "../middl
 const authRouter = Router();
 
 //auth routers
-authRouter.get("/userInfo", authController.getUserInfo);
+authRouter.get("/userInfo",jwtAuth, authController.getUserInfo);
 authRouter.post("/register", registerAuth, authController.registerHandler);
 authRouter.post("/login", loginAuth, authController.loginHandler);
 authRouter.post("/changePassword",jwtAuth, chnagePasswordVerify, authController.changePasswordHandler);

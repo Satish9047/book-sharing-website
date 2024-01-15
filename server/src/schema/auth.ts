@@ -41,14 +41,14 @@ export const registerSchema = Joi.object({
 
 //change password schema
 export const changePasswordSchema = Joi.object({
-    oldPassword: Joi.string().trim().pattern(new RegExp("^[a-zA-Z0-9]{8,100}$"))
+    oldPassword: Joi.string().trim().pattern(new RegExp("^[a-zA-Z0-9]{8,50}$"))
         .messages({
             "string.base": "Password should be a string",
             "string.empty": "Password cannot be empty",
             "string.pattern.base": "Password must be between 8 to 100 characters long",
             "any.required": "Old password is required",
         }),
-    newPassword: Joi.string().trim().pattern(new RegExp("^[a-zA-Z0-9]{8,100}$"))
+    newPassword: Joi.string().trim().pattern(new RegExp("^[a-zA-Z0-9]{8,50}$"))
         .messages({
             "string.base": "Password should be a string",
             "string.empty": "Password cannot be empty",
@@ -56,3 +56,6 @@ export const changePasswordSchema = Joi.object({
             "any.required": "New password is required",
         }),
 });
+
+
+

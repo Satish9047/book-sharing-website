@@ -1,8 +1,9 @@
 import { Request, Response, NextFunction } from "express";
-import { addBookSchema, queryPageSchema, queryBookSchema } from "../schema/book";
+import { addBookSchema, queryPageSchema, queryBookSchema, uploadBookSchema } from "../schema/book";
 
 //addbook middleware
 export const addBookMiddlware = (req: Request, res: Response, next: NextFunction) => {
+    console.log(req.body);
     const { error } = addBookSchema.validate(req.body);
     if (error) {
         return res.status(400).json({ error: "invalid credentials provided" });
@@ -24,6 +25,16 @@ export const queryPageMiddlware = (req: Request, res: Response, next: NextFuncti
     const { error } = queryPageSchema.validate(req.query);
     if (error) {
         return res.status(400).json({ error: error });
+    }
+    next();
+};
+
+// uploadBook middleware
+export const uploadBookVerify = (req:Request, res: Response, next: NextFunction) => {
+    console.log(req.body);
+    const {error} = uploadBookSchema.validate(req.query);
+    if(error){
+        return res.status(400).json({error:error});
     }
     next();
 };
