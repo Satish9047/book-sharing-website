@@ -49,7 +49,7 @@ export function renderData(bookdata: []) {
                     link.href = window.URL.createObjectURL(blob);
                     link.download = `${book.book_name}.pdf`;
                     link.click();
-                    console.log("download suceesfull");
+                    console.log("download successfull");
                 }
             } catch (error) {
                 console.log(error);

@@ -25,32 +25,32 @@ export const uploadBookSchema = Joi.object({
             "string.empty": "Book name is required",
             "string.max": "Book name should have a maximum length of 20 characters"
         }),
-    author: Joi.string().required().max(20)
+    author: Joi.string().required().max(30)
         .messages({
             "string.base": "Author must be a string",
             "string.empty": "Author is required",
-            "string.max": "Author should have a maximum length of 20 characters"
+            "string.max": "Author should have a maximum length of 30 characters"
         }),
         
-    category: Joi.string().required().max(10)
+    category: Joi.string().required().max(20)
         .messages({
             "string.base": "Category must be a string",
             "string.empty": "Category is required",
-            "string.max": "Category should have a maximum length of 10 characters"
+            "string.max": "Category should have a maximum length of 20 characters"
         }),
         
-    keyword: Joi.string().required().max(10)
+    keyword: Joi.string().required().max(20)
         .messages({
             "string.base": "Keyword must be a string",
             "string.empty": "Keyword is required",
-            "string.max": "Keyword should have a maximum length of 10 characters"
+            "string.max": "Keyword should have a maximum length of 20 characters"
         }),
         
-    description: Joi.string().required().max(50)
+    description: Joi.string().required().max(250)
         .messages({
             "string.base": "Description must be a string",
             "string.empty": "Description is required",
-            "string.max": "Description should have a maximum length of 50 characters"
+            "string.max": "Description should have a maximum length of 250 characters"
         }),
         
     pdfPath: Joi.string().required()

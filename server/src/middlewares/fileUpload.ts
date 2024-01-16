@@ -17,7 +17,7 @@ const getFileType = (fileName: string) => {
     }
 };
 
-//defiing path
+//defiing path and file name
 const customStorage = (destination: string) => {
     return multer.diskStorage({
         destination: (req, file, cb) => {
@@ -49,7 +49,7 @@ const customFilter = (fileType: string) => {
     };
 };
 
-//save file and filtering the img/pdf
+
 export const filesUpload = multer({
     storage: customStorage("public/uploads"),
     fileFilter: (req, file, cb) => {
