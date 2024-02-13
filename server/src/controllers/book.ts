@@ -6,7 +6,7 @@ import { IPage, IBookInfo, IQueryBookDb, IAddBook } from "./../interfaces/book";
 
 //get books controller
 export const getBooks = async (req: Request, res: Response) => {
-    console.log(req.query.skip, req.query.take, "hello fro the cotroller");
+    // console.log(req.query.skip, req.query.take, "hello fro the cotroller");
     const page: IPage = {
         skip: Number(req.query.skip) || 0,
         take: Number(req.query.take) || 10,
@@ -15,7 +15,7 @@ export const getBooks = async (req: Request, res: Response) => {
     try {
         const data = await bookServices.getBooks(page);
         if (!data) return res.status(404).json(data);
-        console.log(data);
+        // console.log(data);
         return res.status(200).json(data);
     } catch (error) {
         console.error(error);
@@ -64,10 +64,10 @@ export const addBookHandler = async (req: IAuthRequest, res: Response) => {
     const bookInfo: IAddBook = req.body;
     try {
         bookInfo.user = Number(req.user);
-        const bookFile = req.files as {[fieldname: string]: Express.Multer.File[]};
+        const bookFile = req.files as { [fieldname: string]: Express.Multer.File[] };
         // console.log(bookFile);
 
-        bookInfo.pdfPath = bookFile?.pdfFile?.[0].path;  
+        bookInfo.pdfPath = bookFile?.pdfFile?.[0].path;
         bookInfo.imgPath = bookFile?.imgFile?.[0].path;
 
         const data = await bookServices.addBookHandler(bookInfo);
@@ -81,7 +81,7 @@ export const addBookHandler = async (req: IAuthRequest, res: Response) => {
 
 //delete book handler
 export const deleteBookHandler = async (req: IAuthRequest, res: Response) => {
-    console.log(req.user, "user id from controller");
+    // console.log(req.user, "user id from controller");
     const userId = req.user;
     const bookInfo: IBookInfo = {
         userId: Number(userId),
