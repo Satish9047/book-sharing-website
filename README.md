@@ -49,8 +49,6 @@ Install client dependencies:
 
 Server
 
-For development:
-
     cd server
     npx prisma migrate dev --name init
     npm run dev
