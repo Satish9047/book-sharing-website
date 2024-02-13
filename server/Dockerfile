@@ -8,6 +8,8 @@ COPY . .
 
 RUN npm install
 
-EXPOSE 5173
+RUN npx prisma migrate dev --name init
+
+EXPOSE 8080
 
 CMD [ "npm", "run", "dev" ]
